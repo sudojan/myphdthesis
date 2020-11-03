@@ -27,10 +27,10 @@ def sigma_decay(energy, density, life_time, mass):
     betagamma = np.sqrt((energy + mass)*(energy - mass))/mass
     return 1 / (betagamma * life_time * c0 * density)
 
-def calculate_dEdx(energies):
+def calculate_losses(energies, ecut, modus='dEdx'):
     mu_def = pp.particle.MuMinusDef()
     medium = pp.medium.Ice(1.0)  # With densitiy correction
-    cuts = pp.EnergyCutSettings(-1, -1)  # ecut, vcut
+    cuts = pp.EnergyCutSettings(ecut, -1)  # ecut, vcut
     multiplier_all = 1.0
     lpm_effect = True
 
@@ -71,18 +71,29 @@ def calculate_dEdx(energies):
             mu_def, medium, multiplier_all))
 
     # =========================================================
-    #   Calculate DE/dx at the given energies
+    #   Calculate dE/dx or dN/dx at the given energies
     # =========================================================
 
-    dedx_all = []
+    xsection = np.empty((7, len(energies)))
 
-    for cross in crosssections:
-        dedx_all.append(np.vectorize(cross.calculate_dEdx)(energies))
+    for idx, cross in enumerate(crosssections):
+        if modus == 'dEdx':
+            xsection[idx] = np.vectorize(cross.calculate_dEdx)(energies)
+        elif modus == 'dNdx':
+            xsection[idx] = np.vectorize(cross.calculate_dNdx)(energies)
+        else:
+            raise AttributeError('modus must be dEdx or dNdx')
 
-    dedx_all.append(energies * np.vectorize(cross_weak.calculate_dNdx)(energies))
-    dedx_all.append(energies * sigma_decay(energies, medium.mass_density, mu_def.lifetime, mu_def.mass))
 
-    return dedx_all
+    if modus == 'dEdx':
+        # tweak the purely stochastic processes to produce continuous losses
+        xsection[-2] = energies * np.vectorize(cross_weak.calculate_dNdx)(energies)
+        xsection[-1] = energies * sigma_decay(energies, medium.mass_density, mu_def.lifetime, mu_def.mass)
+    elif modus == 'dNdx':
+        xsection[-2] = np.vectorize(cross_weak.calculate_dNdx)(energies)
+        xsection[-1] = sigma_decay(energies, medium.mass_density, mu_def.lifetime, mu_def.mass)
+
+    return xsection
 
 def calc_dEdx_params(energies, dedx_sum):
     def func(x, a, b):
@@ -90,13 +101,18 @@ def calc_dEdx_params(energies, dedx_sum):
     return curve_fit(func, energies, dedx_sum, sigma=dedx_sum)[0]
 
 
-def plot_ranges():
+def plot_ranges(energy_min=1e3, energy_max=1e12, n_energies=200,
+    output='dedx_range.pdf'):
     fig = plt.figure()
     ax = fig.add_subplot(111)
 
-    n_energies = 200
-    energies = np.logspace(3, 12, n_energies)
-    dedx_all = calculate_dEdx(energies)
+    energies = np.logspace(
+        np.log10(energy_min),
+        np.log10(energy_max),
+        n_energies)
+    dedx_all = calculate_losses(energies, ecut=-1)
+    # get the sum without the pure stochastic losses
+    # weak interaction and decay
     dedx_sum = np.zeros(n_energies)
     for dedx in dedx_all[:-2]:
         dedx_sum += dedx
@@ -105,6 +121,12 @@ def plot_ranges():
 
     def average_range_calc(energies, a, b):
         return np.log(1 + b*energies/a) / b
+
+    # def average_energy_range_calc(range, a, b):
+    #     return a/b*(np.exp(b*raange)-1)
+    # raange = 1e5
+    # print('energy to travel 1km')
+    # print(average_energy_range_calc(raange, *fit_params)/1e3)
 
     dedx_ranges = average_range_calc(energies, *fit_params)
     fig = plt.figure()
@@ -115,19 +137,24 @@ def plot_ranges():
     ax.set_xlabel('Muon Energy / GeV')
     ax.set_ylabel('Range / m')
     ax.legend()
+    ax.grid()
 
-    fig.savefig('dedx_range.pdf',bbox_inches='tight')
+    fig.savefig(output, bbox_inches='tight', pad_inches=0.02)
     ax.cla()
     plt.close()
 
 
-def plot_dEdx():
+def plot_dEdx(energy_min=1e3, energy_max=1e12, n_energies=200, ecut=-1, #MeV
+    output='dEdx_ecut_{ecut:.4g}.pdf', do_fit=False):
+    output = output.format(**{'ecut':ecut})
     fig = plt.figure()
     ax = fig.add_subplot(111)
 
-    n_energies = 200
-    energies = np.logspace(3, 12, n_energies)
-    dedx_all = calculate_dEdx(energies)
+    energies = np.logspace(
+        np.log10(energy_min),
+        np.log10(energy_max),
+        n_energies)
+    dedx_all = calculate_losses(energies, ecut, modus='dEdx')
 
     labels = ['Ionization',
         r'$e$ Pair Production',
@@ -138,29 +165,88 @@ def plot_dEdx():
         'Decay',
     ]
 
-    for dedx, _label in zip(dedx_all, labels):
-        ax.plot(energies, dedx, linestyle='-', label=_label)
+    if do_fit:
+        # get the sum without the pure stochastic losses
+        # weak interaction and decay
+        dedx_sum = np.zeros(n_energies)
+        for dedx in dedx_all[:-2]:
+            dedx_sum += dedx
+        fit_params = calc_dEdx_params(energies, dedx_sum)
+        ax.plot(energies, dedx_sum, linestyle='-', label='Sum')
+        ax.plot(energies, fit_params[0] + fit_params[1]*energies,
+                label='Fit: a= {:.4g}, b={:.4g}'.format(fit_params[0], fit_params[1]))
+        ax.set_ylim(1e-4, 1e7)
 
-    dedx_sum = np.zeros(n_energies)
-    for dedx in dedx_all[:-2]:
-        dedx_sum += dedx
-    fit_params = calc_dEdx_params(energies, dedx_sum)
-    ax.plot(energies, dedx_sum, linestyle='-', label='Sum')
-    ax.plot(energies, fit_params[0] + fit_params[1]*energies,
-            label='Fit: a= {:.4g}, b={:.4g}'.format(fit_params[0], fit_params[1]))
+        for dedx, _label in zip(dedx_all, labels):
+            ax.plot(energies, dedx, linestyle='-', label=_label)
+
+    else:
+        for dedx, _label in zip(dedx_all[:-2], labels[:-2]):
+            ax.plot(energies, dedx, linestyle='-', label=_label)
+        ax.set_ylabel(r'$\frac{\mathrm{d}E}{\mathrm{d}X} \,\left/\, \left( \rm{MeV} / \rm{cm} \right) \right. $')
+
 
     ax.set_xlabel(r'Muon Energy $E \,/\, \mathrm{MeV} $')
     ax.set_ylabel(r'$\left\langle\frac{\mathrm{d}E}{\mathrm{d}X}\right\rangle \,\left/\, \left( \rm{MeV} / \rm{cm} \right) \right. $')
     ax.legend(loc='best')
     ax.set_xscale('log')
     ax.set_yscale('log')
-    ax.set_xlim(1e3, 1e12)
-    ax.set_ylim(1e-5, 1e7)
+    ax.set_xlim(energy_min, energy_max)
 
-    fig.savefig('dEdx_all.pdf', bbox_inches='tight')
+    if output.endswith('.pdf'):
+        plt.savefig(output, bbox_inches='tight', pad_inches=0.02)
+    else:
+        plt.savefig(output, bbox_inches='tight', pad_inches=0.02, dpi=300)
+    ax.cla()
+    plt.close()
+
+def plot_dNdx(energy_min=1e3, energy_max=1e12, n_energies=200, ecut=1, #MeV
+    output='dNdx_ecut_{ecut:.4g}.pdf'):
+    output = output.format(**{'ecut':ecut})
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+
+    energies = np.logspace(
+        np.log10(energy_min),
+        np.log10(energy_max),
+        n_energies)
+    dedx_all = calculate_losses(energies, ecut, modus='dNdx')
+
+    labels = ['Ionization',
+        r'$e$ Pair Production',
+        'Bremsstrahlung',
+        'Nuclear Interaction',
+        r'$\mu$ Pair Production',
+        'Weak Interaction',
+        'Decay',
+    ]
+
+    dedx_sum = np.zeros(n_energies)
+    for dedx in dedx_all:
+        dedx_sum += dedx
+    ax.plot(energies, dedx_sum, linestyle='-', label='Sum')
+
+    for dedx, _label in zip(dedx_all, labels):
+        ax.plot(energies, dedx, linestyle='-', label=_label)
+
+    ax.set_xlabel(r'Muon Energy $E \,/\, \mathrm{MeV} $')
+    ax.set_ylabel(r'$\left\langle\frac{\mathrm{d}N}{\mathrm{d}X}\right\rangle \,\left/\, \left( 1 / \rm{cm} \right) \right. $')
+    ax.legend(loc='lower right')
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    ax.set_xlim(energy_min, energy_max)
+    # ax.set_ylim(1e-4, 1e7)
+
+    if output.endswith('.pdf'):
+        plt.savefig(output, bbox_inches='tight', pad_inches=0.02)
+    else:
+        plt.savefig(output, bbox_inches='tight', pad_inches=0.02, dpi=300)
     ax.cla()
     plt.close()
 
 if __name__ == "__main__":
-    plot_dEdx()
-    # plot_ranges()
+    plot_dEdx(output='dedx_all.pdf', ecut=-1, do_fit=True)
+    plot_dEdx(output='dedx_ecut_{ecut:.4g}.pdf', ecut=500)
+    plot_dNdx(output='dndx_ecut_{ecut:.4g}.pdf', ecut=1)
+    plot_dNdx(output='dndx_ecut_{ecut:.4g}.pdf', ecut=500)
+    plot_ranges(output='dedx_range.pdf')
