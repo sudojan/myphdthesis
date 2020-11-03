@@ -1,0 +1,43 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-\feynlen-\feynsmallen, 0);
+    \vertex (mu_out) at (\feynlen+\feynsmallen, 0);
+    % epair
+    \vertex (epair_in) at (\feynlen+\feynsmallen, \feynlen+\feynsmallen);
+    \vertex (epair_vertex) at (\feynsmallen, \feynlen);
+    \vertex (epair_out) at (\feynlen+\feynsmallen, \feynlen-\feynsmallen);
+    % blob
+    \vertex (blob) at (0,0);
+    \vertex (blob_left) at (-\feynsmallen, 0);
+    \vertex (blob_right) at (\feynsmallen, 0);
+    \vertex (blob_down) at (0, -\feynsmallen);
+    \vertex (blob_up) at ($(blob) + (75:\feynsmallen)$);
+    % nucleus
+    \vertex (n_in) at (-\feynlen-\feynsmallen, -\feynlen);
+    \vertex (n_vertex) at (0, -\feynlen);
+    \vertex (n_out) at (\feynlen+\feynsmallen, -\feynlen);
+    % draw diagram
+    \diagram* {
+        (mu_in) -- [fermion] (blob_left),
+        (blob_right) -- [fermion] (mu_out),
+        (epair_in) -- [fermion] (epair_vertex) -- [fermion] (epair_out),
+        (blob_down) -- [boson] (n_vertex),
+        (blob_up) -- [boson] (epair_vertex)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[thick, double] (n_in) -- (n_vertex) -- (n_out);
+    \draw[pattern = north east lines] (blob) circle[radius=\feynsmallen];
+    \draw[fill] (n_vertex) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu '$};
+    \node[right] at (epair_in) {$e^+$};
+    \node[right] at (epair_out) {$e^-$};
+    \node[left] at (n_in) {$N$};
+    \node[right] at (n_out) {$N'$};
+\end{feynman}
+\end{tikzpicture}
+%

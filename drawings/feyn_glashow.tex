@@ -1,0 +1,22 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    \vertex (nu_in) at (-\feynlen, \feynlen);
+    \vertex (e_in) at (-\feynlen, -\feynlen);
+    \vertex (nu_vertex) at (0, 0);
+    \vertex (w_out) at (\feynlen, 0);
+    % draw diagram
+    \diagram* {
+        (e_in) -- [fermion] (nu_vertex) -- [fermion] (nu_in),
+        (nu_vertex) -- [boson] (w_out)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[fill] (nu_vertex) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (nu_in) {$\bar{\nu}_e$};
+    \node[left] at (e_in) {$e^-$};
+    \node[right] at (w_out) {$W^-$};
+\end{feynman}
+\end{tikzpicture}
+%
