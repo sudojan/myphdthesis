@@ -1,127 +1,141 @@
-\chapter{Muon Generation Processes}
+\chapter{Muon Generation Processes} \label{sec:generation}
 
-Muons with energies above some GeV are naturally produced by cosmic ray or neutrino interactions.
-At energies above several TeV, even the strongest accelerator experiments LHC is not powerful enough to create such energetic muons.
+Regarding the natural generation processes, muons with energies above a GeV detected at the surface are produced by cosmic-ray or neutrino interactions.
+While GeV muons can still be produced at particle physic experiments, at energies above several TeV, even the strongest accelerator experiment, the LHC, is not powerful enough to create such energetic muons.
+Those high energetic muons can only be created by cosmic-rays or neutrinos.
 
-At the earths surface most of the muons are going downward, originating from interactions of cosmic ray in the atmosphere.
-After $\mathcal{O}(\num{e4})$ meter-water-equivalent (mwe) even the highest energetic muons lost all of their energy and stop before decaying \cite{PDG20}.
+At the earths surface most of the muons are going downward, originating from interactions of cosmic-ray in the atmosphere.
+After $\mathcal{O}(\num{e4})$ meter-water-equivalent (mwe) even the highest energetic muons lost all of their energy and stop before they decay \cite{PDG20}.
 Therefore all muons propagating longer distances through the earth will get absorbed.
 Only neutrinos can travel through the earth without an interaction and can possibly convert to their charged leptonic counterpart just before the surface.
-Therefore muons seen in a detector going downward most-often originate from cosmic rays while upward-going muons originate from neutrino interactions.
+Therefore muons seen in a detector going downward most-often originate from cosmic-rays while upward-going muons originate from neutrino interactions.
 
-\section{Cosmic Ray induced Muons}
+\section{Cosmic-Ray induced Muons}
 
-Cosmic rays hit the atmosphere with a rate of \SI{1000}{\hertz\per\square\meter} and consist of Protons (\SI{75}{\percent}), Helium (\SI{17}{\percent}) and heavier nuclei \cite{Gaisser16CR}.
+Cosmic-rays hit the atmosphere with a rate of \SI{1}{kHz/m^2} and consist mainly of Protons (\SI{75}{\percent}), Helium (\SI{17}{\percent}) and heavier nuclei \cite{Gaisser16CR}.
 Depending on the energy range these ratios are shifted towards the heavier nuclei, mainly iron, dominating at higher energies.
-The cosmic ray spectrum is shown in \figref{fig:cr_spectrum} together models describing the composition of the nuclei and the cosmic source classes.
+The cosmic-ray spectrum is shown in \figref{fig:cosmic_rays} together models describing the composition of the nuclei.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{./images/cosmic_ray_spectrum_2.pdf}
-    \caption{The energy spectrum of the cosmic rays from the GeV range to the GZK-cutoff. The compositions of the nuclei and on their models describing the all particle spectrum are shown. \cite{Dembinski19MuonPuzzle}}
-    \label{fig:cr_spectrum}
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{./images/cosmic_ray_composition.pdf}
+        \caption{Composition of the cosmic-rays grouped nearly equally in their logarithmic mass between proton and nickel. The size of the circles denotes the flux ratio compared to the leading element in each group. \cite{Dembinski17GSF}}
+        \label{fig:cr_components}
+        \vspace{0.5cm}
+    \end{subfigure}
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/cosmic_ray_spectrum.pdf}
+        \caption{Global Spline Fit of the measured all-particle cosmic-ray energy spectrum. For Oxygen and Iron the data points represent the measured elemental flux and the model lines are shown without error bars for the elemental flux and with error bars for the group flux. \cite{Dembinski19MuonPuzzle}}
+        \label{fig:cr_spectrum}
+    \end{subfigure}
+    \caption{The energy spectrum of the cosmic-rays from the GeV range to the GZK-cutoff. Up to a PeV, space-based detectors measure the cosmic-rays directly being able to differentiate between the compositions. Above a PeV, ground-based detectors measure the cosmic-rays indirectly via air showers.}
+    \label{fig:cosmic_rays}
 \end{figure}
 
-\subsection{Cosmic Ray Energy Spectrum}
+\subsection{Cosmic-Ray Energy Spectrum}
 
-The energy spectrum of incoming cosmic rays, shown in \figref{fig:cr_spectrum}, is focusing above the GeV energy range where most of the particles are produced outside of our solar system.
-Until energies of roughly a GeV the main source of measured cosmic ray events originate from our sun with a variable event rate depending on the suns activity.
-Cosmic rays from outside of our solar system are screened by the Heliosphere.
+The energy spectrum of incoming cosmic-rays, shown in \figref{fig:cr_spectrum}, is focusing above the GeV energy range where most of the particles are produced outside of our solar system.
+Until energies of roughly a GeV the main source of measured cosmic-ray events originate from our sun with a variable event rate depending on the suns activity.
+Cosmic-rays from outside of our solar system are screened by the Heliosphere.
 
 Above a GeV the magnetic fields of the sun are not powerful enough to accelerate particles to such high energies and galactic sources are the main source of origin.
-The main accelerators for the cosmic rays are considered supernova remnants (SNR).
+The main accelerators for the cosmic-rays are considered supernova remnants (SNR).
 Supernov\ae{} occur in average once in a century in our galaxy, while their shock waves propagate hundreds of years into the interstellar medium.
 The particles with these energies are considered to undergo the so called Fermi acceleration, a shock acceleration resulting in a power law spectrum $E^{-\gamma}$ with an index of $\gamma = \num{2}$.
 Due to interaction losses and the probability to escape the galactic magnetic field the spectrum gets steeper and results in a measured spectral index of \num{2.7}.
-SNRs can accelerate particles up to a PeV, a region called \enquote{knee} of the spectrum.
+SNRs can accelerate particles up to a PeV, a region called \textit{knee} of the spectrum.
 
-Above the \enquote{knee} and until the so called \enquote{ankle} at an EeV yet unknown processes, probably Pulsars or Quasars become dominant resulting in an increased measured spectral index of \num{3.1}.
-Above the \enquote{ankle} sources inside our galaxy are not powerful enough to accelerate such high energetic particles and extragalactic sources, e.g. Active Galactic Nuclei, become the main contributor.
+Above the \textit{knee} and until the so called \textit{ankle} at an EeV yet unknown galactic sources, probably Pulsars or Quasars become dominant resulting in an increased measured spectral index of \num{3.1}.
+Above the \textit{ankle} sources inside our galaxy are not powerful enough to accelerate such high energetic particles and extragalactic sources, e.g. Active Galactic Nuclei, become the main contributor.
 The resulting spectral shape flattens again to an index of \num{2.6}.
-At around \SI{1e20}{eV} the protons interact with the photons of the cosmic microwave Background (CMB) to a Delta resonance, resulting in the GZK-cutoff of the energy spectrum, predicted by Greisen, Zatsepin and Kuz'man \cite{Greisen66GZK, Zatsepin66GZK}.
+At around \SI{1e20}{eV} the protons interact with the photons of the CMB to a Delta resonance, resulting in the GZK-cutoff of the energy spectrum, predicted by Greisen, Zatsepin and Kuz'man \cite{Greisen66GZK, Zatsepin66GZK}.
 
-The CMB is a left-over from the big bang when the temperature drops below the critical value to perform electromagnetic pair production and annihilation.
-Due to the expanding universe, the temperature of the CMB is today at \SI{2.7}{K} \cite{PDG20}.
+\subsection{Cosmic-Ray induced Air Shower} \label{sec:air_shower}
 
-\subsection{Cosmic Ray induced Air Shower} \label{sec:air_shower}
-
-When cosmic rays reach the earth they interact with the dense medium of the atmosphere.
-Depending on the energy and the composition the height of the first interaction is at \SIrange{10}{15}{km}.
-The secondary particles of this interaction again interact with the atmosphere resulting in a particle cascade or Air shower of thousands or even millions of particles.
-These showers can be categorized into a hadronic, muonic and electromagnetic subshowers, that are illustrated in \figref{fig:air_shower_components}.
+When cosmic-rays reach the earth they interact with the dense medium of the atmosphere.
+Depending on the energy and the composition of the particle, the height of the first interaction is at \SIrange{10}{15}{km}.
+The secondary particles of this interaction again interact with the atmosphere resulting in a particle cascade or air shower that consist of thousands or even billions of particles.
+These showers can be categorized into hadronic, muonic and electromagnetic shower components, that are illustrated in \figref{fig:air_shower_components}.
 
 \begin{figure}
     \centering
     \begin{subfigure}[t]{0.47\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./images/air_shower_components.pdf}
-        \caption{Basic scheme of the shower components of an air shower. \cite{Barrantes18EAS}}
+        \caption{Basic scheme of the interactions and particles for the shower components of an air shower. \cite{Barrantes18EAS}}
         \label{fig:air_shower_components}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.47\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./images/air_shower_development.pdf}
-        \caption{Development of the contribution for the different particles during the air shower. \cite{Engel11EAS}}
+        \caption{Development of the number of produced shower particles for a \SI{e19}{eV} proton induced vertical air shower. \cite{Engel11EAS}}
         \label{fig:air_shower_development}
     \end{subfigure}
-    \caption{Development of a cosmic ray induced air shower. To the left the different sub-showers divided into an electromagnetic, a muonic and a hadronic component is shown. To the right the number of particles during the shower development is shown. Therefore a \SI{e19}{eV} proton induced air shower is simulated.}
+    \caption{Development of a cosmic-ray induced air shower. To the left the different sub-showers divided into an electromagnetic, a muonic and a hadronic component is shown. To the right the contribution of these sub-showers and particles during the shower development is shown.}
     \label{fig:air_shower}
 \end{figure}
 
-\textbf{The electromagnetic shower component} consist of electrons, positrons and photons.
-Starting e.g. with a high energy photon the two main processes gamma are the production of an electron-positron pair, also called Bethe-Heitler process, and Compton Scattering.
-While the latter is just important for the deflection, the pair production is the crucial process for the shower development.
-The produced electron or positron dominantly loose their energy via Bremsstrahlung, creating again a high energy photon.
+\textbf{The electromagnetic shower component} consists of electrons, positrons and photons.
+Starting e.g. with a high energy photon the two main gamma interactions are the production of an electron-positron pair, also called Bethe-Heitler process, and Compton Scattering.
+While the latter is just important for the deflection, the pair production is the important process for the shower development.
+The produced electrons and positrons dominantly loose their energy via bremsstrahlung, creating again a high energy photon.
 The Positron can also annihilate with the atomic electrons creating a photon pair, which is a sub-dominant process.
 
-(TODO: vgl Tau-Regeneration; wie viel Energie geht in einem cyclus verloren?)
+(TODO: wie viel Energie geht in einem cyclus verloren? vgl Tau-Regeneration)
 The cylce of photon pair production and electron/positron bremsstrahlung continues until the bremsstrahlung photons are below an MeV and therefore not energetic enough to create an electron/positron pair.
 Due to the high number of charged particles (c.f. \figref{fig:air_shower_development}) that are created, this shower component produces the dominant amount of the Cherenkov light and is also important for the radio signal of a shower.
-The production of a muon pair is a sub-dominant process as the muon mass is 200 times higher than the electron mass decreasing the phase space and is therefore not important for the em shower development.
-Otherwise it is a non-negligible process regarding the number of produced muons inside the shower, while the main production originates from the hadronic shower.
+The production of a muon pair is a sub-dominant process as the muon mass is 200 times higher than the electron mass decreasing the phase space and is therefore not important for the electromagnetic shower development.
+However, it is a non-negligible process regarding the number of produced muons inside the shower, while the main production originates from the hadronic shower.
 
-\textbf{The hadronic showercomponent} mainly consist of the lightest mesons, charged Pions and Kaons ($m_{\pi^{\pm}} \approx \SI{140}{MeV}, m_{K^{\pm}} \approx \SI{494}{MeV}$ \cite{PDG20}.
-Due to their relatively long lifetimes of $\tau_{\pi^{\pm}} = \SI{26}{ns}$ and $\tau_{K^{\pm}} = \SI{12}{ns}$ they propagate and loose some amount of energy through interactions, before they decay.
+\textbf{The hadronic shower component} mainly consists of the lightest mesons, charged Pions and Kaons ($m_{\pi^{\pm}} \approx \SI{140}{MeV}, m_{K^{\pm}} \approx \SI{494}{MeV}$ \cite{PDG20}).
+Due to their relatively long lifetimes of $\tau_{\pi^{\pm}} = \SI{26}{ns}$ and $\tau_{K^{\pm}} = \SI{12}{ns}$ they propagate and loose a significant amount of their energy through interactions, before they decay.
 Pions decay mainly into muons, as their rest mass is just slightly higher.
-Kaons either directly decay into muons or first decay into Pions, which then decay to muons and neutrinos.
+Kaons either directly decay into muons (or electrons) or first decay into Pions, which then decay to muons and neutrinos.
 The energy losses during the propagation of the Pions and Kaons lead to a steepening of the resulting muon and neutrino energy spectrum with a spectral index of \num{3.7}.
-Muons or neutrinos originating from these processes are called \enquote{conventional atmospheric} muons or neutrinos.
+The muons or neutrinos originating from these processes are called \textit{conventional atmospheric} muons or neutrinos.
 
-Next to Pions and Kaons also short-lived Mesons and baryons occur in hadronic showers.
+Next to Pions and Kaons also short-lived mesons and baryons occur in hadronic showers.
 They consist mainly of mesons with a charm quark, like the D-Meson, of $\Lambda$-Baryons and of unflavored mesons, while the latter do not often decay into muons and muon neutrinos.
-Due to their short lifetime, they are not losing energy during their short propagation and directly decay.
-The resulting energy spectrum of the decay products therefore remains the same as the primary spectrum and the spectral index does not change.
+Due to their short lifetime ($\tau \leq \SI{1}{ps}$), they do not lose energy during their short propagation and directly decay.
+The resulting energy spectrum of the decay products is therefore similar to the primary spectrum as the spectral index does not change.
 Although these processes are sub-dominant, the smaller spectral index of the resulting muons and neutrinos makes them relevant at higher energies.
-Due of the direct decay of the hadrons, which mainly consist of charmed mesons, the resulting muons or neutrinos are called \enquote{charmed} or \enquote{prompt atmospheric} muons or neutrinos.
+Due of the direct decay of the hadrons, which mainly consist of charmed mesons, the resulting muons or neutrinos are called \textit{charmed} or \textit{prompt atmospheric} muons or neutrinos.
 
-\textbf{The muonic showercomponent} mainly originates from the hadronic showercomponent and produce just a few secondaries compared to the other shower particles.
-The high muon mass compared to the electron also decreases the interaction probability as the bremsstrahlung cross section is proportinal to $1/m^2$.
-Combined with the relatively high lifetime, the muon range through dense media is the highest, neglecting neutrinos, making them the biggest background for all particle detectors even deep underground.
-Except of detectors at high altitude, like HAWC \cite{HAWC17} or LHAASO \cite{LHAASO19}, they are the only shower component measured on the earths surface, neglecting the em-radiation part like Cherenkov light, Fluorescence light or the radio signal.
-
-The resulting muon and neutrino energy flux from cosmic ray induced air showers is shown in \figref{fig:atmo_mu_nu_flux}.
-
+\textbf{The muonic showercomponent} mainly originates from the hadronic shower component and produce just a few secondaries compared to the other shower particles.
+The high muon mass ratio compared to the electron also decreases the interaction probability as the bremsstrahlung cross section is proportinal to $1/m^2$.
+Combined with the relatively high lifetime, the muon range through dense media is the highest, neglecting neutrinos, making them the biggest background for all particle detectors even if they are located deep underground.
+Except of detectors placed at high altitudes, they are the only shower component for inclined showers measured on the earths surface, neglecting the electromagnetic radiation like Cherenkov light, Fluorescence light or the radio signal.
+The resulting muon and neutrino energy flux from cosmic-ray induced air showers is shown in \figref{fig:atmo_mu_nu_flux}.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{./images/mceq_mu_nu_flux.pdf}
-    \caption{Atmospheric muon and neutrino flux at the surface using MCEq. \cite{Fedynitch15MCEq}}
+    \caption{Predictions of the atmospheric muon and neutrino flux at the surface using matrix cascade equations. \cite{Fedynitch15MCEq}}
     \label{fig:atmo_mu_nu_flux}
 \end{figure}
 
 A longitudinal shower profile and the contribution of the different sub-shower types is shown in \figref{fig:air_shower_development}.
-An increasing number of particles during the beginning of cascade development can be seen as well as a decreasing part when more and more Bremsstrahlung photons are too low energetic for electron pair production.
-The resulting maximum of the longitudinal shower profile $X_{\mathrm{max}}$ at roughly \SI{5}{km} varies for the different primary particle types and energies making it an important feature for the primary particle tagging.
+An increasing number of particles in the beginning of the shower development can be seen as well as a decreasing part when more and more bremsstrahlung photons are too low energetic to produce an electron positron pair.
+The resulting maximum of the longitudinal shower profile $X_{\mathrm{max}}$ at roughly \SI{5}{km} for vertical showers varies for the different primary particle types and energies making it an important feature to classify the primary particle.
 
 Another important feature to estimate the energy of the primary particle is the number of muons detected at the earths surface.
-Unfortunately, there is a discrepancy between the number of muons measured in air shower detectors, which exceeds the number of muons produced in air shower simulations starting at primary energies of \SI{e16}{eV}.
-by around across multiple experiments with an evidence of \SI{8}{\sigma}, known as the \enquote{Muon Puzzle} \cite{Dembinski19MuonPuzzle}.
+Unfortunately, there is a discrepancy between the number of muons measured in air shower detectors, which exceeds the number of muons produced in air shower simulations starting at primary energies of \SI{e16}{eV} \cite{Dembinski19MuonPuzzle}.
+That is seen across multiple experiments with an evidence of \SI{8}{\sigma}, known as the \textit{Muon Puzzle}.
+
+It is considered, that most of the discrepancy arises from the uncertainties of the hadronic interaction models.
+While most of the models are influenced by accelerator measurements like the LHC, these models provide good agreements for high transversal momentums.
+In the forward direction, the beam pipe and not a detector is located, which is fine for those experiments as most differential cross sections diverges in the forward direction.
+However, in astroparticle physics experiments most often measure the shower in the forward direction leading to less cross checks with the accelerator measurements.
+This type of challenge to evaluate cross section also in the forward direction does not just occur for the hadronic models, but for all types of particle interaction including the muon cross sections.
 
 A precise description of the muon bundles is also crucial for underground detectors to separate these background events from their signal.
-While there are a significant amount of muons with a high transversal momentum resulting in a lateral distribution for the \SI{e19}{eV} event in \figref{fig:air_shower_development} of kilometers \cite{Engel11EAS} most of the high energetic muons propagate close to the primary direction making a separation between them challenging.
-An extraction of muon physics parameters out of muon bundles is therefore limited as single muons provide a deeper understanding.
+While there are also muons with a high transversal momentum compared to the shower axis resulting in a lateral distribution for the \SI{e19}{eV} event in \figref{fig:air_shower_muon_surface} of kilometers \cite{Engel11EAS} most of the high energetic muons propagate close to the primary direction making a separation between them challenging.
+An extraction of muon physic parameters out of these muon bundles is therefore limited and single muons are required to provide a deeper understanding.
 
-TODO: Plot showing the simulated muon arrival distribution of an air shower on the earths surface.
+TODO: Plot showing the simulated muon arrival distribution of an air shower on the earths surface. Ask DBaack
 
 %
 % 
@@ -131,39 +145,37 @@ TODO: Plot showing the simulated muon arrival distribution of an air shower on t
 
 \section{Neutrino induced Muons}
 
-Compared to the cosmic ray induced muons that occur only in bundles, neutrinos produce single muons.
+Compared to the cosmic-ray induced muons that occur only in bundles, neutrinos produce single muons.
 Further muons are produced in the hadronic cascade at the neutrino vertex or as muon pair production.
-But these muons have much less energy and stop far before the main muon, so they can be neglected regarding GeV muons or above.
+But these muons have much less energy and stop far before the main muon produced by the neutrino, so they can be neglected regarding muon energies of GeV or above.
 
 \subsection{Neutrino Energy Spectrum}
 
 The neutrino energy spectrum shown in \figref{fig:neutrino_spectrum} is assumed to starts with a high number of cosmological neutrinos or the cosmic neutrino background (C$\nu$B).
 Like the CMB they are left-overs from the big bang when the temperature drops below the critical value of weak lepton production and annihilation.
-It consist of all neutrino flavors but the energies are far too low to be measured.
-
+It consist of all neutrino flavors but the energies are far too low to be measurable.
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{./plots/nu_spectrum.pdf}
-    \caption{Neutrino energy spectrum. \cite{KatzSpiering12}}
+    \includegraphics[width=0.9\textwidth]{./plots/nu_spectrum.pdf}
+    \caption{The diffuse neutrino energy spectrum at the earth from the cosmological neutrino background $C\nu B$ at mEv energies to the cosmogenic neutrinos at EeV energies. The gap between the $C\nu B$ and the solar neutrinos from nuclear processes is filled by thermal neutrinos from the sun, not included here (c.f. \cite{Vitagliano20}}). Adapted from \cite{KatzSpiering12}.
     \label{fig:neutrino_spectrum}
 \end{figure}
 
-At neutrino energies of keV and MeV solar neutrinos from fusion processes dominate the neutrino flux on earth with additional contributions of terrestrial anti-neutrinos from naturally decaying radioactive nuclids.
-Additional anti-neutrinos from nuclear reactors also contribute to the neutrino flux depending on the location on earth.
+Until keV-energies, thermal neutrinos from the sun are predicted \cite{Vitagliano20} before at neutrino energies of keV and MeV solar neutrinos from fusion processes dominate the neutrino flux on earth with additional contributions of terrestrial anti-neutrinos from naturally decaying radioactive nuclide.
+Additional anti-neutrinos from nuclear reactors also contribute to the neutrino flux depending on the location on earth \cite{Usman15}.
 Although only electron neutrinos are produced in radioactive decays or fusion processes, solar neutrinos are measured in all three flavors through the neutrino oscillation further described in section \ref{sec:nu_osc}.
 
 Furthermore in the MeV range neutrinos from supernova remnants also contribute to the neutrino flux.
-For the last seen supernova SN1987A, where the neutrino contribution was first measured, the neutrino flux was orders of magnitudes higher than the SNR flux, dominating the spectrum at MeVs during that burst.
-% Here the distances are large enough for neutrino oscillation like on every cosmic scale resulting in a neutrino flux of all three flavors.
+For the last supernova SN1987A, where the neutrino contribution was first measured, the neutrino flux was orders of magnitudes higher than the SNR flux, dominating the spectrum at MeVs during that burst.
 
-For neutrino energies starting around a GeV cosmic ray induced atmospheric neutrinos are the main contributors.
-Their flux can be approximated by a broken power-law of \enquote{conventional} and \enquote{prompt} atmospheric neutrinos as described in section \ref{sec:air_shower}.
+For neutrino energies starting around a GeV cosmic-ray induced atmospheric neutrinos are the main contributors.
+Their flux can be approximated by a broken power-law of \textit{conventional} and \textit{prompt} atmospheric neutrinos as described in section \ref{sec:air_shower}.
 At around \SI{100}{TeV} both the prompt atmospheric and astrophysical neutrinos (probably from AGNs) starts dominating the flux both due to their more flat spectrum.
 While the astrophysical flux has already been measured by IceCube, the prompt component has always been fitted to zero and its contribution remain hidden, yet.
 
-The neutrino creation process for the cosmic accelerators (possibly AGNs) is similar to the atmospheric neutrinos.
+The neutrino creation process for the cosmic accelerators (possibly Active Galactic Nuclei) is similar to the atmospheric neutrinos.
 Accelerated protons interact near the source and through the pion and muon secondaries, neutrinos are produced.
-In contrast to the atmospheric neutrinos the medium at astrophysical sources is not as dense as the atmosphere, so the pions and muons do not lose much of their energy before they decay.
+In contrast to the atmospheric neutrinos the medium at astrophysical sources is not as dense as the atmosphere and the pions and muons do not lose much of their energy before they decay.
 Therefore the energy spectrum does not get steeper and the spectral index remains on the level of the Fermi acceleration near 2.
 
 The two main processes of the accelerated protons for the neutrino production are the $pp$-channel and the $p\gamma$-channel.
@@ -173,12 +185,12 @@ The two main processes of the accelerated protons for the neutrino production ar
 \end{align}
 
 In the $pp$-channel a proton interacts with another proton in the surrounding matter near the source producing an equal amount of $\pi^+$ and $\pi^-$.
-In the $p\gamma$-channel a proton interacts with a photon producing a Delta-resonance resulting in the production of only positively charged pions.
+In the $p\gamma$-channel a proton interacts with a photon producing a Delta-resonance resulting in the production of only positively charged Pions.
 A way to distinguish between neutrinos and anti-neutrinos at these energies could therefore give further insight of the production processes.
 
 Starting at \SI{10}{PeV} the so called cosmogenic neutrinos are predicted to be the main contributors.
-They are produce from decaying Delta-resonances induced by cosmic ray protons at the GZK-limit.
-Unfortunately, they have not been measured yet, as the detectors to measure them with radio techniques are currently in the planing and fund raising phase.
+They are produce from decaying Delta-resonances induced by cosmic-ray protons at the GZK-limit.
+Unfortunately, they have not been measured yet, as the detectors to measure them with radio techniques are currently in the phase of planing and fund raising.
 
 \subsection{Neutrino Flavors at Earth} \label{sec:nu_osc}
 
@@ -208,19 +220,19 @@ The neutrino propagating through the earth further changes due to the different 
 \end{figure}
 
 For astrophysical sources like SNRs or AGNs the propagation distances are much larger than the oscillation length and the mean probability averaged over the oscillation is used to describe the neutrino flux composition depending on the initial production composition.
-There are three mainly discussed production scenarios describing a likely and two extreme scenarios of neutrino production.
+There are three mainly discussed production scenarios describing one likely and two extreme scenarios of neutrino production.
 
 Assuming pure \textbf{pion decay} processes, the flavor ratio $\nu_e : \nu_{\mu} : \nu_{\tau}$ is $1:2:0$
 \begin{align}
     \pi^+ \to &\mu^+ \nu_\mu \\
     &\mu^+ \to e^+ \nu_e \bar{\nu}_{\mu} ,
 \end{align}
-Equivalent processes happen during the $\pi^-$ decay.
+Equivalent processes happen for the $\pi^-$ decay.
 
 In the \textbf{muon damping} model, also assuming pure pion decays, the produced muons interact near the production region and loose most of their energy before they decay assuming a more dense medium around the source.
 The outgoing neutrinos of the muon decay are therefore in the range of a few MeV which is not measurable for astroparticle detectors.
 The resulting flavor ratio of $0:1:0$ then does not contain electron neutrinos.
-Atmospheric electron neutrinos this leads to the Kaon decay as main production channel as Kaons decay equally into muons and electrons.
+Atmospheric electron neutrinos are mainly produced in Kaon decay as Kaons decay equally into muons and electrons.
 
 In the other extreme scenario a high energetic \textbf{neutron beam} is assumed at the source.
 When the neutrons decay, this results in a pure electron neutrino flux and a flavor ratio of $1:0:0$.
@@ -229,7 +241,7 @@ For all three neutrino production scenarios the flavor ratio that would be measu
 Independent of the neutrino creation model at the astrophysical source, neutrinos of all three flavors will arrive at the earth through neutrino oscillation, including tau neutrinos.
 The most discussed scenario of the dominating pion production without muon damping produces a nearly equal amount of $1:1:1$.
 
-Tau neutrinos are of special interest as the rates to produce the tau lepton with its high mass of \SI{1.7}{GeV} directly is highly suppressed; in air showers or at $pp$ or $p\gamma$ interactions at the source.
+Tau neutrinos are of special interest as the rates for a direct production of the tau lepton with its high mass of \SI{1.7}{GeV} is highly suppressed; both in air showers and at extragalactic sources.
 They are only measurable through neutrino oscillation and have therefore a high confidence being of astrophysical origin.
 
 Due to the negligible initial tau neutrino flux, the currently measured oscillation parameters assuming the standard model allows the neutrino flavor arriving on earth just to be in a distinct region of the flavor ratio, shown in \figref{fig:nu_flavor_trangle}.
@@ -268,7 +280,7 @@ There are three different interaction modes, illustrated in figure \ref{fig:feyn
 The \textbf{Charged Current} (CC) interaction, with a W-Boson as exchange partner between the nucleon and the neutrino, is the main producer of high energy muons.
 While the neutrino converts into its charged counterpart-lepton the other outgoing product is the hadronic cascade.
 The \textbf{Neutral Current} (NC) Interaction, with an Z-Boson as exchange partner just produces an energy loss of the neutrino without converting it.
-Therefore just a hadronic cascade comes out of this interaction as a visible part.
+Therefore only the hadronic cascade is the visible outcome of this interaction.
 For both the CC and NC interactions in average a third of the neutrino energy is stored as hadronic cascade and two thirds in the outgoing lepton, shown in \figref{fig:nu_xsection_y}.
 
 The CC interaction is the dominant interaction contributing two thirds to the total cross section, while the NC just contribute a third, as shown in \figref{fig:nu_xsection_tot}.
@@ -297,12 +309,10 @@ The sea quarks and thereby an equal treatment of neutrino and anti-neutrino beco
 At an energy of \SI{6.3}{PeV} the peak of the \textbf{Glashow Resonance} (GR) dominates the cross section \cite{Glashow60}.
 At this energy the anti-electron neutrino interacts resonantly with an atomic electron producing a W-Boson.
 The result is a huge hadronic cascade, as the W-Boson decays with the hole energy producing also multiple higher energetic muon tracks characteristic for this interaction.
-% The IceCube detector has seen one very likely Glashow-resonance event after 10 years of data taking.
 
 The energy distribution of muons propagating out of a hadronic cascade is shown in \figref{fig:mu_flux_hadr_shower}.
-Compared to the directly produced muon of the CC interaction, the secondary muons of the hadronic are much less energetic while still producing a non-negligible signature.
+Compared to the directly produced muon of the CC interaction, the secondary muons of the hadronic cascade are much less energetic while still producing a non-negligible signature.
 Especially, as the hadronic interactions not only occur at the neutrino vertex, but also at each inelastic nuclear interaction along a muon track.
-
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{./images/muon_flux_hadronic_shower.pdf}

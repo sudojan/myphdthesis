@@ -128,7 +128,13 @@
   giveninits=true, % automatically abbreviate auther's first names
   backref=true,    % ref back to the pages, where it is cited
 ]{biblatex}
-\addbibresource{references/simulation.bib}  % the bib file to use
+% the bib file to use
+\addbibresource{references/introduction.bib}
+\addbibresource{references/generation.bib}
+\addbibresource{references/detection.bib}
+\addbibresource{references/interactions.bib}
+\addbibresource{references/simulation.bib}
+% \addbibresource{references/analysis.bib}
 \DefineBibliographyStrings{english}{andothers = {{et\,al\adddot}}}  % replace u.a. with et al.
 
 
@@ -136,6 +142,19 @@
 \usepackage[pdfusetitle, unicode, linkbordercolor=tugreen]{hyperref}
 \usepackage{bookmark}
 \usepackage[shortcuts]{extdash}
+
+%------------------------------------------------------------------------------
+%--------------------------- Selfdefined Shortcuts ----------------------------
+%------------------------------------------------------------------------------
+
+% Define Differential
+\newcommand{\dif}{\mathrm{d}}
+% Define Differential
+\newcommand{\logn}{\mathrm{ln}}
+% Define \figref as abbreviation of "Figure~\ref{...}"
+\newcommand\figref{Figure~\ref}
+% Define \tabref as abbreviation of "Table~\ref{...}"
+\newcommand\tabref{Table~\ref}
 
 %------------------------------------------------------------------------------
 %-------------------------    Angaben zur Arbeit   ----------------------------
@@ -148,7 +167,7 @@
 \chair{Lehrstuhl für Experimentelle Physik V}
 \division{Fakultät Physik}
 \thesisclass{eines Doktors der Naturwissenschaften \\ (Dr. rer. nat.)}
-\submissiondate{31. September 2020}
+\submissiondate{31. Dezember 2020}
 \firstcorrector{Prof.~Dr.~Dr.~Wolfgang Rhode}
 \secondcorrector{Prof.~Dr.~Zweitgutachter}
 
@@ -157,10 +176,10 @@
 
 \begin{document}
 \frontmatter
-\maketitle
+% \maketitle
 
 % Gutachterseite
-\makecorrectorpage
+% \makecorrectorpage
 
 % hier beginnt der Vorspann, nummeriert in römischen Zahlen
 % \input{content/00_abstract.tex}
@@ -168,9 +187,12 @@
 
 \mainmatter
 % Hier beginnt der Inhalt mit Seite 1 in arabischen Ziffern
-% \input{content/01_introduction.tex}
-\input{content/02_theory.tex}
-\input{content/analysis.tex}
+\input{content/introduction.tex}
+\input{content/generation.tex}
+% \input{content/detection.tex}
+% \input{content/interactions.tex}
+% \input{content/simulation.tex}
+% \input{content/analysis.tex}
 
 % \appendix
 % % Hier beginnt der Anhang, nummeriert in lateinischen Buchstaben

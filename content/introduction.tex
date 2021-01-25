@@ -1,0 +1,38 @@
+\chapter{Introduction}
+
+Muons have been first discovered in cloud chamber observations in 1936 \cite{Anderson36Muon}.
+Due to their propagated range, energy loss and deflection their signature in the detector didn't match the behavior of an electron or a proton.
+In particular it's the range of muons, that they can propagate through large volumes of media before they lost all of their energy, that makes them special and interesting for nearly all particle detectors on earth.
+Muons are the only particle type from cosmic-ray induced air showers that can reach detectors deposited deep underground.
+Therefore, they are the dominant measured event signature for underground experiments and often seen as unwanted background to get rid of.
+With the high rate of cosmic-rays hitting the atmosphere, their secondary muons contribute to a third of the natural radiation consumption for humans on earth.
+
+But these muons can also be used for an indirect measurement of cosmic-rays.
+In the context of astroparticle physics or multi-messenger astronomy, cosmic-rays are just one type of messenger discovered 1914 \cite{Hess12CRbirth}.
+Electro-magnetic waves are by far the oldest type to observe the sky, mainly at optical frequencies.
+In the 20th century also the other wavelengths of the electro-magnetic spectrum from radio frequencies to $\gamma$-rays were used to further understand astrophysical processes in Multy-Wavelength studies.
+The 21st century, especially the last decade reveal two further messengers, neutrinos and gravitational waves making the 2010s a golden decade for astronomy.
+
+To get a deeper understandings of astrophysical processes, all of these messengers needs to get combined to profit from their advantages and disadvantages e.g. the observable horizon.
+While the neutrinos only loose their energy due to the expanding universe, resulting the horizon of $\sfrac{c}{H_0}\approx\SI{4}{GPc}$, the observable distance for gravitational waves depends on the total mass of the binary system \cite{LIGO20WhitePaper}.
+However, protons and photons interact with the diffuse electromagnetic \textit{cosmic background} \cite{Hill18CosmicBg}, limiting their horizon depending on their energy.
+The strongest attenuation is driven by the cosmic microwave Background (CMB) limiting the distance of PeV photons to \SI{10}{kPc}, which is barely the distance to our galactic center, and ZeV protons to \SI{10}{MPc}, which just includes the nearest galaxies \cite{DeAngelis13Horizon}.
+The CMB is considered to be a left-over from the big bang when the temperature drops below the critical value to perform electromagnetic pair production and annihilation.
+Due to the expanding universe, the temperature of the CMB is today at \SI{2.7}{K} \cite{PDG20}.
+
+Besides these fixed limitations for the incoming messenger flux, the detection and analysis methods have been steadily developed to gather more information and increase the sensitivities leading to the current knowledge on particle physics and astronomy.
+Although many new astroparticle experiments or enhancements are planned the size of most particle detectors converge to their possible limits.
+Further large increases of detection volumes depend on large increases of investments, which are challenging and are often not in relation to the gain of sensitivity.
+Therefore the software improvements including the simulation and reconstruction methods become more important to keep up with the new detectors and to improve the sensitivity for the the existing ones.
+
+One part of these soft-improvements consist of modern methods of computer science and statistics to analyse the data using e.g. machine learning approaches to extract and reconstruct the measured events.
+The other part consist of more accurate theoretical calculations and more flexible simulations including these accurate models and being adaptive to the different demands of the experiments to reduce the systematic uncertainty.
+
+This work focuses on the latter part to reduce the systematic uncertainty for the muon simulation and provide this to diverse types of experiments.
+Since, there is no astrophysical source, sending a test beam of messengers to calibrate the detection, simulations are necessary to understand the measured data.
+A precise description of the stochastic behavior of muons is therefore crucial for cosmic-ray and neutrino detectors as muons are the dominating measured event signature.
+
+In Chapter \ref{sec:generation} the generation and in \ref{sec:detection} the detection processes of the muons measured on earth is presented introducing the demands for muon simulations.
+In chapter \ref{sec:interaction} the interactions are presented and in \ref{sec:simulation} the implementation in the simulation is described.
+Next to the cross sections, also the remaining uncertainties and an understanding of their effects in analysis is important.
+In chapter \ref{sec:analysis} a simulation study for an analysis is presented before giving an outlook in chapter \ref{sec:outlook} enrolling what further analysis can be done.
