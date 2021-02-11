@@ -1,0 +1,39 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-\feynlen-\feynsmallen, \feynlen);
+    \vertex[right=2.5*\feynlen of mu_in] (mu_out);
+    \vertex[right=1.25*\feynlen of mu_in] (mu_vertex);
+    % nucleus/electron target
+    \vertex[below=\feynlen of mu_in] (e_in);
+    \vertex[below=\feynlen of mu_out] (e_out);
+    % brems
+    \vertex[below=\feynlen of e_out] (brems_out);
+    % blob
+    \vertex[below=\feynlen of mu_vertex] (blob);
+    \vertex (blob_left) at ($(blob) + (180:\feynsmallen)$);
+    \vertex (blob_right) at ($(blob) + (0:\feynsmallen)$);
+    \vertex (blob_vertex) at ($(blob) + (90:\feynsmallen)$);
+    \vertex (blob_brems) at ($(blob) + (-45:\feynsmallen)$);
+    % draw diagram
+    \diagram* {
+        (e_in) -- [fermion] (blob_left),
+        (blob_right) -- [fermion] (e_out),
+        (mu_in) -- [fermion] (mu_vertex) -- [fermion] (mu_out),
+        (blob_vertex) -- [boson] (mu_vertex),
+        (blob_brems) -- [boson] (brems_out)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[pattern = north east lines] (blob) circle[radius=\feynsmallen];
+    \draw[fill] (mu_vertex) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu '$};
+    \node[left] at (e_in) {$e$};
+    \node[right] at (e_out) {$e'$};
+    \node[right] at (brems_out) {$\gamma$};
+\end{feynman}
+\end{tikzpicture}
+%

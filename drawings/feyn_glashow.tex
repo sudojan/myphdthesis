@@ -2,10 +2,10 @@
 \begin{tikzpicture}
 \begin{feynman}
     % define vertices
-    \vertex (nu_in) at (-\feynlen, \feynlen);
-    \vertex (e_in) at (-\feynlen, -\feynlen);
+    \vertex (nu_in) at (-\feynlen, 0.75*\feynlen);
+    \vertex (e_in) at (-\feynlen, -0.75*\feynlen);
     \vertex (nu_vertex) at (0, 0);
-    \vertex (w_out) at (\feynlen, 0);
+    \vertex[right=\feynlen of nu_vertex] (w_out);
     % draw diagram
     \diagram* {
         (e_in) -- [fermion] (nu_vertex) -- [fermion] (nu_in),

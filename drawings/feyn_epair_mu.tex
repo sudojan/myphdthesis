@@ -4,21 +4,21 @@
     % define vertices
     % muon
     \vertex (mu_in) at (-\feynlen-\feynsmallen, 0);
-    \vertex (mu_out) at (\feynlen+\feynsmallen, 0);
-    % epair
-    \vertex (epair_in) at (\feynlen+\feynsmallen, \feynlen+\feynsmallen);
-    \vertex (epair_vertex) at (\feynsmallen, \feynlen);
-    \vertex (epair_out) at (\feynlen+\feynsmallen, \feynlen-\feynsmallen);
+    \vertex[right=2.5*\feynlen of mu_in] (mu_out);
     % blob
-    \vertex (blob) at (0,0);
-    \vertex (blob_left) at (-\feynsmallen, 0);
-    \vertex (blob_right) at (\feynsmallen, 0);
-    \vertex (blob_down) at (0, -\feynsmallen);
+    \vertex[right=1.25*\feynlen of mu_in] (blob);
+    \vertex (blob_left) at ($(blob) + (180:\feynsmallen)$);
+    \vertex (blob_right) at ($(blob) + (0:\feynsmallen)$);
+    \vertex (blob_down) at ($(blob) + (-90:\feynsmallen)$);
     \vertex (blob_up) at ($(blob) + (75:\feynsmallen)$);
+    % epair
+    \vertex[above=1.25*\feynlen of mu_out] (epair_in);
+    \vertex[above=0.75*\feynlen of mu_out] (epair_out);
+    \vertex[above=\feynlen of blob_right] (epair_vertex);
     % nucleus
-    \vertex (n_in) at (-\feynlen-\feynsmallen, -\feynlen);
-    \vertex (n_vertex) at (0, -\feynlen);
-    \vertex (n_out) at (\feynlen+\feynsmallen, -\feynlen);
+    \vertex[below=\feynlen of mu_in] (n_in);
+    \vertex[below=\feynlen of blob] (n_vertex);
+    \vertex[below=\feynlen of mu_out] (n_out);
     % draw diagram
     \diagram* {
         (mu_in) -- [fermion] (blob_left),
@@ -31,6 +31,7 @@
     \draw[thick, double] (n_in) -- (n_vertex) -- (n_out);
     \draw[pattern = north east lines] (blob) circle[radius=\feynsmallen];
     \draw[fill] (n_vertex) circle[radius=\feynvertexsize];
+    \draw[fill] (epair_vertex) circle[radius=\feynvertexsize];
     % add labels
     \node[left] at (mu_in) {$\mu$};
     \node[right] at (mu_out) {$\mu '$};

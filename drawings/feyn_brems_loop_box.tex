@@ -1,0 +1,42 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-\feynlen, 0);
+    \vertex[right=2.5*\feynlen of mu_in] (mu_out);
+    \vertex[right=\feynlen of mu_in] (mu_vertex_nucl);
+    \vertex[left=\feynlen of mu_out] (mu_vertex_brems);
+    % brems
+    \vertex[below=0.75*\feynlen of mu_out] (brems_out);
+    % nucleus
+    \vertex[below=1.5*\feynlen of mu_in] (n_in);
+    \vertex[below=1.5*\feynlen of mu_vertex_nucl] (n_vertex);
+    \vertex[below=1.5*\feynlen of mu_out] (n_out);
+    % loop
+    \vertex[right=1.25*\feynlen of mu_in] (loop);
+    \vertex (loop_left) at ($(loop) + (-180:0.6*\feynlen)$);
+    \vertex (loop_right) at ($(loop) + (0:0.6*\feynlen)$);
+    % draw diagram
+    \diagram* {
+        (mu_in) -- [fermion] (loop_left) -- (loop_right) -- [fermion] (mu_out),
+        (mu_vertex_nucl) -- [boson] (n_vertex),
+        (loop_left) -- [boson, half left] (loop_right),
+        (mu_vertex_brems) -- [boson] (brems_out)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[thick, double] (n_in) -- (n_vertex) -- (n_out);
+    \draw[fill] (n_vertex) circle[radius=\feynvertexsize];
+    \draw[fill] (mu_vertex_nucl) circle[radius=\feynvertexsize];
+    \draw[fill] (mu_vertex_brems) circle[radius=\feynvertexsize];
+    \draw[fill] (loop_left) circle[radius=\feynvertexsize];
+    \draw[fill] (loop_right) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu '$};
+    \node[right] at (brems_out) {$\gamma$};
+    \node[left] at (n_in) {$N$};
+    \node[right] at (n_out) {$N'$};
+\end{feynman}
+\end{tikzpicture}
+%
