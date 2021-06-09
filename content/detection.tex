@@ -51,7 +51,7 @@ Another type is the luminescence light which is used in searches of magnetic mon
 
 The different signals an air shower produces are measured with multiple approaches, from the direct detection of the different shower particles at high altitudes over the muon detection at the surface to the fluorescence or radio signal besides the shower axis.
 
-\subsection{$\gamma$-Ray induced Air Shower Detectors}
+\subsection{Gamma-Ray induced Air Shower Detectors}
 
 Extended air shower Arrays (EAS-Arrays) are placed at high altitudes, ideally near the typical maximum of the shower profile $X_{\mathrm{max}}$ to measure most of the produced particles inside the detector.
 One approach is using a dense array of closed tanks filled with purified water.
@@ -159,7 +159,7 @@ Four main types of neutrino telescopes have been established so far.
 % Large volumes of media transparent to the blue Cherenkov light like Water, Ice or simply the air is used as a detection volume.
 % Other methods like the radio or acoustic detection are in the development phase.
 
-\subsection{Neutrino Telescope Types}
+\subsection{Types of Neutrino Telescopes}
 
 An exemplary detector in the neutrino energy range from MeV to \SI{10}{GeV} is the Super-Kamioka Neutrino Detection Experiment \cite{HyperKamiokande18} located in a former mine \SI{1}{km} deep underground in Japan.
 It consists of a cylindrical tank with \SI{40}{m} in diameter and height filled with \SI{50}{kt} of purified water.
@@ -212,7 +212,7 @@ Both again looking for a hadronic shower, only Tau Neutrinos can produce.
 For all these experiments again atmospheric muons are the dominant background by orders of magnitudes.
 Therefore an accurate description for all energies and energy losses is crucial to cover also the edge cases in the simulations.
 
-\subsection{IceCube} \label{sec:IceCube}
+\subsection{IceCube Neutrino Observatory} \label{sec:IceCube}
 
 The biggest neutrino telescope is the IceCube detector located at the geographic south pole, shown in \figref{fig:icecube_detector}.
 On a hexagonal grid of a square kilometer, 78 Strings are drilled into the glacial ice with a string distance of \SI{125}{m}.
@@ -253,7 +253,7 @@ In contrast to IceCube, the Strings in Gen2 will be organized on a sunflower str
 Besides, a radio detector is planned, placing the antennas on a grid with an inner distance of a kilometer covering an area of \SI{100}{\cubic\kilo\meter} to analyze the cosmogenic neutrinos.
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{./images/gen2_detector.pdf}
+    \includegraphics[width=\textwidth]{./images/detector_gen2.pdf}
     \caption{Schematic top view of the IceCube detector compared to the enhancements for Gen2. \cite{IceCube20Gen2}}
     \label{fig:detect_gen2}
 \end{figure}
@@ -312,12 +312,12 @@ The tracks are further separated between up-going and down-going tracks.
 Down-going events are most-often atmospheric muons reaching the detector as bundles with a lateral distance of some meter between them.
 Those events are seen as one thick, bright track due to the limited resolution preventing a separation of the single muons from a bundle.
 Therefore those muon bundles are in principle of limited usefulness since the number of muons and their energy is not reconstructible.
-An approach to analyzing atmospheric muon bundles is the search for a \textbf{leading muon} containing most of the bundle energy \cite{Fuchs16PhD}.
+An approach to analyzing atmospheric muon bundles is the search for a \textbf{leading muon} containing most of the bundle energy \cite{Fuchs16PhD, Fuchs16ECRS, Werthebach17Master}.
 A bundle of many low energetic muons creates a bright track with a continuous energy loss.
 Leading or single muons have higher stochasticity, e.g. with a huge bremsstrahlung loss resulting in a thinner track with brighter cascades along it.
 As these muons are produced in one of the first interactions of the air shower they can provide further insights into the particle processes in the atmosphere.
 
-Another approach to use atmospheric muons is using \textbf{stopping muons} \cite{Hoinka17Master}.
+Another approach to use atmospheric muons is using \textbf{stopping muons} \cite{Hoinka17Master, Ninfa19Master}.
 They are most-often single muons and have energies of just several \SI{100}{GeV} when entering the detector.
 At these energies, they are in the regime of the minimal Ionization and can be used to calibrate the detector and measure systematic parameters.
 For stopping muons, also the range they have traveled through the ice is known which is an approximation of their energy at the surface.
@@ -340,14 +340,14 @@ A comparison of the standard and neural network approaches for the reconstructio
     \centering
     \begin{subfigure}{0.55\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{./images/icecube_cascade_angular_resolution.pdf}
+        \includegraphics[width=\textwidth]{./images/icecube_resolution_cascade_angular.pdf}
         \caption{Resolution of the angular reconstruction for cascades comparing the standard likelihood approach with a Neural Network (CNN). \cite{IceCube20DNN}}
         \label{fig:icecube_angular_resolution}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.43\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{./images/icecube_muon_energy_resolution.pdf}
+        \includegraphics[width=\textwidth]{./images/icecube_resolution_muon_energy.pdf}
         \caption{Resolution of the energy reconstruction for tracks comparing the standard $\mathrm{d}E/\mathrm{d}X$ and track length approach with a Deep Neural Network. \cite{Huennefeld17Master}}
         \label{fig:icecube_energy_resolution}
     \end{subfigure}

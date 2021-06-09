@@ -1,6 +1,7 @@
 % references for the muon simulation techniques
 
 % Monte-Carlo methods
+
 @article{Lipari91,
     author      = {Lipari, Paolo and Stanev, Todor},
     title       = {Propagation of multi-Tev muons},
@@ -15,7 +16,14 @@
 % PROPOSAL
 % -----------------
 
-% theses about PROPOSAL
+% theses about PROPOSAL/MMC
+@phdthesis{Chirkin03PhD,
+    author      = {Chirkin, Dmitry Aleksandrovich},
+    title       = {Cosmic Ray Energy Spectrum Measurement with the Antarctic Muon and Neutrino Detector Array (AMANDA)},
+    institution = {University of California at Berkeley},
+    year        = 2003
+}
+
 @thesis{Frantzen11Diplom,
     author      = {Frantzen, Katharina},
     title       = {Wirkungsquerschnitte in PROPOSAL - Beschreibung alter und Implementierung neuer Parametrisierungen},
@@ -89,16 +97,16 @@
 }
 
 @thesis{Gutjahr21Master,
-    author      = {Gutjahr, Pascal},
-    title       = {blablabla to be published Muon Defelction},
+    author      = {Gutjahr, Pascal Thomas},
+    title       = {Study of muon deflection angles in the TeV energy range with IceCube},
     institution = {TU Dortmund},
-    type        = {Master's thesis (to be published)},
+    type        = {Master's thesis},
     year        = 2021
 }
 
 % papers and proceedings about PROPOSAL/MMC
 @online{Chirkin04MMC,
-    author      = {Chirkin, Dimitri and Rhode, Wolfgang},
+    author      = {Chirkin, Dmitry Aleksandrovich and Rhode, Wolfgang},
     title       = {Propagating leptons through matter with Muon Monte Carlo (MMC)},
     year        = 2004,
     eprinttype  = {arXiv},
@@ -127,18 +135,28 @@
     eprint      = {1002.0543}
 }
 
+@article{Soedingrekso19ICRC,
+    author      = {Soedingrekso, Jan and Sandrock, Alexander and Rhode, Wolfgang},
+    title       = {The effect of improved high-energy muon cross-sections},
+    journal     = {Proceedings of Science},
+    issuetitle  = {Proceedings of the 36th International Cosmic Ray Conference (ICRC 2019), Madison},
+    volume      = 358,
+    number      = {429},
+    year        = 2019,
+    eprint      = {1910.07050},
+    eprinttype  = {arXiv}
+}
+
 @article{Alameddine20PROPOSAL,
     author      = {Alameddine, Jean-Marco and others},
     title       = {PROPOSAL: A library to propagate leptons and high energy photons},
     journal     = {Journal of Physics: Conference Series},
     issuetitle  = {Proceedings of the 5th International Conference on Particle Physics and Astrophysics (ICPPA 2020), Moscow},
     volume      = 1690,
-    pages       = {012020},
+    pages       = {012021},
     year        = 2020,
-    doi         = {10.1088/1742-6596/1690/1/012020}
+    doi         = {10.1088/1742-6596/1690/1/012021}
 }
-
-
 
 % ---------------------------
 % other muon Simulation softwares
@@ -182,8 +200,8 @@
 }
 
 % MUM
-@article{Sokalski01,
-    author = {Sokalski, Igor A. and Bugaev, Edgar V. and Klimushinm, Sergey I.},
+@article{Sokalski01MUM,
+    author = {Sokalski, Igor A. and Bugaev, Edgar Valerievich and Klimushinm, Sergey I.},
     title = {MUM: Flexible precise Monte Carlo algorithm for muon propagation through thick layers of matter},
     journal = {Physical Review D},
     volume = 64,
@@ -192,6 +210,14 @@
     doi = {10.1103/PhysRevD.64.074015},
     eprinttype = {arXiv},
     eprint = {hep-ph/0010322}
+}
+
+@online{Bugaev00MUM,
+    author      = {Bugaev, Edgar Valerievich and Sokalski, Igor A. and Klimushinm, Sergey I.},
+    title       = {Simulation accuracy of long range muon propagation in medium: analysis of error sources},
+    year        = 2000,
+    eprinttype  = {arXiv},
+    eprint      = {hep-ph/0010323}
 }
 
 % MUPAGE
@@ -299,10 +325,11 @@
 }
 
 @manual{GEANT4,
-    editor = {GEANT4 Collaboration},
-    title = {GEANT4 Physics Reference Manual},
-    edition = {10.6},
-    year = 2019
+    author      = {GEANT4},
+    authortype  = {GEANT4 Collaboration},
+    title       = {GEANT4 Physics Reference Manual},
+    edition     = {10.6},
+    year        = 2019
 }
 
 % CORSIKA
@@ -326,14 +353,53 @@
 
 % EGS4/5
 
+@techreport{Bielajew94EGS4,
+    author      = {Bielajew, Alex F. and others},
+    title       = {History, overview and recent improvements of EGS4},
+    institution = {Stanford Linear Accelerator Center},
+    note        = {SLAC-PUB-6944, KEK-Report-94-4},
+    year        = 1994
+}
+
+@techreport{Nelson94EGS4,
+    author      = {Nelson, Walter Ralph and others},
+    title       = {EGS4 in 94 - A Decade of Enhancements},
+    institution = {Stanford Linear Accelerator Center},
+    note        = {SLAC-Report-6625},
+    year        = 1994
+}
 
 @techreport{EGS5,
-    author = {Hirayama, Hideo and others},
-    title = {The EGS5 code system},
+    author      = {Hirayama, Hideo and others},
+    title       = {The EGS5 code system},
     institution = {Stanford Linear Accelerator Center},
-    note = {SLAC-Report-730, KEK-Report-2005-8},
-    year = 2005,
-    doi = {10.2172/877459}
+    note        = {SLAC-Report-730, KEK-Report-2005-8},
+    year        = 2005,
+    doi         = {10.2172/877459}
+}
+
+% AIRES
+
+@manual{Sciutto19AIRES,
+    author      = {Sciutto, S. J.},
+    title       = {AIRES - A system for air shower simulations},
+    version     = {19.04.00},
+    year        = 2019,
+    eprint      = {astro-ph/9911331},
+    eprinttype  = {arXiv},
+    doi         = {10.13140/RG.2.2.12566.40002}
+}
+
+% ZHS
+
+@article{Zas92ZHS,
+    author      = {Zas, Enrique and Halzen Francis and Stanev, Todor},
+    title       = {Electromagnetic pulses from high-energy showers: Implications for neutrino detection},
+    journal     = {Physical Review D},
+    volume      = 45,
+    pages       = {362-376},
+    year        = 1992,
+    doi         = {10.1103/PhysRevD.45.362}
 }
 
 
@@ -403,7 +469,8 @@
 % IceCube
 
 @article{IceCube2019SnowStorm,
-    author      = {M. G. Aartsen and others},
+    author      = {Aartsen, Mark G. and others},
+    authortype  = {IceCube Collaboration},
     title       = {Efficient propagation of systematic uncertainties from calibration to analysis with the SnowStorm method in IceCube},
     journal     = {Journal of Cosmology and Astroparticle Physics},
     volume      = 10,
@@ -412,5 +479,29 @@
     eprint      = {1909.01530},
     eprinttype  = {arXiv},
     doi         = {10.1088/1475-7516/2019/10/048}
+}
+
+% Drak Matter and further exotics
+
+@article{Plestid20MiliCharged,
+    author      = {Plestid, Ryan and others},
+    title       = {New Constraints on Millicharged Particles from Cosmic-ray Production},
+    journal     = {Physical Review D},
+    volume      = 102,
+    pages       = {115032},
+    year        = 2020,
+    eprint      = {2002.11732},
+    eprinttype  = {arXiv},
+    doi         = {10.1103/PhysRevD.102.115032}
+}
+
+
+@online{Arguelles21MiliCharged,
+    author      = {Argüelles Delgado, Carlos Alberto and Kelly, Kevin James and Albornoz, Víctor Muñoz},
+    title       = {Millicharged Particles from the Heavens: Single- and Multiple-Scattering Signatures},
+    year        = 2021,
+    eprinttype  = {arXiv},
+    eprint      = {2104.13924},
+    note        = {FERMILAB-PUB-21-214-T}
 }
 

@@ -1,6 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import ternary
+from matplotlib import rc
+
+rc('font', **{'family': 'serif',
+   'serif': ['Computer Modern']})
+rc('text', usetex=True)
+rc('text.latex', preamble=r'\usepackage{calrsfs}')
 
 class NuOsc(object):
     def __init__(self, inverted=True):
@@ -66,10 +72,10 @@ class NuOsc(object):
     def plot_osc(self, nu_i, LoverE, filename):
         figure, ax = plt.subplots()
         x_arr = np.asarray(LoverE)
-        ax.plot(x_arr, np.vectorize(self.prob)(nu_i,0,x_arr), c='k', label=r'$\nu_{e}$')
+        ax.plot(x_arr, np.vectorize(self.prob)(nu_i,0,x_arr), c='k', label=r'$\nu_{e}$', ls='--')
         ax.plot(x_arr, np.vectorize(self.prob)(nu_i,1,x_arr), c='b', label=r'$\nu_{\mu}$')
-        ax.plot(x_arr, np.vectorize(self.prob)(nu_i,2,x_arr), c='r', label=r'$\nu_{\tau}$', ls='dotted')
-        ax.set_xlabel('L/E / km/GeV')
+        ax.plot(x_arr, np.vectorize(self.prob)(nu_i,2,x_arr), c='r', label=r'$\nu_{\tau}$', ls='-.')
+        ax.set_xlabel(r'Oscillation Length $L/E_\nu$ / (km/GeV)')
         ax.set_ylabel(r'Probability ($\nu_{e} \to \nu_{\mathrm{final}}$)')
         ax.legend()
 
@@ -148,7 +154,7 @@ class NuOsc(object):
 
 if __name__ == '__main__':
     osc = NuOsc()
-    # # print(osc.prob(1,0,400) + osc.prob(1,1,400) + osc.prob(1,2,400))
-    # # print(osc.prob_avg(1,0) + osc.prob_avg(1,1) + osc.prob_avg(1,2))
-    # # osc.plot_osc(0, np.linspace(0, 35000, 500), 'nu_osc_len.pdf')
-    osc.plot_flavor_triangle('nu_flavor_triangle.pdf')
+    # print(osc.prob(1,0,400) + osc.prob(1,1,400) + osc.prob(1,2,400))
+    # print(osc.prob_avg(1,0) + osc.prob_avg(1,1) + osc.prob_avg(1,2))
+    osc.plot_osc(0, np.linspace(0, 35000, 500), 'nu_osc_len.pdf')
+    # osc.plot_flavor_triangle('nu_flavor_triangle.pdf')

@@ -1,0 +1,60 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-2*\feynlen, 0);
+    \vertex[right=3.5*\feynlen of mu_in] (mu_out);
+    \vertex[right=1.75*\feynlen of mu_in] (mu_vert);
+    % eoair
+    \vertex[below=0.65*\feynlen of mu_out] (epair_in);
+    \vertex[below=1.15*\feynlen of mu_out] (epair_out);
+    % blob
+    \vertex[below=0.9*\feynlen of mu_vert] (blob);
+    \vertex (blob_mu) at ($(blob) + (90:\feynsmallen)$);
+    % here instead of \feynlen the number 1.13791 is used,
+    % since pgf polar coordinates cannot handle
+    % predifined lengths in the first place.
+    % in principle, this line should look like
+    % \vertex (blob_ep) at ($(blob) + (30: \feynlen and \feynsmallen)$);
+    \vertex (blob_ep) at ($(blob) + (30: 1.13791 and \feynsmallen)$);
+    \vertex (blob_em) at ($(blob) + (-30: 1.13791 and \feynsmallen)$);
+    \vertex (blob_vertex_a) at ($(blob) + (-120: 1.13791 and \feynsmallen)$);
+    \vertex (blob_vertex_b) at ($(blob) + (-100: 1.13791 and \feynsmallen)$);
+    \vertex (blob_vertex_c) at ($(blob) + (-60: 1.13791 and \feynsmallen)$);
+    % nucleus
+    \vertex[below=2*\feynlen of mu_in] (n_in);
+    \vertex[below=2*\feynlen of mu_out] (n_out);
+    % nblob
+    \vertex[right=1.75*\feynlen of n_in] (nblob);
+    \vertex (nblob_left) at ($(nblob) + (180:\feynlen)$);
+    \vertex (nblob_right) at ($(nblob) + (0:\feynlen)$);
+    % same procedure as above
+    \vertex (nblob_vertex_a) at ($(nblob) + (120: 1.13791 and \feynsmallen)$);
+    \vertex (nblob_vertex_b) at ($(nblob) + (100: 1.13791 and \feynsmallen)$);
+    \vertex (nblob_vertex_c) at ($(nblob) + (60: 1.13791 and \feynsmallen)$);
+    % draw diagram
+    \diagram* {
+        (mu_in) -- [fermion] (mu_vert) -- [fermion] (mu_out),
+        (blob_mu) -- [boson] (mu_vert),
+        (epair_in) -- [fermion] (blob_ep),
+        (blob_em) -- [fermion] (epair_out),
+        (blob_vertex_a) -- [boson] (nblob_vertex_a),
+        (blob_vertex_b) -- [boson, edge label=$\dots$] (nblob_vertex_b),
+        (blob_vertex_c) -- [boson] (nblob_vertex_c)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[thick, double] (n_in) -- (nblob_left);
+    \draw[thick, double] (nblob_right) -- (n_out);
+    \draw[pattern = north east lines] (blob) ellipse[x radius=\feynlen, y radius=\feynsmallen];
+    \draw[pattern = north east lines] (nblob) ellipse[x radius=\feynlen, y radius=\feynsmallen];
+    \draw[fill] (mu_vert) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu '$};
+    \node[right] at (epair_in) {$e^+$};
+    \node[right] at (epair_out) {$e^-$};
+    \node[left] at (n_in) {$N$};
+    \node[right] at (n_out) {$N'$};
+\end{feynman}
+\end{tikzpicture}

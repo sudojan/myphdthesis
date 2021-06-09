@@ -1,0 +1,50 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-\feynlen, \feynlen);
+    \vertex[right=2*\feynlen of mu_in] (mu_out);
+    \vertex[right=\feynlen of mu_in] (mu_vertex);
+    % epair
+    \vertex[below=0.75*\feynlen of mu_out] (epair_in);
+    \vertex[below=1.25*\feynlen of mu_out] (epair_out);
+    % blob
+    \vertex[below=\feynlen of mu_vertex] (blob);
+    \vertex (blob_right_up) at ($(blob) + (35:\feynsmallen)$);
+    \vertex (blob_right_down) at ($(blob) + (-35:\feynsmallen)$);
+    \vertex (blob_down) at ($(blob) - (90:\feynsmallen)$);
+    \vertex (blob_up) at ($(blob) + (90:\feynsmallen)$);
+    % nucleus
+    \vertex[below=2*\feynlen of mu_in] (n_in);
+    \vertex[below=2*\feynlen of mu_vertex] (n_vertex);
+    \vertex[below=2*\feynlen of mu_out] (n_out);
+    % loop
+    \vertex (loop_left) at ($(mu_vertex) + (-180:\feynlen/3)$);
+    \vertex (loop_right) at ($(mu_vertex) + (0:\feynlen/3)$);
+    % draw diagram
+    \diagram* {
+        (mu_in) -- [fermion] (loop_left) -- (loop_right) -- [fermion] (mu_out),
+        (epair_in) -- [fermion] (blob_right_up),
+        (blob_right_down) -- [fermion] (epair_out),
+        (blob_down) -- [boson] (n_vertex),
+        (blob_up) -- [boson] (mu_vertex),
+        (loop_left) -- [boson, half left] (loop_right)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[thick, double] (n_in) -- (n_vertex) -- (n_out);
+    \draw[pattern = north east lines] (blob) circle[radius=\feynsmallen];
+    \draw[fill] (n_vertex) circle[radius=\feynvertexsize];
+    \draw[fill] (mu_vertex) circle[radius=\feynvertexsize];
+    \draw[fill] (loop_left) circle[radius=\feynvertexsize];
+    \draw[fill] (loop_right) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu '$};
+    \node[right] at (epair_in) {$e^+$};
+    \node[right] at (epair_out) {$e^-$};
+    \node[left] at (n_in) {$N$};
+    \node[right] at (n_out) {$N'$};
+\end{feynman}
+\end{tikzpicture}
+%

@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import interpolate
 from scipy import integrate
+from matplotlib import rc
+
+rc('font', **{'family': 'serif',
+   'serif': ['Computer Modern']})
+rc('text', usetex=True)
+rc('text.latex', preamble=r'\usepackage{calrsfs}')
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 

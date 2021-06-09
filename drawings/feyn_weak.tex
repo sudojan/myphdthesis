@@ -1,0 +1,29 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-\feynlen, \feynlen);
+    \vertex[right=2*\feynlen of mu_in] (nu_out);
+    \vertex[right=\feynlen of mu_in] (mu_vertex);
+    % nucleus
+    \vertex[below=2*\feynlen of mu_in] (n_in);
+    \vertex[below=2*\feynlen of mu_vertex] (n_vertex);
+    \vertex[below=2*\feynlen of mu_out] (n_out);
+    % draw diagram
+    \diagram* {
+        (mu_in) -- [fermion] (mu_vertex) -- [fermion] (mn_out),
+        (mu_vertex) -- [boson, edge label=$W^\mp$] (n_vertex)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[thick, double] (n_in) -- (n_vertex) -- (n_out);
+    \draw[fill] (n_vertex) circle[radius=\feynvertexsize];
+    \draw[fill] (mu_vertex) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu '$};
+    \node[left] at (n_in) {$N$};
+    \node[right] at (n_out) {$X$};
+\end{feynman}
+\end{tikzpicture}
+%

@@ -1,0 +1,53 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-\feynlen, \feynlen);
+    \vertex[right=2*\feynlen of mu_in] (mu_out);
+    \vertex[right=\feynlen of mu_in] (mu_vertex);
+    \vertex (muvert_left) at ($(mu_vertex) + (180:\feynsmallen)$);
+    \vertex (muvert_right) at ($(mu_vertex) + (0:\feynsmallen)$);
+    \vertex (muvert_down) at ($(mu_vertex) + (-90:\feynsmallen)$);
+    % epair
+    \vertex[below=0.75*\feynlen of mu_out] (epair_in);
+    \vertex[below=0.5*\feynlen of epair_in] (epair_out);
+    % blob
+    \vertex[below=\feynlen of mu_vertex] (blob);
+    \vertex (blob_right_up) at ($(blob) + (35:\feynsmallen)$);
+    \vertex (blob_right_down) at ($(blob) + (-35:\feynsmallen)$);
+    \vertex (blob_down) at ($(blob) - (90:\feynsmallen)$);
+    \vertex (blob_up) at ($(blob) + (90:\feynsmallen)$);
+    % nucleus
+    \vertex[below=1.75*\feynlen of mu_in] (n_in);
+    \vertex[right=\feynlen of n_in] (n_vertex);
+    \vertex[right=2*\feynlen of n_in] (n_out);
+    % brems
+    \vertex (blob_brems) at ($(mu_vertex) + (45:\feynsmallen)$);
+    \vertex[above=0.75*\feynlen of mu_out] (brems_out);
+    % draw diagram
+    \diagram* {
+        (mu_in) -- [fermion] (muvert_left),
+        (muvert_right) -- [fermion] (mu_out),
+        (epair_in) -- [fermion] (blob_right_up),
+        (blob_right_down) -- [fermion] (epair_out),
+        (blob_down) -- [boson] (n_vertex),
+        (blob_up) -- [boson] (muvert_down),
+        (blob_brems) -- [boson] (brems_out)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[thick, double] (n_in) -- (n_vertex) -- (n_out);
+    \draw[pattern = north east lines] (blob) circle[radius=\feynsmallen];
+    \draw[pattern = north east lines] (mu_vertex) circle[radius=\feynsmallen];
+    \draw[fill] (n_vertex) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu '$};
+    \node[right] at (epair_in) {$e^+$};
+    \node[right] at (epair_out) {$e^-$};
+    \node[left] at (n_in) {$N$};
+    \node[right] at (n_out) {$N'$};
+    \node[right] at (brems_out) {$\gamma$};
+\end{feynman}
+\end{tikzpicture}
+%
