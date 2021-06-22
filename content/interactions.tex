@@ -85,7 +85,7 @@ Assuming $a$ and $b$ as constant values, the average range of the muons can be a
     R_{\left\langle \frac{\dif E}{\dif X} \right\rangle} = \frac{1}{b} \logn \left( 1 + \frac{b}{a} E \right).
 \end{align}
 This simple linear model, shown in \figref{fig:dedx_range}, already provides a rough description of the muon energy loss and range and is used in many applications as a first estimation of the muon contribution.
-A comparison with more precise calculations of the range using Monte-Carlo techniques is shown in \figref{fig:range_comparison}.
+A comparison with more precise calculations of the range using Monte-Carlo techniques is shown in \figref{fig:prop_range}.
 \begin{figure}
     \centering
     \begin{subfigure}{0.9\textwidth}
@@ -990,7 +990,7 @@ Compared to the bremsstrahlung, diffractive corrections and their interference t
 The inelastic nuclear interaction describes the inelastic exchange of a photon between the muon and a nucleus by creating a hadronic cascade or at least a pion (the lightest hadron).
 It is also often called the Photonuclear Interaction, which however commonly refers to a real photon interacting with the nucleus and getting absorbed.
 In contrast to the previously described interactions, producing an electromagnetic cascade, hadronic interactions are part of the QCD.
-Due to the complex calculation of hadronic cascades, there are dedicated tools like Sybill \cite{Sybill} to calculate or sample the individual secondary particles.
+Due to the complex calculation of hadronic cascades, there are dedicated tools like Sibyll \cite{Riehn20Sibyll} to calculate or sample the individual secondary particles.
 For the simulation in PROPOSAL, only the calculation of the energy loss and the deflection is relevant.
 
 The main part of this interaction originates from interactions with low $Q^2$ which is not well described by perturbative QCD and therefore phenomenological models are used.
@@ -1295,7 +1295,7 @@ This process is just a rare process, which cannot be distinguished from an inela
 Therefore only the charge current interaction is relevant and also implemented in PROPOSAL.
  
 The same cross-section used for the neutrino interaction can also be used for this process, due to crossing symmetry.
-For the used neutrino cross-section calculated by \cite{CSMS11NuXsection}, data of the HERA experiment \footnote{For the parton distribution functions, HERAPDF1.5 \cite{HERAPDF} was used.} were interpolated for an energy range of \SIrange{10}{e12}{GeV}.
+For the used neutrino cross-section calculated by \cite{CSMS11NuXsection}, data of the HERA experiment\footnote{For the parton distribution functions, HERAPDF1.5 \cite{Aaron09herapdf10, CooperSarkar10herapdf15} was used.} were interpolated for an energy range of \SIrange{10}{e12}{GeV}.
 The differential cross sections were tabulated for the proton and neutron cross-section.
 The resulting cross-section for PROPOSAL is the mean cross-section according to the number of the individual nucleons in the nucleus
 \begin{align}
@@ -1316,6 +1316,8 @@ where the neutrino mass is neglected for the upper limit and $Q_{\text{min}}^2$ 
 The uncertainty of this interaction is mainly driven by the Parton distribution function and the limitations of perturbative QCD below $Q_{\text{min}}^2$, as already discussed in section \ref{sec:photonucl} about the inelastic nuclear interaction.
 However, due to the rareness of this process, the order of magnitude is sufficient for background rate estimations.
 
+%
+
 \section{Scattering and Deflection}
 
 In the context of astroparticle physics, the energy loss and the scattering angle are typically calculated independent of each other and not through a two-dimensional differential cross-section, like in particle physics experiments using earth-bound accelerators.
@@ -1327,13 +1329,13 @@ Therefore it is mainly relevant for lower energies or for large stochastic inter
 However, due to the long ranges muons can propagate, many small deflections can sum up in measurable deviations from the initial shower axis.
 Besides, the deflection processes are especially relevant for electron and high energy photons regarding the lateral shower profile of electromagnetic air showers.
 
-\subsection{Multiple Scattering}
+\subsection{Multiple Scattering} \label{sec:multiple_scat}
 
 Similar to the average energy loss, many small elastic deflections can be averaged and combined for a certain distance $X$ in the so-called \textit{Multiple Scattering}.
 This is also named after Moliere, who introduced the theory and calculation formalism for this process \cite{Moliere47, Moliere48}.
 To increase the performance of the complex calculation, the distribution of the scattering angle can be approximated with a Gaussian distribution introduced in \cite{Highland75, Highland79} and later improved by \cite{Lynch91}.
 The scale of the normal distribution is thereby given as
-\begin{align}
+\begin{align} \label{eq:multiple_scat}
     \theta_0 = \frac{\SI{13.6}{MeV}}{\beta c_0 p} |z| \sqrt{\frac{X}{X_0}} \left( 1 + 0.088 \log_{10} \frac{X}{X_0} \right) ,
 \end{align}
 with the radiation length $X_0$ described in section \ref{sec:medium}.
@@ -1421,6 +1423,10 @@ and the sampled momentum by
     \qquad
     t_1 = \min((Ev)^2, \SI{0.4}{GeV^2}) .
 \end{align*}
+A simple approximation for the deflection angle, which can be applied to each interaction type is the inverse Lorentz Gamma $M/E$.
+This is often used when propagating particles, if no other physical model is available, to include some sort of deflection in the simulation.
+
+%
 
 \section{Decay} \label{sec:decay_dsigma}
 

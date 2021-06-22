@@ -1,0 +1,978 @@
+\chapter{Muon Simulation} \label{sec:simulation}
+
+Each analysis lacking in calibration measurements to perform a data-driven approach to analyze the experimental data requires simulations.
+These simulations can be deterministic after a given initial condition, e.g. by solving the differential equations describing the processes iteratively, which is used in fluid dynamics.
+However, high-energy particles behave stochastically during their propagation, choosing from different interactions and producing further stochastic particles.
+A deterministic approach for particle simulation would mean to average out the stochastic nature of the particle behaviors.
+This can be used to produce distributions of the incoming particle flux.
+But also at the edges of the kinematic regions or in the far tail of a distribution, this approach is limited to bin widths, since the differential equations are usually discretized to get solved.
+Besides, experiments in particle or astroparticle physics need to simulate individual event signatures they measure in their detector and therefore Monte-Carlo techniques are used.
+Thereby, each propagation step is randomly sampled according to the physical distribution.
+
+The name Monte-Carlo is named after the capital of Monaco which is known for its casinos and gambling, where the decision of winning or losing is random and determined e.g. by throwing dices.
+Back to particle physics, the full event simulation consists of the combination of these single random decisions for each propagation step.
+This allows to fill out the high dimensional phase space of possible event signatures by simulating a huge amount of Monte-Carlo events, which can result in billions of simulations.
+
+The benefit of Monte-Carlo simulations representing the whole phase space of possible event signatures can be explained by Monte-Carlo integration.
+For high dimensional integration problems deterministic approaches, using for example grid-based approaches, get outperformed by Monte-Carlo techniques, which are independent of the dimensions and scales only with the square root of the sampling points.
+Even the edge cases of the phase space are therefore included, which is important in particular as the amount of the interesting signal events in particle physic experiments are typically many orders of magnitudes below the number of background events.
+
+In many particle and astroparticle experiments, atmospheric muons are the dominant type of background although the detectors are most often located underground to reduce already a huge amount of these disturbing events.
+For an accurate description of muon events that can, due to their stochastic behavior, mime signal-like events, even the rarest interactions need to be simulated with a decent amount of statistics.
+A huge amount of Monte-Carlo statistic is therefore required to achieve this accuracy and therefore a trade-off between the performance of the simulation and its precision has to be made, adapted to each detector resolution.
+Also, tools have to be developed to match both requirements with the special requirement for muons to propagate through large volumes of material.
+
+%
+
+\section{Muon Simulation Tools}
+
+There are multiple simulation tools that can propagate muons.
+Most of them are based on the methods for the interactions and the average energy loss developed in \textit{MUDEDX} \cite{Lohmann85} and with the additional thresholds in the energy loss for the stochastic propagation introduced in \textit{PROPMU} \cite{Lipari91}.
+A similar version of the latter is used in KM3Net, called \textit{PropaMuon} \cite{Km3Net2020gSeaGen}.
+Due to the deviations observed between these two frameworks \cite{Desiati01ICRC}, mainly driven by the difference in their algorithmic approach, further advanced tools were developed.
+Two examples of these frameworks, that are still maintained and further developed is \textit{MUM} \cite{Sokalski01MUM, Bugaev00MUM}, used in the Baikal experiment \cite{Baikal97}, and the most widely used muon propagator \textit{MUSIC} \cite{Antonioli97, Kudryavtseva99, Kudryavtsev09}, which is used in most underground experiments like Kamiokande \cite{HyperKamiokande18}.
+
+These simulation tools are mainly used to propagate atmospheric muons from the surface to the underground detector.
+The muon generation in the air shower and their propagation in the atmosphere to the surface are performed by the air shower frameworks like CORSIKA \cite{CORSIKA, Engel19}, AIRES \cite{Sciutto19AIRES}, or ZHS \cite{Zas92ZHS}.
+To generate a muon flux near the detector region and skip the runtime consuming part of the air shower simulation, tools like MUPAGE \cite{Carminati09} and MuonGun (based on \cite{Becherini06}) used in the neutrino telescopes Km3NeT and IceCube respectively were developed, parameterizing the energy and zenith dependent flux of the muon bundles in certain depths.
+
+An alternative approach to estimate the atmospheric muon flux near the detector is by using the Matrix cascade equation and solve the differential equation of the shower development, like in CONEX \cite{Bergmann07CONEX}, MCEq \cite{Fedynitch15MCEq}, or EMCa \cite{MeighenBerger19EMCa, MeighenBerger19ICRC}, where the latter is specialized for the electromagnetic component.
+Out of the estimated flux distribution, individual muon can be sampled to propagate inside the detector.
+However, since the differential equations have to get discretized, the resolution of the simulated muon flux depends on the binning, and muons in the far tails of the flux distribution can not be described accurately.
+
+An alternative approach to overcome the runtime intensive production of large air shower simulation datasets to describe the event signature, but still using Monte-Carlo methods is the backward Monte-Carlo approach by PUMA \cite{Niess17}.
+Instead of forward propagating the muons from the air shower to the detector, they get propagated backward from the detector to their generation in the air shower.
+This is mainly used when the forward propagation becomes extremely inefficient, e.g. if the detection area is small, while the muons can originate from a wide field of the sky, like in the muon tomography of pyramids.
+
+The simulation of particles inside the detector is nearly always performed by simulation framework GEANT4 \cite{Agostinelli03, Allison06, Allison16, GEANT4}.
+There, the most accurate description of physical models and materials is given.
+However, the design of the simulation architecture and algorithm is optimized for detectors of the size of $\mathcal{O}(\SI{10}{m})$ and already distances of \SI{100}{m} become extremely inefficient.
+For larger detectors, like neutrino telescopes, dedicated tools to propagate particles through large volumes, as described before, are required.
+
+In this work, an alternative to the previously mentioned muon simulation tools, the simulation library \textit{PROPOSAL}, propagating leptons and high energy photons, has been further developed.
+
+%
+
+\section{The Leptonpropagator PROPOSAL}
+
+PROPOSAL stands for \textit{\textbf{PR}opagator with \textbf{O}ptimal \textbf{P}recision and \textbf{O}ptimized \textbf{S}peed for \textbf{A}ll \textbf{L}eptons} and is a C\texttt{++} and python library for the Monte-Carlo simulation of high energy particles \cite{Koehne13PROPOSAL}.
+Focusing on the electroweak interactions of leptons and high energy photons, PROPOSAL is a simulation library for Monte-Carlo propagation providing multiple selectable interaction and scattering models.
+It was initially designed to propagate muons through large volumes of media and calculate the tau decay for the IceCube Neutrino Observatory.
+After a couple of restructuring cycles and further enhancements and improvements PROPOSAL is now a modular simulation library used in several simulation frameworks of astroparticle experiments.
+For the final calculations and plots of this work, version 7.1.0 was used.
+
+PROPOSAL is a Free Open Source Software with an LGPL Licence and developed on Github\footnote{see \url{https://github.com/tudo-astroparticlephysics/PROPOSAL/}}.
+It can be installed as a classic \texttt{cmake} project or using the package manager conan\footnote{\url{https://conan.io/center/proposal}} for the C\texttt{++} library or pip\footnote{\url{https://pypi.org/project/proposal/}} for the python library.
+It provides the full track of a propagated particle, single propagation steps or just the physical input of the cross-sections for fine-tunable settings.
+These settings are mainly defined by the input particle, the cross-sections, the medium, and the cuts of the energy loss from which the integrals for the individual propagation steps can be calculated, which is described in the following sections.
+
+%
+
+\subsection{Historical Overview}
+
+PROPOSAL is the successor of MMC (Muon Monte-Carlo) \cite{Chirkin03PhD, Chirkin04MMC}, written in java, which was designed to propagate muons efficiently through large volumes of ice for the AMANDA and IceCube detector.
+There were two different requirements for the simulations of the AMANDA and IceCube experiment.
+First, a highly performant muon propagation through tens of kilometers of ice to the detector to obtain a sufficiently accurate muon spectrum at the detector.
+Second, a precise muon simulation inside the detector region providing the energy losses to further steps of the simulation chain.
+Due to the limited detector resolution, these experiments just differentiate between an electromagnetic or hadronic cascade going out of the interaction and are not interested in an accurate sampling of the secondary particles.
+The propagation of taus was also included while not being the focus in the development, since they directly decay in most cases, which is not as complex as the propagation methods when just calculating the energy of the electromagnetic or hadronic cascade.
+The Electron propagation was not included, since this is equivalent to an electromagnetic cascade.
+
+Next to the efficient propagation of muons, the possibility to perform simulation studies analyzing the effects of systematical uncertainties of the cross-sections was also a key target of this simulation tool.
+Therefore multiple parametrizations for the bremsstrahlung and photonuclear interactions were implemented.
+For pair production, there was a lack of comprehensible alternatives and for Ionization, which is only dominant for lower energies where these losses can also be measured, the cross-section was already accurate enough.
+
+During the transition of the IceCube software from java to C++, also the muon and tau simulation was rewritten in C++ and renamed to PROPOSAL.
+This complete revision of the simulation code was done in numerous works at TU Dortmund.
+In \cite{Frantzen11Diplom, Schmitz11Diplom} the focus was on the accurate interpolation of the cross-sections also studying the deviations between the multiple parametrizations for the interactions.
+Possible calculations on GPUs were tested in \cite{Fuchs12Master} and found to be only relevant for the interpolation methods.
+In \cite{Geiselbrinck13Bachelor} multiple parametrizations for the Moliere Scattering were implemented.
+All of these works were developed under the umbrella of \cite{Koehne13PhD} and resulted in a publication \cite{Koehne13PROPOSAL} summarizing these works and describing the new simulation tool.
+
+For the next years, PROPOSAL was maintained as a side project of \cite{Fuchs16PhD} and in close collaboration with the IceCube collaboration.
+Meanwhile, theoretical calculations on new parametrizations of the bremsstrahlung and pair production cross-sections were developed in \cite{Menne14Master, Sandrock14Master, Soedingrekso16Master}.
+This was further developed in \cite{Sandrock18PhD} leading to the publication \cite{Sandrock18nlo} of higher-order corrections of the bremsstrahlung in collaboration with the MePhI who already developed the commonly used cross-section parametrizations.
+These new cross-sections for bremsstrahlung and pair production were implemented in PROPOSAL and presented in \cite{Soedingrekso19ICRC}.
+
+In this work, further enhancements and improvements were implemented with multiple restructuring cycles.
+The first cycle of restructuring together with \cite{Dunsch18Master} introduced a more modular and polymorph structure and established PROPOSAL as a software library, giving the user the possibilities to define the settings how to simulate muons.
+Each part of the library either the cross-section or the propagation was made available from the outside to get full control but also to test each part individually.
+Initially intended for easier testing, the so-called propagation utility was introduced collecting the integrals required during the propagation (described in section \ref{sec:prop_util}) and separate them from the main propagation routine.
+Also, pybindings were introduced so PROPOSAl can be used as a C++ or python library, the two most common programming languages in the scientific community by now.
+Furthermore, the decay process was completely revised introducing a new phase space calculation for many-body decays.
+The whole improvements are described in the publication \cite{Dunsch19PROPOSAL}.
+With this new structure, new experiments got interests in using this simulation software, e.g. for radio neutrino astronomy \cite{Glaser20nuRadioMC}.
+A first attempt to introduce neutrino propagation to be able to simulate tau regeneration was done in \cite{Franz20Bachelor}.
+
+The interest in using PROPOSAL for the air shower simulation framework CORSIKA (c.f. section \ref{sec:corsika}) calculating the electromagnetic shower component introduced the second round of restructuring to meet these requirements.
+New cross-sections for electrons positrons and high energy photons were implemented in \cite{Alameddine20Master} and presented in \cite{Alameddine20PROPOSAL}.
+CORSIKA introduced a new kind of usage as it wants to get the physics i.e. the cross-sections or mean free path so that PROPOSAL is proposing an interaction step while CORSIKA is propagating the particles.
+For this purpose, the propagation utilities became important and the new level of modularity was introduced and is mainly described in \cite{Sackel21Master}, implementing also new interpolation techniques.
+
+Regarding the most recent development, in \cite{Gutjahr21Master} the deflections at stochastic processes were introduced and in \cite{Bollmann21Bachelor} the produced electromagnetic air showers in the new CORSIKA framework using PROPOSAL are validated to previous results.
+Jean-Marco Alameddine is the next main developer after this work and was already doing key developments in the second round of restructuring.
+In the following sections, the current status of PROPOSAL is described.
+
+%
+
+\subsection{Medium and Component} \label{sec:medium}
+
+In PROPOSAL, the targets, where the particles interact, are either the medium or single components, i.e. the atoms, of the medium.
+These components are defined by 
+\begin{itemize}
+    \item the name of the component.
+    \item the charge $Z$ of the component
+    \item the average mass $A$ of an atom
+\end{itemize}
+Next to the components that can be defined by the periodic table, there are also effective elements, like the StandardRock with $Z=11, A=22$, which is an effective description of CaCO$_3$ and a widely used material describing rock.
+Out of these parameters also the following parameters are set
+\begin{itemize}
+    \item the average mass of a nucleon $\bar{m}_N$
+    \item the elastic and inelastic constant of the radiation logarithm $B_{\text{(in)el}}$
+    \item the Woods-Saxon potential (up to now, only used in the \textit{ButkevichMikheyev} parametrization)
+\end{itemize}
+There are several values given for the constant of the radiation logarithm describing required to describe the elastic atomic form factor (see section \ref{sec:brems_screen}).
+In the Thomas-Fermi model for the electron distribution, this value is \num{183}, independent of the nuclear charge but only applicable for elements with high $Z$ \cite{Bethe34a, Bethe34b}.
+However, $B_{\text{el}}$ in principle depends on the nuclear charge.
+A more accurate description using the Hartree-Fock model \cite{Kelner99RadLog} results in the values listed in \tabref{tab:rad_log}.
+\begin{table}
+    \caption{The $Z$ dependence of the elastic radiation logarithm constants in the Hartree-Fock model, calculated in \cite{Kelner99RadLog}. This constant was originally introduced as a constant in the logarithm of the screening function $\Phi_1$ in the complete screening approximation.}
+    \label{tab:rad_log}
+    \begin{center}
+    \begin{tabular}{cc|cc|cc|cc|cc}
+        \toprule
+        $Z$ & $B_{\text{el}}$ & $Z$ & $B_{\text{el}}$ & $Z$ & $B_{\text{el}}$ & $Z$ & $B_{\text{el}}$ & $Z$ & $B_{\text{el}}$ \\
+        \midrule
+        1 & 202.4 & 8 & 173.4 & 15 & 172.2 & 22 & 176.8 & 53 & 178.6 \\
+        2 & 151.9 & 9 & 170.0 & 16 & 173.4 & 26 & 175.8 & 74 & 177.6 \\
+        3 & 159.9 & 10 & 165.8 & 17 & 174.3 & 29 & 173.1 & 82 & 178.0 \\
+        4 & 172.3 & 11 & 165.8 & 18 & 174.8 & 32 & 173.0 & 92 & 179.8 \\
+        5 & 177.9 & 12 & 167.1 & 19 & 175.1 & 35 & 173.5 & & \\
+        6 & 178.3 & 13 & 169.1 & 20 & 175.6 & 42 & 175.9 & others & 182.7 \\
+        7 & 176.6 & 14 & 170.8 & 21 & 176.2 & 50 & 177.4 & & \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{table}
+For the constant of the inelastic radiation logarithm, PROPOSAL only differentiates between Hydrogen with $B_{\text{inel}} = 1429$ all other elements with $B_{\text{inel}} = 1194$ \cite{Tsai74, Tsai77}.
+
+The Wood-Saxon potential is defined by \cite{Butkevich02}
+\begin{align}
+    N_S(A) = 4 \pi \rho_0 \int\limits_{r_0}^{\infty} \frac{r^2}{1+\exp((r-r_0)/a)} \dif r
+    \quad \text{with} \quad
+    r_0 = 1.12 A^{\sfrac13} - 0.86 A^{-\sfrac13} .
+\end{align}
+% which can be written to
+% \begin{align}
+%     a r_0^2 \int_0^{\infty} \frac{\dif x}{1+e^x}
+%         + 2a^2r_0 \int_0^{\infty} \frac{x \dif x}{1+e^x}
+%         + a^3 \int_0^{\infty} \frac{x^2 \dif x}{1+e^x}
+% \end{align}
+For a constant $a = \SI{0.54}{fm}$ and $\rho_0 = \SI{0.17}{fm^{-3}}$, it can analytically be integrated to
+\begin{align}
+    N_S(A) = 4 \pi \rho_0 [a r_0^2\log(2) + a^2 r_0 \pi^2 / 6 + \sfrac32 a^3 \zeta(3)] ,
+\end{align}
+where $\zeta(x)$ is the Riemann zeta function.
+
+There are also processes, where the interaction is a continuous process and not a single atom, like the density correction for Ionization or the LPM and dielectric effect.
+The medium constants for the Ionization and density correction were already given in section \ref{sec:ioniz}.
+Besides, the medium is defined by the density, which can be varied according to a given density distribution, described in section \ref{sec:geometry_density}.
+
+Out of the list of components and the density, the following parameters are available:
+\begin{itemize}
+    \item the number of protons, i.e. the charge $Z$ and the number of nucleons
+    \item the mol density
+    \item the radiation length, which is required for the LPM effect or the Multiple Scattering
+\end{itemize}
+The radiation length describes the distance when the electron has on average lost $1/e$ of its energy.
+Since bremsstrahlung is the dominating process, the total cross-section of the electron bremsstrahlung in the complete screening case is used.
+\begin{align}
+    X_0 = \frac{\sum A}{\sum \sigma_{e, \text{brems.}} A}
+\end{align}
+where the sum is over each atom in the components.
+For the bremsstrahlung cross-section, the complete screening case for electrons is used, as this is accurate enough and it can be integrated analytically.
+
+The densities for a medium are mainly taken from \cite{PDG20}.
+It is also possible to define an inhomogeneous medium where the density changes along an axis, described in section \ref{sec:geometry_density}.
+However, there are processes, like the LPM effect, depending on the density of the medium in a more complex way than just a linear factor at the cross-section.
+In principle, the change of the density can therefore not be treated independently of the cross-section.
+Since the cross-sections are interpolated before the propagation to increase the performance, approximations are required, like assuming a locally homogeneous medium.
+This issue is also faced by other simulation frameworks and a decent approximation or alternative is still an ongoing topic of research.
+
+%
+
+\subsection{Geometries an Density Profiles} \label{sec:geometry_density}
+
+A particle can be propagated through different sectors of media, each defined by a geometry and a density distribution.
+
+There are three geometries available in PROPOSAL.
+\begin{itemize}
+    \item A \texttt{sphere} is defined by the coordinate of its center or origin and its \texttt{radius}. The sphere is rather a spherical shell since next to the radius also an \texttt{inner\_radius} can be set, which is e.g. used to describe the different layers of the earth.
+    \item A \texttt{cylinder} is defined by the same parameters of a \texttt{radius} and an \texttt{inner\_radius} as the spherical shell and the \texttt{height}. In contrast to the radius, there is no inner height resulting more in the design of a pipe than a cylindric shell.
+    \item A \texttt{box} is defined by the center coordinate and the \texttt{length}, \texttt{width}, and \texttt{height}. Compared to the sphere or the cylinder, no inner lengths can be defined.
+\end{itemize}
+With these geometries, the environment of the simulation can be created.
+Each geometry also consists of a \texttt{hierarchy} parameter, that in the case of overlapping geometries, the one with a higher hierarchy is chosen.
+If both hierarchies are equal, the geometry with a higher density is used.
+
+The density inside a geometry can also be varied along an axis using the following density profiles
+\begin{itemize}
+    \item A homogeneous density
+    \item An exponential decreasing or increasing density
+    \item A polynomial density distribution
+    \item A distribution defined by interpolating splines.
+\end{itemize}
+Not for all interactions, the density can be treated separately.
+The LPM effect has larger effects if the medium is denser and the distance to the next atom is smaller resulting in stronger influences of their wave functions with the interaction.
+However, the cross-section integrals described in section \ref{sec:ecuts} as well as the propagation integrals, described in section \ref{sec:prop_util}, are interpolated before the propagation.
+Therefore density effects in inhomogeneous media can only be taken into account for a reference point assuming no major changes of the density inside the geometry.
+Since the density effects are mainly minor corrections or have significant effects only at higher energies, this is still applicable for most experiments.
+Nevertheless, this is an important issue, which needs to get solved in the future, especially for the electron and positron propagation in the atmosphere.
+
+%
+
+\subsection{Particles and Secondaries} \label{sec:particle}
+
+As the name of PROPOSAL suggests, all leptons, meaning charged leptons of all three flavors (electrons, muons, and taus) including their anti-particles and their corresponding neutrinos can be propagated with PROPOSAL.
+In addition, high-energy photons can also be propagated due to similar propagation behaviors.
+Also, exotic particles beyond the Standard Model of particle physics like magnetic monopoles and supersymmetric staus are implemented and can be propagated using the same propagation techniques.
+Since all cross-sections are implemented adapting to the mass and charge of the primary particle, as described in chapter \ref{sec:interactions}, the same cross-sections as for the muon propagation can be used for custom particles, e.g. a muon with a mass of \SI{500}{GeV} or a milicharged particle with a charge of \num{e-3} \cite{Plestid20MiliCharged, Arguelles21MiliCharged}.
+To illustrate the change of the relevant interaction types, the average energy loss of various particles is shown in section \ref{sec:dedx_various}.
+This of course is limited to the cross-sections for charged and massive particles; cross-sections for neutrinos or high energy photons can not be used for this.
+
+In principle, every kind of particle can be propagated by changing the particle properties and using a set of cross-sections given to the propagation.
+But only for the above-mentioned particles, the relevant cross-sections or decay channels are implemented.
+The particle properties called \texttt{ParticleDef} consist of the following parameters.
+\begin{itemize}
+    \item The \texttt{name} of the particle.
+    \item The \texttt{mass} of the particle. The exotic particles have a mass of \SI{100}{GeV}.
+    \item The parameter \texttt{low} defining the lower limit of the particle energy to calculate the integrals for the interpolation tables, thereby defining the lower limit until the particle can be propagated.
+    This is usually set to the mass of the particle except for the massless particles, where it is a small value, due to the logarithmic energy scale of the interpolation.
+    For photons, the value is two times the electron mass.
+    \item The \texttt{lifetime} of the particle. Stable or exotic particles have an infinite lifetime.
+    \item The \texttt{charge} of the particle.
+    \item The \texttt{hard\_component\_table} containing the parameters for the optional nuclear inelastic interaction. These tables are only provided for muons and taus (c.f. section \ref{sec:photo_vmd}).
+    \item The \texttt{decay\_table} listing the possible decay channels for the particle. This is only provided for muons and taus.
+    \item The \texttt{particle\_type} is the PDG code for the particle type.
+    \item The \texttt{weak\_partner} is the PDG code of the weak partner particle produced in a charged current weak interaction. This is only defined for leptons.
+\end{itemize}
+To propagate these particles, the dynamic properties are collected in the so-called \texttt{ParticleState} storing the following parameters.
+\begin{itemize}
+    \item The \texttt{position} of the particle.
+    \item The \texttt{direction} of the particle.
+    \item The \texttt{energy} of the particle. This directly also sets the \texttt{momentum} for massive particles.
+    \item The \texttt{time} of the particle.
+    \item The \texttt{propagated\_distance} storing the distance the particle has been propagated.
+    \item The \texttt{type} of the particle, i.e. an identifier using the PDG codes.
+\end{itemize}
+Next to the particles that can be propagated, the secondary particles of the decays or interactions, short secondaries are implemented.
+They can either be extracted as pseudo particles just referring to the type of the interaction and its dynamic properties similar to the \texttt{ParticleState}.
+Adaptations are made for continuous energy losses, which have an initial and final time or direction.
+On the other side, also real particles can be sampled out of these pseudo decay or energy loss objects.
+
+For the bremsstrahlung or the Ionization, where just a photon or an electron this conversion is trivial.
+For the electron or muon pair production, the asymmetry parameter $\rho$, see \eqref{eq:epair_dsigma} or \eqref{eq:mupair_dsigma} of the electron or muon pair can be sampled to separate the energy loss on the individual particles.
+For the photonuclear interaction, it is not possible in PROPOSAL to sample individual particles, since the complex calculation to simulate particles of a hadronic shower is a research topic on its own, still facing the problem of the \textit{muon puzzle} (see section \ref{sec:muon_puzzle}).
+Existing tools are dealing specifically with hadronic cascades, like Sibyll \cite{Riehn20Sibyll} or QGSJet \cite{Ostapchenko10qgsjet}, which an applicant can use if this is required.
+The direction of these secondaries of energy losses, either they are pseudo or real particles, are set to the direction of the primary particle before the stochastic process.
+There are no deflection calculations for the primary particle as described in section \ref{sec:stochastic_deflect} and not for the secondaries, yet.
+
+For the decay, there is also the possibility to sample the individual product particles out of a pseudo decay object.
+However, the decay process differs compared to the energy loss processes, as not all of the decay energy is stored in an electromagnetic or hadronic cascade and some amount of the energy is taken away by the neutrinos.
+Therefore, it is also possible to sample just the energy that is stored in a hadronic or electromagnetic cascade and therefore visible to the detector.
+For the leptonic decays, only the produced electron or muon can be sampled.
+For hadronic decays, only the neutrino energy needs to get sampled.
+
+%
+
+\subsection{Cross Sections}
+
+Next to the cross-sections relevant for the muon propagation described in section \ref{sec:xsection} there are further parametrizations available for some interactions to perform systematic studies on the effect of slightly different cross-sections on the propagation.
+The additional interactions and parametrizations for electrons, positrons, and high energy photons to produce an electromagnetic shower are based on the simulation software EGS \cite{EGS5} and are described in \cite{Alameddine20Master}.
+For the neutrino propagation, the cross-sections of \cite{CSMS11NuXsection} are used which are already introduced for the weak interaction.
+Additional effects like the Glashow resonance or neutrino oscillation are not implemented, yet.
+For each of the main particle types that can be propagated, there is a default cross-section set available to reduce the complexity of the usage.
+A complete description of the available processes and their parametrizations are listed in \tabref{tab:xsection_params}.
+Their names are most often the authors of the corresponding publication, or with a descriptive naming of their purpose.
+\begin{table}
+    \caption{List of implemented cross-section parametrizations in PROPOSAL. The parametrizations \textit{AbramowiczLevinLevyMaor91}, \textit{AbramowiczLevinLevyMaor91} and \textit{DuttaRenoSarcevicSeckel} are abbreviated.}
+    \label{tab:xsection_params}
+    \begin{tabular}{l | l | l}
+        \toprule
+        \textbf{Ionization}          & \textbf{Photonuclear} & \textbf{Annihilation} \\
+        BetheBlochRossi              & \underline{VMD}       & Heitler \\
+        BergerSeltzerBhabha          & Zeus                  & \\
+        BergerSeltzerMoller          & BezrukovBugaev        & \textbf{Compton} \\
+                                     & Kokoulin              & KleinNishina \\
+        \textbf{Bremsstrahlung}      & Rhode                 & \\
+        KelnerKokoulinPetrukhin      & \underline{Regge}     & \textbf{Photo Pair Production} \\
+        PetrukhinShestakov           & ALLM91                & Tsai \\
+        CompleteScreening            & ALLM97                & \\
+        AndreevBezrukovBugaev        & ButkevichMikheyev     & \textbf{$\mu$ Pair Production} \\
+        SandrockSoedingreksoRhode    & RenoSarcevicSu        & KelnerKokoulinPetrukhin \\
+        ElectronScreening            & AbtFT                 & \\
+                                     & BlockDurandHa         & \textbf{Weak Interaction} \\
+        \textbf{$e$ Pair Production} &                       & CooperSarkarMertsch \\
+        KelnerKokoulinPetrukhin      & \underline{Shadowing} & \\
+        SandrockSoedingreksoRhode    & DRSS                  & \\
+        ForElectronPositron          & ButkevichMikheyev     & \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+For \textbf{Ionization} the default cross-section for massive particles is the parametrization called \textit{BetheBlochRossi}, i.e. the parametrization described in section \ref{sec:ioniz}.
+Due to the additional Feynman diagrams for Electrons with Bhabha Scattering and Positrons with Moeller Scattering, the default cross-section slightly different and labeled \textit{BergerSeltzerBhabha} and \textit{BergerSeltzerMoller} \cite{Alameddine20Master}.
+
+For the \textbf{Bremsstrahlung} default cross-section is the widely used \textit{KelnerKokoulinPetrukhin} parametrization, described in section \ref{sec:brems_screen_approx}.
+A parametrization using the analytical interpolation of the screening as described in \eqref{eq:brems_screen_interpol} and another approach for the nuclear form factor is \textit{PetrukhinShestakov}.
+In the \textit{AndreevBezrukovBugaev} parametrization, no approximation of the screening ($\Phi_1 \neq \Phi_2$) was made.
+The calculation combining the benefits of these three parametrizations with additional radiative corrections is the \textit{SandrockSoedingreksoRhode} parametrization, which is described in section \ref{sec:brems}.
+There is also a parametrization approximated for high energies, called \textit{CompleteScreening}.
+Since bremsstrahlung is the dominant energy loss process for electrons and positrons, there is a dedicated parametrization for them, called \textit{ElectronScreening}.
+
+For the \textbf{$e$ pair production}, the widely used default is the \textit{KelnerKokoulinPetrukhin} parametrization \cite{Kokoulin71, Kelner98}, described in section \ref{sec:epair_screen_approx}.
+A parametrization without the screening approximation ($\Phi_1 \neq \Phi_2$) is \textit{SandrockSoedingreksoRhode} \cite{Soedingrekso19ICRC}.
+There is a dedicated parametrization again for electrons and positrons, due to the interference terms of the same particles in the final state.
+This is similar to the \textbf{muon pair production} (c.f. section \ref{sec:mupair}), where the parametrization is called \textit{KelnerKokoulinPetrukhin} \cite{Kelner00mupair}.
+
+The \textbf{inelastic nuclear interaction} is the most uncertain of the relevant processes, hence the one with the most parametrizations that can be divided into the approach of a Vector Meson Dominance and the Regge models as described in section \ref{sec:photonucl}.
+For the VMD model, there are the parametrizations of \textit{BezrukovBugaev} \cite{Bezrukov80}, \textit{Kokoulin} \cite{Kokoulin97}, \textit{Rhode} \cite{Rhode93PhD}, and \textit{Zeus} \cite{Breitweg99ZEUS}, already described in section \ref{sec:photo_vmd}.
+For the Regge models, there is the initial \textit{AbramowiczLevinLevyMaor} parametrization published in the year 1991 \cite{Abramowicz91} and the updated fit Parameters from 1997 \cite{Abramowicz97}, where the latter is the default photonuclear parametrization.
+This fit was redone on more recent HERA measurements in 2017 which can be used with \textit{AbtFT} \cite{Abt17PhotoQ2}.
+Two alternative approaches can be used by \textit{ButkevichMikheyev} \cite{Butkevich02} and with \textit{BlockDurandHa}.
+Dedicated for supersymmetric staus, a calculation for spin 0 particles is available under the name \textit{RenoSarcevicSu}.
+For the Regge models also the parametrization of the shadowing can be selected.
+There is the \textit{ButkevichMikheyev} parametrization, corresponding to the same-named cross-section and alternatively the \textit{DuttaRenoSarcevicSeckel} \cite{Dutta01}.
+
+For the dedicated interactions of recently added particles to propagate, i.e. the electron, positron, high energy photons, and neutrinos, there is up to now, only one parametrization per interaction available.
+The \textbf{Weak Interaction} either for neutrino propagation or for charged leptons has the parametrization of \textit{CooperSarkarMertsch} \cite{CSMS11NuXsection}.
+For the \textbf{Annihilation} of a positron interacting with an atomic electron, the parametrization of \textit{Heitler} \cite{Heitler54} is used.
+For high-energy photons, the processes of \textbf{Pair Production} and \textbf{Compton Scattering} are included with the parametrization names \textit{Tsai} and \textit{KleinNishina} respectively.
+
+All cross-sections are implemented differential in the relative energy loss $v$ as $\sfrac{\dif \sigma}{\dif v}$, except for the purely stochastic processes, from now on called catastrophic interactions, where the primary particle does not exist anymore, i.e. Annihilation, weak interaction, and pair production by photons.
+Cross-sections that are also differential in a second parameter, i.e. the asymmetry $\rho$ in the electron and muon pair production and the momentum $Q^2$ for the Regge approach of the photonuclear interaction, this second dimension is interpolated numerically for a consistent treatment of the cross-sections.
+
+To create a cross-section in PROPOSAL, one has to define at least a \texttt{ParticleDef} and a \texttt{Medium} or \texttt{Component}, where the interaction takes place.
+For the total cross-section or the average energy loss, also the cut for the energy loss needs to be defined in case of non-catastrophic interactions.
+
+%
+
+\subsection{Energy Loss Cuts Separating Continuous and Stochastic Losses} \label{sec:ecuts}
+
+Before describing the propagation principles the energy loss cuts, as an important mechanism to simulate muons, needs to be introduced.
+As outlined in chapter \ref{sec:brems} the bremsstrahlung cross-section diverges for small energy losses, meaning that there is an infinite possibility to create a photon with no energy.
+Compared to the other interactions, where the lower limit is defined by the masses of the produced particles, the lower limit for bremsstrahlung is \num{0} due to the massless photon.
+Although the bremsstrahlung cross-section does not diverge when propagating through media due to the dielectric effect, calculating this interaction is still numerically unstable and should be avoided.
+
+Even when neglecting the bremsstrahlung, it is also highly inefficient to simulate a huge amount of low energetic electrons produced in small energy losses regarding pair production or Ionization with lower thresholds for the energy loss of \SI{1}{MeV} and $\mathcal{O}(\SI{100}{eV})$ respectively.
+It would cost more runtime during the simulation and more memory or disk space to store all the energy losses, which might not even get measured by the detector.
+
+Therefore all small energy losses up to a certain threshold are combined and averaged out into a continuous loss.
+In PROPOSAL, this threshold can be set as absolute energy, called $e_{\textrm{cut}}$ or relative to the energy of the primary particle, called $v_{\textrm{cut}}$.
+The threshold is then chosen as the minimum between both,
+\begin{align} \label{eq:ecut}
+    e_{\textrm{cut}} = \min(e_{\textrm{cut}}', v_{\textrm{cut}} \cdot E_{\mathrm{particle}})
+    \quad
+    \text{with }
+    e_{\textrm{cut}} \in (0, \infty)
+    \text{ and }
+    v_{\textrm{cut}} \in (0, 1]
+\end{align}
+A purely continuous simulation can be achieved with $e_{\textrm{cut}}=\infty$ and $v_{\textrm{cut}}=1$.
+This would be without any stochasticity and therefore deterministic.
+
+First introduced in \cite{Lipari91}, the energy loss cut represents the threshold between an average energy loss
+\begin{align} \label{eq:cuts_dedx}
+    f(E) \coloneqq -\frac{\dif E}{\dif X} = 
+        E \cdot \sum_\text{processes} \sum_{\substack{\text{atom} \\ \text{in medium}}}
+        \frac{N_A}{A} \int_{v_{\min}}^{v_{\textrm{cut}}} v \frac{\dif \sigma}{\dif v} \dif v
+\end{align}
+and the number of Stochastic Losses per distance
+\begin{align} \label{eq:cuts_dndx}
+    \frac{\dif N}{\dif X} = 
+        \sum_\text{processes} \sum_{\substack{\text{atom} \\ \text{in medium}}}
+        \frac{N_A}{A} \sigma(E) ,
+    \qquad \text{with} \qquad
+    \sigma(E) \coloneqq \int_{v_{\text{cut}}}^{v_{\max}} \frac{\dif \sigma}{\dif v} \dif v .
+\end{align}
+The abbreviations $f(E)$ and $\sigma(E)$ are defined to be consistent with the literature.
+With this approach, all small energy losses with an energy $E_{\text{Loss}} < e_{\text{cut}}$ are combined to a continuous loss and averaged out, while all energy losses above the cut are treated stochastically.
+The energy loss cut is therefore an important parameter to adjust either the performance of the simulation using high cuts, or an accurate simulation using small cuts.
+\begin{figure}
+    \centering
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/dedx_ecut_1.pdf}
+        \caption{$\left\langle \frac{\dif E}{\dif X} \right\rangle$ with $e_{\text{cut}} = \SI{1}{MeV}$.}
+        \label{fig:dedx_ecut_1}
+        \vspace{0.5cm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/dedx_ecut_500.pdf}
+        \caption{$\left\langle \frac{\dif E}{\dif X} \right\rangle$ with $e_{\text{cut}} = \SI{500}{MeV}$.}
+        \label{fig:dedx_ecut_500}
+        \vspace{0.5cm}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/dndx_ecut_1.pdf}
+        \caption{$\frac{\dif N}{\dif X}$ with $e_{\text{cut}} = \SI{1}{MeV}$.}
+        \label{fig:dndx_ecut_1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/dndx_ecut_500.pdf}
+        \caption{$\frac{\dif N}{\dif X}$ with $e_{\text{cut}} = \SI{500}{MeV}$.}
+        \label{fig:dndx_ecut_500}
+        \vspace{0.5cm}
+    \end{subfigure}
+    \caption{Continuous Energy Loss and Stochastic Interaction Probability of muons in Ice for an energy loss cut of \SI{1}{MeV} and \SI{500}{MeV}.}
+    \label{fig:dedx_dndx_ecuts}
+\end{figure}
+
+In \figref{fig:dedx_dndx_ecuts} the effect of different energy loss cuts on the average energy loss and the stochastic interaction probability is shown.
+Compared to average energy loss without an energy loss cut (see \figref{fig:dedx_all}), the Ionization dominates the small energy losses, also at higher muon energies.
+The huge amount of low energetic Ionization losses is also seen in the stochastic interaction probability and the rise of the number of secondaries between the already low cut of \SI{500}{MeV} and the cut at \SI{1}{MeV}.
+
+The integrals presented in \eqref{eq:cuts_dedx} and \eqref{eq:cuts_dndx} get interpolated and are then used for the propagation integrals described in the next section.
+Next to these two integrals of the cross-sections, a third integral is created when using the option \texttt{continuous\_randomization}, described in section \ref{sec:cont_rand}.
+Hereby, the second momentum of the cross-section or the variance of the energy loss
+\begin{align} \label{eq:ecut_de2dx}
+    \left\langle \frac{\dif E^2}{\dif X} \right\rangle = E^2 \int\limits_{v_{\min}}^{v_{\textrm{cut}}} v^2 \frac{\dif \sigma}{\dif v} \dif v
+\end{align}
+is used to smear out the continuous energy loss and slightly randomize the deterministic calculation.
+
+%
+
+\subsection{\textit{One propagation step for PROPOSAL \dots}} \label{sec:prop_util}
+\textit{\dots a giant leap for muon research ;).}
+
+Out of the cross-sections and the energy loss cuts, the propagation integrals, collected in the so-called \texttt{propagation\_utilities} can be calculated.
+These integrals or utilities are required to perform a single propagation step.
+
+There are two approaches on how PROPOSAL can estimate or sample from an initial state $i$ the next interaction point with the final state $f$;
+\begin{itemize}
+    \item by calculating the energy integral taking into account the continuous losses,
+    \item and by using the mean free path length assuming no continuous loss.
+\end{itemize}
+If the particle propagation includes also continuous energy losses, which is the case for charged leptons, the default approach to sample the next interaction is by solving the so-called \textbf{Energy Integral}
+\begin{align} \label{eq:prop_cdf_general}
+    P(E_i \leq E \leq E_f) = - \int\limits_{E_i}^{E_f} p(E) \dif E ,
+\end{align}
+with the probability distribution $p(E)$ for an interaction and the cumulative distribution $P(E)$.
+The general idea was developed in \cite{Sokalski01MUM} and \cite{Chirkin04MMC}.
+Instead of sampling a distance or length, the calculation is performed in energies, which is more accurate and stable and e.g. independent of the density (when neglecting the LPM dependence).
+The goal is to sample the energy $E_f$ the muon has, right before it has the next stochastic interaction while the difference between the initial energy $E_i$ and $E_f$ is lost due to continuous losses.
+In a second step, the distance is calculated according to the sampled $E_f$.
+
+The track between the initial and final state is divided into infinitesimal small track sections.
+The probability of no stochastic loss in each of these track sections but with a stochastic interaction at the state $f$ can be written as
+\begin{align}
+    \Delta P_f &= \prod\limits_{j=i}^{f-1} (1 - \sigma_j \Delta x_j) \sigma_f \Delta x_f \\
+        &\approx \exp \left( - \sum\limits_{j=i}^{f-1} \sigma_j \Delta x_j \right) \sigma_f \Delta x_f \\
+    \xrightarrow{\Delta x \to 0} \dif P_f &= \exp \left( - \int\limits_{x_i}^{x_f} \sigma(E(x)) \dif x \right) \sigma_f \dif x_f \label{eq:prop_interaction_integral}
+\end{align}
+where the approximation of $\Delta x \ll 1$ is used in the second line.
+$\sigma_j = \sigma(E(x_j))$ is the probability for a stochastic loss at state $j$ as defined in \eqref{eq:cuts_dndx}.
+To transform to an energy integral, \eqref{eq:cuts_dedx} is used, resulting in
+\begin{align}
+    \dif P_f = \exp \left( \int\limits_{E_i}^{E_f} \frac{\sigma(E)}{f(E)} \right) \frac{\sigma(E_f)}{-f(E_f)} \dif E_f .
+\end{align}
+When integrating over the probabilities the cumulative distribution of \eqref{eq:prop_cdf_general} is obtained
+\begin{align}
+    P(E_i \leq E \leq E_f) = \int\limits_{P_i=0}^{P_f} \dif P_f .
+\end{align}
+This can be integrated using the substitution
+\begin{align}
+    u(E) \int_{E_i}^E \frac{\sigma(E')}{f(E')} \dif E'
+    \qquad \text{and} \qquad
+    \dif u = \frac{\sigma(E)}{f(E)} \dif E ,
+\end{align}
+resulting in
+\begin{align}
+    P(E_i \leq E \leq E_f) = \exp \left( \int\limits_{E_i}^{E_f} \frac{\sigma(E)}{f(E)} \dif E \right) .
+\end{align}
+Finally, the energy $E_f$ can be sampled using a random number $\xi \in (0,1]$ with
+\begin{align} \label{eq:energy_integral_int}
+    \logn \xi = \int\limits_{E_i}^{E_f} \frac{\sigma(E)}{f(E)} \dif E ,
+\end{align}
+which has a solution if
+\begin{align}
+    \xi < \exp \left( \int\limits_{E_i}^{E_{\text{low}}} \frac{\sigma(E)}{f(E)} \dif E \right) ,
+\end{align}
+where $E_{\text{low}}$ is the \texttt{low} parameter of the particle definition, described in section \ref{sec:particle}, and therefore always smaller than $E_i$.
+If the random number is greater than the integral, there is no stochastic loss.
+
+If the particle can decay, the energy $E_{f,\text{decay}}$, where the next decay would occur, can be sampled similar to the energy integral for interactions.
+By replacing the interaction probability in \eqref{eq:energy_integral_int} with the decay cross-section defined in \eqref{eq:sigma_decay}, the \textbf{Decay Integral} is defined by
+\begin{align}
+    \rho \logn \xi = \int\limits_{E_i}^{E_{f,\text{decay}}} \frac{\dif E}{f(E) \gamma\beta \tau c_0} .
+\end{align}
+In contrast to the interaction cross-sections, the decay cross-section is independent of the medium and the density does not cancel out with the continuous losses thus must be taken into account.
+
+Out of the sampled energy $E_f$, the distance where the next stochastic loss would occur can be calculated using the so-called \textbf{Tracking Integral}, defined by
+\begin{align} \label{eq:tracking_integral}
+    - \int\limits_{E_i}^{E_f} \frac{\dif E}{f(E)}
+    = \int\limits_{x_f}^{x_i} \rho(x) \dif x
+    \xrightarrow{\rho=const.}
+    x_f - x_i .
+\end{align}
+For inhomogeneous media, the density profile needs to be considered for the tracking integral.
+Alternatively, the distance can be calculated in units of grammage instead of e.g. meter, separating the density distribution from the tracking integral.
+
+Regarding purely stochastic propagations, e.g. for neutrinos, there is no energy loss between two stochastic interactions.
+Therefore the calculations are not in energies, but in distances, and the interaction and tracking integrals \eqref{eq:prop_interaction_integral} and \eqref{eq:tracking_integral} reduces to
+\begin{align} \label{eq:tracking_stochastic}
+    x_f - x_i = \frac{- \logn \xi}{\sigma(E)} .
+\end{align}
+This can also be derived by sampling from an exponential distribution with the mean free path length, which is proportional to the inverse cross-section.
+It is also applicable for scenarios, which in principle have continuous energy losses, but where the step length between two stochastic losses is small.
+In \figref{fig:prop_util_tracking}, a comparison between the two approaches of calculating the next interaction point is shown.
+Only for the rare scenarios, in which most of the energy gets lost, there are larger deviations.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.82\textwidth]{./plots/prop_util_next_int.pdf}
+    \caption{Calculation of the distance to the next interaction point for a muon with an initial energy of \SI{2e5}{MeV} in ice using an energy loss cut of \SI{500}{MeV}. The approach of the tracking integral via the sampled energy integral is compared to a sampling of an exponential probability distribution function (pdf) with the mean free path length as the scale parameter.}
+    \label{fig:prop_util_tracking}
+\end{figure}
+
+Next to the sampled decay or interaction energy, also energy thresholds can be set optionally limiting estimation of the next track point or energy.
+This can either be a limitation in the maximum energy the particle can lose continuously between two stochastic interactions.
+Another limitation of the energy is that the particle energy cut has been reached, i.e. the minimal energy, the particle should get propagated.
+The final energy of a single propagation step is therefore defined by
+\begin{align}
+    E_f = \max(E_{\text{interaction}}, E_{\text{decay}}, E_i - E_{\text{max continuous loss}}, E_{\text{min particle}})
+\end{align}
+The step length can also be limited optionally, which is considered after calculating the tracking integral.
+The next track point is finally chosen between the sampled interaction point, either via the estimated energy with \eqref{eq:tracking_integral} or directly via \eqref{eq:tracking_stochastic}, the step limitation, and the edge of the simulation geometry
+\begin{align}
+    x_f = \min(x_{\text{interaction}}, x_{\text{max step}}, x_{\text{border}}) .
+\end{align}
+The limitation of the step length, in the energy or the distance, is important for processes assuming a constant particle energy between two stochastic interactions, especially when calculating the magnetic pulse of an air shower.
+However, when forcing maximum continuous losses of e.g. \SI{1}{\%} of the initial energy, this can results in many small steps without a stochastic loss for lower energies and thereby an inefficient performance.
+
+The \textbf{Time Integral} to calculate the time at the next loss can either be calculated in a similar way as the tracking integral including the continuous losses resulting in
+\begin{align} \label{eq:time_integral}
+    t_f - t_i = \int\limits_{E_i}^{E_f} \frac{\dif E}{f(E)} \underbrace{\frac{1}{c_0 \sfrac{p}{E}}}_{v(E)} .
+\end{align}
+For only stochastic propagations of massless particles like photons or neutrinos, the time can be calculated with
+\begin{align}
+    t_f - t_i = \frac{x_f - x_i}{c_0}.
+\end{align}
+At high energies, this is also an accurate approximation if the particles are massive and lose energy along the track since the assumption of propagating with the speed of light is a good approximation.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.82\textwidth]{./plots/prop_util_next_time.pdf}
+    \caption{Calculation of the time at the next interaction point for a muon with an initial energy of \SI{e5}{MeV} in ice using an energy loss cut of \SI{500}{MeV}. The approach of the time integral is compared to the approximation, the particle propagates with $c_0$.}
+    \label{fig:prop_util_time}
+\end{figure}
+
+In case, a non-catastrophic interaction is chosen, the relative energy loss of the stochastic interaction is sampled with the \textbf{Stochastic Integral}
+\begin{align}
+    \xi = \frac{1}{\sigma(E)} \int\limits_{v_{\text{cut}}}^{v_{\text{Loss}}} \frac{\dif \sigma}{\dif v} \dif v .
+\end{align}
+To calculate the interaction, three things need to get determined; the interaction type, the target, where it interacts, i.e. the atom or in case of ionization the medium, and the amount of the energy loss.
+By stacking these probabilities, the interaction can be sampled with a single inverted cumulative probability distribution, shown in \figref{fig:prop_util_stoch_loss}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.82\textwidth]{./plots/prop_util_stoch_loss.pdf}
+    \caption{The stacked and inverted cumulative distribution of a stochastic loss for a muon with an initial energy of \SI{e5}{MeV} in ice using an energy loss cut of \SI{500}{MeV}. The interaction is split between the probabilities for the different targets; Hydrogen (dotted), Oxygen (dashed), and Ice (dash-dotted).}
+    \label{fig:prop_util_stoch_loss}
+\end{figure}
+
+After calculating the stochastic energy loss, the deflection can optionally be sampled, as described in section \ref{sec:scat_stoch}.
+Finally, the remaining dynamic properties (see \secref{sec:particle}) of the particle and the energy loss like the propagated distance are updated.
+Then the cycle starts again and the next interaction point is sampled.
+
+These are the main calculations, which are performed in each step of the particle propagation.
+They can optionally further be improved via the two processes described in the following section; the so-called \textit{Continuous randomization} and Multiple Scattering.
+
+\subsection{Continuous Randomization} \label{sec:cont_rand}
+
+As already described in section \ref{sec:ecuts}, the choice of the energy loss cut mainly influences the performance of the simulation.
+Smaller cuts are more accurate, thus slower and higher cuts are more performant, thus less precise. 
+In any case, this is an unphysical cut producing an artifact in the simulation.
+Therefore the cut has to be chosen, that these artifacts are not visible in the simulation of the experiment, or at least they should be reduced as much as possible.
+
+There are two main scenarios with different requirements for muon simulations.
+Calorimetric measurements are often more sensitive to the energy losses than to the bare muon track.
+An absolute value of the energy loss cut is then often used according to the detection sensitivity.
+The other scenario is propagating muons through large distances to the detector, where the track of the muon with its energy losses is not visible to the detector.
+This is often the case for experiments located deep underground.
+Here, only an accurate description of the incoming muon flux at the detector is required and not a precise calculation of the energy losses.
+Therefore, a relative energy loss cut is often used in these cases.
+Regarding the IceCube Detector, both scenarios are required.
+
+When setting the absolute energy of the cut below the detection sensitivity of the calorimeter, the artifacts of the energy loss cut are not visible to the detector.
+However, for the second scenario with the performant muon simulation and a relative cut, detectable artifacts may remain in the muon flux.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/prop_cont_rand_loss.pdf}
+        \caption{The spectrum of the energy that is lost.}
+        \label{fig:cont_rand_loss}
+        \vspace{0.5cm}
+    \end{subfigure}
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/prop_cont_rand_mu.pdf}
+        \caption{The spectrum muon energy after propagation.}
+        \label{fig:cont_rand_mu}
+    \end{subfigure}
+    \caption{The energy spectrum of the muon energy and the summed energy lost after propagating \num{e6} muons through \SI{1}{m} of ice. For different energy loss cuts $v_{\text{cut}}$ the energy spectra are compared including continuous randomization (dashed) and without this smearing (straight).}
+    \label{fig:cont_rand}
+\end{figure}
+
+The main artifact can be seen in the energy spectrum of the muons after propagating a certain distance, as shown in \figref{fig:cont_rand_mu}.
+Each muon propagating the distance without any stochastic interaction arrives with the same energy, resulting in a delta peak in the distribution.
+The peak is determined by the continuous losses of the muon according to the cut.
+After the peak, there is a gap in the spectrum of the size of the energy loss cut, since a single stochastic loss requires at least the amount of the energy loss cut.
+\begin{table}
+    \caption{Comparison of runtime performance of \num{e6} muons propagated with different energy loss cuts through \SI{1}{m} of ice.}
+    \label{tab:cont_rand_runtime}
+    \begin{center}
+    \begin{tabular}{l | c | c | c | c }
+        \toprule
+        Continuous & \multicolumn{4}{c}{Energy Loss Cut $v_{\mathrm{cut}}$} \\
+        Randomization & \num{e-2} & \num{e-3} & \num{e-4} & \num{e-5} \\
+        \midrule
+        True & \SI{9}{s} & \SI{12}{s} & \SI{21}{s} & \SI{93}{s} \\
+        False & \SI{9}{s} & \SI{12}{s} & \SI{20}{s} & \SI{89}{s} \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{table}
+
+The main idea is now to smear out the sampled energy $E_f$ of the muon, after the calculation of the tracking and the time integral to randomize the continuous propagation step.
+The randomization is performed using a Gaussian distribution with the mean $E_f$.
+The variance of the distribution is calculated using the second momentum of the energy loss, as already indicated in \eqref{eq:ecut_de2dx}.
+The variance, defined by
+\begin{align}
+    \left\langle \frac{\Delta (\Delta E)^2}{\Delta x} \right\rangle &= \left\langle \frac{\Delta E^2}{\Delta x} \right\rangle - \left\langle \frac{\Delta E}{\Delta x} \right\rangle^2
+\end{align}
+can be calculated similar to the derivation of the energy integral, dividing the track between two stochastic losses in many small track segments and summing up their contribution
+\begin{align}
+    \langle \Delta (\Delta E)^2 \rangle
+        &= \sum\limits_{j=i}^f \left\langle \frac{\Delta E^2}{\Delta x} \right\rangle_j \Delta x_j
+            - \left\langle \frac{\Delta E}{\Delta x} \right\rangle_j^2 \underbrace{(\Delta x_j)^2}_{\approx 0}
+        \\
+    \xrightarrow{\Delta x \to 0} &\approx \int\limits_{x_i}^{x_f} \left\langle \frac{\dif E^2}{\dif x} \right\rangle .
+\end{align}
+In the second line, the limit of infinite small track lengths is used neglecting the terms of $(\Delta x)^2$.
+The integral over the track segments can again be written in an integral over the energies, similar to energy integral for the interaction or decay, resulting in the \textbf{Continuous Randomization Integral}
+\begin{align}
+    \langle \Delta (\Delta E)^2 \rangle = \int\limits_{E_i}^{E_f} \frac{E^2}{-f(E)} \left\langle \frac{\dif E^2}{\dif x} \right\rangle .
+\end{align}
+The effect of the runtime for the \num{e6} muons propagated for \figref{fig:cont_rand} is listed in \tabref{tab:cont_rand_runtime}.
+Nearly no loss in runtime performance is visible if the continuous randomization is included or not.
+However, while for high energy cuts, other processes are more dominant and the different cuts do not influence significantly, this changes drastically for smaller cuts resulting in nearly an order of magnitude in runtime due to the additional propagation steps.
+
+%
+
+\subsection{Multiple Scattering}
+
+The multiple scattering of the muon between two stochastic losses is theoretically described in section \ref{sec:multiple_scat}.
+There are multiple options available to calculate the Multiple Scattering:
+\begin{itemize}
+    \item It is possible to propagate without scattering to increase the performance if the deflections are not relevant.
+    \item The other extreme is a precise calculation of \texttt{Moliere}'s theory on Multiple scattering, described in detail in \cite{Geiselbrinck13Bachelor}.
+    This however can increase the performance by orders of magnitude, as presented in \cite{Dunsch19PROPOSAL}.
+    \item The \texttt{Highland} approximation of the Moliere Scattering using a Gaussian distribution, as described in \eqref{eq:multiple_scat}.
+    \item The Highland approximation, as described before, but considering also the continuous energy losses, is called \texttt{HighlandIntegral}.
+\end{itemize}
+Only the latter includes the continuous energy loss during the propagation step, while the others assume a particle constant energy of $E_i$.
+Including the continuous loss, the calculation of the scattering angle in the Highland approximation given by \eqref{eq:multiple_scat} changes to the \textbf{Scattering Integral}
+\begin{align}
+    \theta_0 = \SI{13.6}{MeV} \left( 1 + 0.088 \log_{10} \frac{X}{X_0} \right)
+        \sqrt{ \int_{E_f}^{E_i} \dif E \frac{E^2}{p^4} \frac{1}{-f(E) X_0} } .
+\end{align}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{./plots/prop_scat.pdf}
+    \caption{Comparison of different deflection calculations for \num{e6} muons propagating \SI{1}{km} through ice with an energy loss cut of \SI{500}{MeV}. Either only the Multiple Scattering according to the parametrization is used, or only the stochastic deflection for the scattering, or both processes. In the latter case, the HighlandIntegral parametrization for Multiple Scattering is used.}
+    \label{fig:prop_scat}
+\end{figure}
+\begin{table}
+    \caption{Comparison of runtime performance of \num{e6} muons propagated with different Scattering calculations through \SI{1}{km} of ice with an energy loss cut of \SI{500}{MeV}.}
+    \label{tab:scatter_runtime}
+    \begin{center}
+    \begin{tabular}{l | c }
+        \toprule
+        Scattering Mode & Runtime / s \\
+        \midrule
+        No Scattering & 404 \\
+        Moliere & 894 \\
+        Highland & 416 \\
+        HighlandIntegral & 463 \\
+        Stochastic Deflection & 428 \\
+        Cont. and Stochastic Deflection & 439 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{table}
+
+In \figref{fig:prop_scat} the effect of the different parametrizations for multiple scattering on the muon simulation is shown and compared also to the effect of stochastic deflections.
+As already discussed in the theory section, the Highland parametrization is an accurate approximation for small angles but does not accurately describe the tail of the Moliere distribution at high scattering angles.
+Including the continuous energy losses for the scattering angle has only an influence on higher energy loss cuts and larger steps.
+Thereby, the runtime performance increases by a couple of percents when including a scattering calculation, as shown in \tabref{tab:scatter_runtime}.
+Only the calculation of the Moliere scattering drastically increases the performance by more than a factor of 2.
+
+For the stochastic deflection, there are also multiple parametrizations available in PROPOSAL.
+The standard parametrizations for the muon deflection are described in section \ref{sec:stochastic_deflect}.
+They only have minor influences on most interactions with small deflection angles.
+However, for larger deviations of the muon axis, they contribute significantly to the distribution, and in the tail, they get close to the distribution of the Moliere scattering.
+
+%
+
+\subsection{The Propagator}
+
+The modules described above are combined to finally create the so-called Propagator, which propagates the particle until a certain condition and returns the track.
+The propagator can be initialized using the following steps:
+\begin{enumerate}
+    \item Define a particle definition, a medium, a selection of cross-section parametrizations, and the energy loss cuts, if necessary, to create the cross-section integrals.
+    \item Out of the cross-section integrals, the propagation utilities can be defined. The utilities consist of the following modules:
+    \begin{itemize}
+        \item An interaction module with the energy integral and the stochastic integral.
+        \item A displacement module with the tracking integral and the calculator of the mean free path length.
+        \item A time module, calculating the time either with the time integral or with the approximation assuming a velocity of $c_0$.
+        \item An optional decay module with the energy integral for the decay process.
+        \item An optional continuous randomization module.
+        \item An optional scattering module containing the Multiple Scattering and the stochastic deflections.
+    \end{itemize}
+    \item The propagation utilities, together with a geometry and a density profile, define a sector, where a particle can propagate through.
+    \item With a list of sectors, e.g. differing in the energy loss cuts before and inside the detector, the propagator can be initialized.
+\end{enumerate}
+These objects can either be defined explicitly in a script using the PROPOSAL library, or these settings can be defined inside a \texttt{json} configuration file.
+
+After the initialization of the settings, the propagator can propagate a particle.
+The propagation loop starts with the sampling of the next interaction point or energy.
+After that, further parameters of the final particle state like the time are estimated including optional corrections due to scattering or the energy randomization.
+Then, the stochastic loss is sampled and the cycle of propagation starts again until it terminates.
+There are the following termination conditions for the propagation
+\begin{itemize}
+    \item The particle decays.
+    \item The particle has a catastrophic interaction, e.g. weak interaction or annihilation, and does not exist after the interaction.
+    \item The particle has reached the end of the defined environment and there is no further geometry/sector in the direction of the particle.
+    \item An optionally set maximum propagation length has been reached.
+    \item An optional minimum of the particle energy has been reached.
+    \item The particle leaves the detection region.
+\end{itemize}
+Regarding the latter case, it is of interest for experiments on how the muons propagate before they reach the detector and in particular how they behave inside the detector.
+But when leaving the detection volume, muons do not need to get propagated further.
+They might still be highly energetic and propagate large distances e.g. a neutrino-induced, up-going muon in IceCube can propagate to the stratosphere and beyond.
+Therefore a threshold of the hierarchy in the geometries is implemented.
+Each sector defining the detection area should contain a hierarchy above this threshold.
+If the particle enters a sector above the hierarchy, it propagates until it reaches the border of all sectors above the threshold.
+If the next sector has a hierarchy below the threshold, it stops.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.82\textwidth]{./plots/prop_track.pdf}
+    \caption{The energy loss of a \SI{10}{TeV} muon during its propagation through ice with an energy loss cut of \SI{500}{MeV} until it decays is shown in the upper plot. The deflection of the above-mentioned muon projected on the $x$ axis including the energy losses on the track IS shown in the lower plot. The radius of the energy loss circles IS scaled with the square root of the energy loss.}
+    \label{fig:prop_track}.
+\end{figure}
+
+After the propagation, the track of the particle is returned consisting of the interaction points and the edge points at the entry and exit points of a geometry.
+Out of this track, the continuous or the stochastic losses can be extracted and filtered for a specific interaction type.
+Also, the secondary particles of the interactions or the decay can be produced as described in section \ref{sec:particle}.
+
+Using the interaction point in the track, also the particle state at each point of the continuous step can be extracted using re-simulations.
+For a given energy, the tracking integral \eqref{eq:tracking_integral} and the time integral \eqref{eq:time_integral} are used to determine the particle state.
+Alternatively, a propagated distance can be given to determine the particle state at this distance.
+This deterministic approach of re-propagating one step is not useful when including continuous randomization, and will produce inconsistent results due to the shift of the final energy.
+Also, the Multiple Scattering is just approximated with a straight line between the initial and the final state.
+In principle, the particle would scatter less at high energies in the beginning and deviate more in the latter part of the track at lower energies.
+However, since the random state is not stored for each step, it is a straight line is the most generic approximation.
+The particle track of a single muon including its energy losses is shown in \figref{fig:prop_track}.
+
+%
+
+\subsection{Decay}
+
+For the different decay channels of muons and taus, multiple decay sampling methods are implemented in PROPOSAL.
+The two leptonic decay methods with an approximated production of the electronic decay channel and the more accurate approach for the muonic decay channel are already described in \secref{sec:decay_dsigma}.
+
+Regarding the hadronic decay modes of the tau, there are two methods available, both only considering the phase space sampling, not the matrix element.
+In the first versions of PROPOSAL, there was only the phase space sampling for a two-body decay.
+This is exact for the decay into a Pion and a neutrino.
+The decay channels where more decay products are produced were described effectively with a two-body decay into an intermediate particle, a resonance, that predominantly decays into the desired products.
+For example, the decay channel $\tau^- \to \pi^- \pi^0 \nu_\tau$, which is the largest decay channel of a tau, was described as a two-body decay into the neutrino and $\rho(770)^-$, which decays with more than \SI{99}{\%} in the channel  $\rho(770)^- \to \pi^- \pi^0$.
+Therefore, it is a reasonable approximation for a simple description of the tau decay.
+However, without further dynamics of a matrix element, a pure phase space consideration of a two-body decay results in a constant, determined value of the produced particle energy in the rest frame of the tau.
+This can be explained since for the two particles in the rest frame of the primary, there is only one possible configuration of one particle going in one direction and the other particle in the opposite direction.
+In the resulting energy distribution of the hadronic particle energy in the rest frame, four peaks occurred for the four implemented decay channels.
+In the boosted frame of the primary particle, this results in step functions in the energy distribution of the hadronic products, with a step at the mass of a hadronic product.
+This is further explained in \cite{Dunsch19PROPOSAL} visualizing also the artifacts in the energy spectra and describing the solution with many body decay samplings.
+
+Since these step functions were observed in IceCube simulations, a many-body phase space sampling was introduced in \cite{Dunsch18Master}.
+Thereby, the Raubold-Lynch algorithm is used, recursively factorizing an $n$-body decay into $n$ two-body decays, which can be calculated.
+Since this algorithm generates decay events, which are not equally distributed in the phase space, a rejection sampling can be applied to extract a uniformly distributed phase space.
+However, since the generation of a single decay product configuration already requires $3n - 4$ random numbers, the rejection sampling can increase the amount of random number sampling by an order of magnitude depending on the configuration.
+If the requirement on the decay simulation is only a continuous spectrum without steps, this is not necessary.
+Regarding the runtime, the decay calculation is not critical compared to the propagation and a more accurate sampling of the phase space doesn't change this relation.
+But the huge number of random numbers needs to be considered, which can be in the order of $\mathcal{O}(\num{e2})$ due to the simple rejection sampling.
+This could be improved in future works by introducing more efficient methods like importance sampling.
+
+Yet, there is no matrix element implemented for any decay channel and a constant matrix element of 1 is used.
+However, it is possible to include an external function calculating the matrix element.
+Thereby, the aforementioned rejection sampling for a uniform phase space gets weighted according to the matrix element.
+This is also applicable and can be tested for the muon decay, where the matrix element is defined by
+\begin{align}
+    \mathcal{M} = 64 G_F^2 p_1 p_2 ,
+\end{align}
+with
+\begin{align}
+    p_1 = E_\mu E_{\bar{\nu}_e} - \vec{p}_\mu \cdot \vec{p}_{\bar{\nu}_e}
+    \qquad \text{and} \qquad
+    p_2 = E_e E_{\nu_\mu} - \vec{p}_e \cdot \vec{p}_{\nu_\mu} .
+\end{align}
+Comparing the sampled electron spectra in \figref{fig:decay_sampling_mu_products} with the two leptonic decay sampling methods shows, that the many-body phase space sampling including the matrix element is as accurate as the improved leptonic decay sampling.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/decay_MuMinus_decay_spectrum}
+        \caption{Energy spectrum of all decay products.}
+        \label{fig:decay_sampling_all_products}
+        \vspace{0.5cm}
+    \end{subfigure}
+    \begin{subfigure}{0.8\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/decay_MuMinus_spectrum_of_TauMinus_decay}
+        \caption{Energy spectrum of the produced electrons.}
+        \label{fig:decay_sampling_mu_products}
+    \end{subfigure}
+    \caption{Energy Spectrum of the decay product of \num{e7} muons decaying at rest. The approximated (PDG) and the more accurate (LahiriPal) leptonic decay calculations are compared to the many-body phase space calculation.}
+    \label{fig:decay_sampling}
+\end{figure}
+However, regarding also the sampled energies of the two neutrinos in \figref{fig:decay_sampling_all_products}, different shapes of the spectra are observed.
+In the two leptonic decay sampling approaches only for the charged, massive leptonic product, the energy, and the direction get sampled.
+For the neutrino states, only the direction for one neutrino gets sampled while the other neutrino gets the opposite direction, in the rest frame.
+The energy for both neutrinos is also not sampled and each neutrino receive the energy
+\begin{align}
+    E_\nu = \frac12 \sqrt{(m_\mu^2 - E_e)^2 - p_e^2} .
+\end{align}
+On the other side, the many-body phase space with the matrix element is assumed to produced the more accurate result
+Comparing the neutrino spectra in \figref{fig:decay_sampling_all_products} with \figref{fig:decay_spectrum_compare} indicates a more plausible spectrum.
+Since the neutrino spectra have not been validated, yet, further investigations are necessary.
+Especially in the light of a growing interest in simulating tau regeneration through the earth.
+Therefore, also a more accurate description of the hadronic products is necessary.
+But as already mentioned, the processes of hadronic interactions are a research topic on its own with dedicated tools for each problem.
+For the hadronic tau decay, the default simulation framework is TAUOLA \cite{Jadach91, Jadach93, Davidson12, Chrzaszcz16}, used in nearly every experiment requiring an accurate description of the tau decay.
+In a future work of PROPOSAL, an interface to this framework can be implemented.
+
+%
+% PROPOSAL
+%
+
+\section{Usage of PROPOSAL in Simulation frameworks}
+
+Mainly used as a muon propagator, PROPOSAL more and more evolves to an electroweak interaction module.
+PROPOSAL is currently used in many different applications, from large simulation frameworks to small case studies.
+Since it is written in C\texttt{++} and also callable in python, the two most used programming languages in the scientific community, it is easily adaptable in new applications.
+It has common installation approaches as a classic \texttt{cmake} project, which is used in most scientific software frameworks, or using the conan package manager.
+The dependencies of \texttt{boost} and \texttt{eigen}, which are already installed in most scientific frameworks as well as the widely used \texttt{spdlog} are also \texttt{cmake} projects.
+To build the python interface, the defacto default library connecting C\texttt{++} and python \texttt{pybind11} is used.
+With the simple installation via \texttt{pip install proposal}, PROPOSAL is now also used in many small-scaled simulation studies.
+
+%
+
+\subsection{High Energy Neutrino Telescopes}
+
+High energy neutrino telescopes, especially the IceCube experiment, were the initial purpose and are still the main users of PROPOSAL.
+For the IceCube simulation, PROPOSAL propagates high energy muons and taus as e.g. described in \cite{IceCube2016Aachen}.
+The IceCube collaboration is also doing significant contributions to the development.
+Also for other neutrino telescopes PROPOSAL is optionally available for their muon propagation, like in the Baikal experiment \cite{Pastircak19Baikal} or KM3NeT \cite{Km3Net2020gSeaGen}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.82\textwidth]{./plots/ranges_prop.pdf}
+    \caption{The energy dependent range distribution of of muons in ice. For each energy bin, \num{e3} muons are propagated with a relative energy cut $v_{\mathrm{cut}}=\num{e-2}$. The median in each energy bin is compared to the approximation of the average energy loss.}
+    \label{fig:prop_range}.
+\end{figure}
+
+Inside the IceCube simulation, PROPOSAL is used with two configurations.
+The generated muon events from atmospheric air shower, which CORSIKA can propagate to the surface of the ice, get further propagated through the ice to the detector region with PROPOSAL.
+The neutrino-induced muons are generated inside the ice (not necessarily directly at the detector) or the bedrock below the detector and get then further propagated.
+Since these muons can have high energies propagating tens of kilometers through the ice, as shown in \figref{fig:prop_range}, a relatively high energy loss cut of $v_{\mathrm{cut}} = \num{e-2}$ is used with the continuous randomization option.
+Thereby, only the final muon state at the detector is of interest, as well as stochastic interactions, where again long-ranged muons are produced, that can reach the detector.
+These interactions are photonuclear interaction, $\mu^+\mu^-$ pair production, and weak interaction.
+
+The second configuration is the propagation inside the detector with an energy loss cut of \SI{500}{MeV}, since the detector is not sensitive to smaller energy losses.
+An energy distribution of the produced secondaries inside the detector is shown in \figref{fig:prop_sec_dist}.
+Out of the stochastic interactions along the muon track, the Cherenkov photons are sampled according to the energy and differing between electromagnetic and hadronic cascades.
+Also, the number of Cherenkov photons along the continuous energy loss step of the muon is simulated according to an energy loss cut of \SI{500}{MeV}.
+Changing this cut would also require creating new photon tables with GEANT4.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.82\textwidth]{./plots/prop_secondary_dist.pdf}
+    \caption{The energy distribution of the secondaries produced when propagating \num{e6} muons through \SI{1}{km} of ice using an energy loss cut of \SI{500}{MeV}.}
+    \label{fig:prop_sec_dist}.
+\end{figure}
+
+Next to the muon, also tau events in IceCube are simulated with PROPOSAL using the same energy loss cuts as for muons.
+An important difference compared to muons is, that for the propagation before the detector also the decay products which can consist of long-ranged muons, need to get stored.
+Regarding searches for physics beyond the Standard Model in IceCube, PROPOSAL was used to propagate stable massive particles, like staus, with an implemented behavior similar to muons but with a mass of \SI{500}{MeV}.
+
+Besides the neutrino telescopes detecting Cherenkov light, also the experiments of radio neutrino astronomy are using PROPOSAL for the muon and tau propagation \cite{Glaser20nuRadioMC}.
+Since these detectors are searching for the highest energies and are sensitive to electromagnetic cascades above a PeV, an energy loss cut of \SI{100}{TeV} is used.
+A peculiarity for the simulations of these experiments is the extremely high energies and their sensitivity calculations ranging until \SI{e30}{eV}, where also the tau leptons propagate long ranges.
+In simulation studies \cite{GarciaFernandez2020RNOG} the effect of large stochastic energy losses of muons miming neutrino events was analyzed using PROPOSAL.
+Hereby, it doesn't have to be a single stochastic loss, but also the sum of several smaller energy losses inside a track segment of $\mathcal{O}(\SI{10}{m})$ have significant contributions.
+
+%
+
+\subsection{Air Shower Simulation} \label{sec:corsika}
+
+In recent years, the air shower simulation framework CORSIKA \cite{CORSIKA, Engel19} with its monolithic structure written in Fortran gets restructured and rewritten into a modular structure, written in C\texttt{++}.
+For this new CORSIKA 8 version, also the electromagnetic shower calculation needed a restructuring.
+In the old version of CORSIKA 7, a modified version of EGS4 \cite{Bielajew94EGS4, Nelson94EGS4, EGS5} was used with additional corrections for the LPM effect.
+Since EGS4 is also a monolithic structure, written in Fortran, PROPOSAL is used as a physics module providing the electromagnetic interaction processes.
+Although PROPOSAl was more designed as a muon and tau propagator similar cross-sections and propagation algorithms are used for the propagation of electrons, positrons, and high energy photons.
+These enhancements of PROPOSAL were presented in \cite{Alameddine20PROPOSAL}.
+
+Also, the energy region is different with lower energy cuts of around \SI{1}{MeV}.
+In particular, these low energetic particles are important, since the charge excess of electrons compared to positrons for the Askaryan effect is mainly driven by low energetic electrons produced in Compton scattering or Ionization processes.
+Furthermore, CORSIKA uses PROPOSAL in a new way.
+Instead of propagating the particles for CORSIKA, PROPOSAL is proposing an interaction step along with further modules like the step size or energy limiting module.
+Then CORSIKA determines the next step and propagates the particle itself.
+Therefore the \texttt{propagation\_utilities} are used.
+
+Many different physic modules are required in the air shower simulations, which are mainly calculating their processes independent of each other.
+This is one the one side a necessary to keep a modular design.
+On the other side, multiple processes can affect each other and approximations have been made.
+This can exemplarily be described regarding the multiple scattering.
+Multiple Scattering is one of the main processes for electromagnetic showers responsible for the deviation from the shower axis, affecting lateral profile significantly.
+In principle, the scattering consists of a positional deviation and a change in direction.
+However, due to the additional deflection of the magnetic field, these two deviation processes interfere with each other.
+Therefore, the multiple scattering currently only changes the direction, neglecting the positional shift.
+
+Another approximation regarding the electromagnetic propagation with PROPOSAL is the continuous energy loss, which is not calculated using the energy integral (c.f. \secref{sec:prop_util}).
+The next interaction point is sampled with the mean-free path length, thereby assuming no continuous energy losses.
+A correction for the continuous losses is calculated in a second, independent step.
+
+Although not all effects and corrections for the electromagnetic shower propagation are implemented in PROPOSAL compared to EGS4, shower distributions like the longitudinal or lateral profile were in good agreement with the old version CORSIKA 7 or other air shower frameworks, like AIRES and ZHS as presented in \cite{Alameddine21ICRC}.
+However, this is an ongoing field of research where PROPOSAl will play a key role in electromagnetic shower simulation for air shower experiments like Pierre Auger, HAWC and CTA.
+Thereby, PROPOSAL can for example also provide the electromagnetic processes for hadronic particles and calculate the Ionization losses.
+
+%
+
+\subsection{Underground Experiments and Further Application Areas}
+
+Next to the application in new physical areas, the main usage of PROPOSAl is still the propagation of muons through large volumes.
+Thereby the underground experiments with small detection volumes also start using PROPOSAL for calculating the incoming muon flux.
+Since these detectors are sensitive to low energy processes, not implemented in PROPOSAL, GEANT4 is used for the propagation inside the detector.
+This was exemplarily done in a simulation study for the DUNE experiment DUNE \cite{Schneider21DUNE}.
+
+In an ongoing analysis for the PICO detector calculating the atmospheric muon flux deep underground at the detector, MCEq is used to estimate the main parts of the incoming muon distribution.
+However, since the analysis with PICO is also sensitive to the rare muons in the tail of the energy distribution, PROPOSAL as a Monte-Carlo propagator is used.
+
+Due to its simple installation and usage, PROPOSAL is not necessarily used in large simulation frameworks running on high-performance clusters.
+It can also be used to produce lightweight simulation studies produced on a notebook.
+For example, in \cite{GarciaFernandez2020RNOG} the effect of large stochastic energy losses 
+
+Another advantage for BSM studies is the modular structure in the particle definition and the cross-section.
+The custom particle properties can be defined and a BSM particle can be propagated with these properties and according to selected interaction processes.
+This was done e.g. to calculate the sensitivity of neutrino telescopes for milicharged particles \cite{Arguelles21MiliCharged}.
