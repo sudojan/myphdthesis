@@ -1,0 +1,30 @@
+\chapter{Summary and Outlook} \label{sec:outlook}
+
+In the context of the more precise measurements of underground experiments, where atmospheric muons are most-often the main source of background events, an accurate description of muon propagation in simulations is required.
+In this work, the systematic uncertainties of high energy muon simulation have been analyzed.
+Thereby, the theoretical models describing the main interactions, ionization, pair production, bremsstrahlung, and inelastic nuclear interaction, as well as rare processes were revised.
+Also, radiative corrections to the pair production cross-section were calculated.
+
+Next to the theoretical work, the Leptonpropagator PROPOSAL was improved by implementing more accurate cross-section and decay calculations.
+Besides the improvements of the theoretical models, also propagation methods were revised and the runtime performance was improved by \SIrange{10}{20}{\%} depending on the energy of the propagation settings.
+The complete software was restructured from a simulation specialized for a single experiment, the IceCube detector, to a modular library used in multiple different applications and experiments ranging from neutrino astronomy to dark matter searches.
+A python interface was developed, which is used e.g. in the simulation framework nuRadioMC for experiments of radio neutrino astronomy, where the interface to PROPOSAL was implemented.
+Also, the restructured air shower simulation framework CORSIKA now uses PROPOSAL as a module providing electromagnetic interactions.
+
+Besides larger experiments and simulation frameworks, also small scaled simulation studies can now be performed using PROPOSAL e.g. to analyze systematic uncertainties of the muon cross-sections and their effects on propagation parameters.
+The effects of more accurate cross-sections for pair production and bremsstrahlung on the muon range and energy distribution at certain distances were found to be negligible compared to the error introduced with an energy loss cut.
+However, regarding the produced secondaries for large calorimetric detectors, a significant change of the energy loss spectrum due to the new cross-sections was observed.
+
+Therefore, a feasibility study was developed estimating the sensitivity for cubic kilometer-sized neutrino telescopes to measure the bremsstrahlung cross-section.
+The created toy Monte-Carlo framework propagates the muons with PROPOSAL and effectively simulates further detector components to produce smeared-out and realistic energy losses along the muon track and reconstructing the muon energy out of these losses.
+Thereby, the energy reconstruction was found to be robust against variations of the bremsstrahlung cross-section of a few percent according to the theoretical uncertainty.
+With the energy loss profiles, the normalization of the bremsstrahlung has been estimated, considering also two further systematic parameters, the efficiency of the photo detectors and the spectral index of the muon flux.
+For a resolution similar to the IceCube experiment, and a single muons sample according to  10 years of neutrino-induced muons measured with IceCube, the bremsstrahlung cross-section can be measured with an uncertainty of $\pm \SI{4}{\%}$.
+
+Regarding possible further works, the unique opportunities of cubic kilometer-sized calorimetric detectors to analyze muon properties have been discussed in the previous section \ref{sec:global_muon_fit}.
+However, solving the muon puzzle will be the main task for the next years regarding muon physics.
+Thereby, the connection of PROPOSAL to CORSIKA is essential to provide a consistent treatment of the muons from the generation and propagation in the atmosphere to the detector, instead of propagating the muon inconsistent and independent of each other.
+Further possible works enhancing PROPOSAL as electromagnetic interaction module e.g. also for hadronic particles or by implementing muon pair production induced by a high energy photon are discussed in \secref{sec:simulation}.
+There is also still some amount of theoretical work required, e.g. to parametrize the radiative corrections to the pair production cross-section or to find a treatment of the LPM effect also in inhomogeneous media as discussed in \secref{sec:interactions}.
+
+The simulation and the theoretical models of high energy muons have been improved in this thesis, but further work needs to be done, providing more accurate simulations thus increasing the sensitivity for experiments measuring high energy particles in the context of Multi-Messenger Astronomy.
