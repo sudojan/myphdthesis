@@ -341,7 +341,7 @@ Just for the starting events, the hadronic cascade of the neutrino interaction c
 
 After the selection, the energy and directional reconstruction is the remaining step before analyzing the desired event sample.
 An overview of the standard reconstruction methods is given in \cite{AMANDA2004Reco, IceCube2014Ereco}.
-In recent years also modern, machine-learning-based methods using e.g. Deep Neural Networks have been developed increasing the accuracy of the reconstruction \cite{Huennefeld17ICRC, Huennefeld17Master, IceCube20DNN}.
+In recent years also modern, machine-learning-based methods using e.g. Deep Neural Networks have been developed increasing the accuracy of the reconstruction \cite{Huennefeld17ICRC, Huennefeld17Master, Huennefeld19VLVNT, IceCube20DNN}.
 A comparison of the standard and neural network approaches for the reconstructions is shown in \figref{fig:icecube_reco} as well as their energy dependence.
 \begin{figure}
     \centering
@@ -368,7 +368,7 @@ When a cascade is contained inside the detector the energy resolution is high du
 For through-going tracks, just a portion of the muon energy loss is deposited inside the detector
 For muons above a TeV the energy is reconstructed using the average energy loss per distance $\mathrm{d}E/\mathrm{d}X$, which increases nearly linear with the muon energy (c.f. section \ref{sec:dedx}).
 Therefore, the track inside the detector is split into multiple segments and the high energetic, stochastic losses are cut away to extract the continuous energy loss.
-The energy resolution 
+Since the linear dependency of the average energy loss on the muon energy starts at around a TeV, while being independent for lower energies, this can only be applied at energies above a TeV.
 For starting tracks, the energy resolution of the muons and neutrinos improves, due to the additional information of the hadronic cascade at the vertex.
 For low energy muons, the average energy loss is not proportional to the muon energy.
 As these muons are most-often stopping inside the detector, the track length can be used to reconstruct the energy.
@@ -377,10 +377,15 @@ Next to the energy and direction, also the energy losses along a muon track can 
 Since IceCube cannot distinguish between single energy losses, the track inside the detector is split into multiple segments as for the $\mathrm{d}E/\mathrm{d}X$ energy reconstruction and the energy loss in each segment unfolded.
 This is just sensitive to high stochastic energy losses and can be used to study the energy loss profile of the muons.
 
-The last important topic regarding event reconstructions is the systematic uncertainty.
+\subsubsection{Systematic Uncertainties}
+
+The remaining task, an analysis has to consider, are systematic uncertainties.
 In every experiment, some remaining parameters are challenging to calibrate or measure and have uncertainties that are non-negligible for analyses.
 For the IceCube detector, one main systematic parameter is the quantum efficiency of the DOMs, short DOM efficiency.
 This varies the amount of detected light and has an uncertainty of $\pm\SI{5}{\percent}$.
+However, in this factor multiple uncertainties are combined, all scaling the amount of detected photons and which cannot be distinguished from each other.
+Also cross-section uncertainties may be an origin, why this factor is not equal to 1.
+
 The other main uncertainties are the ice properties, mainly the absorption and scattering lengths, which are depth-dependent.
 The depth dependence does not originate due to the different levels of pressure and thus temperature, but due to several layers of dust \cite{Icecube06ice, Icecube13ice}.
 Especially in the middle of the detector at a depth around \SI{2}{km} the absorption length is significantly decreased and nearly all photons get absorbed before reaching a DOM.
@@ -391,6 +396,10 @@ Next to these detector and ice properties, further sub-dominant systematics aris
 Regarding the muon physics, the uncertainties of the cross sections needs to be differentiated between the processes dominant for the low energy losses and processes dominating the high, stochastic energy losses.
 While an increase of the low energy losses can already be compensated by an increase in the DOM efficiency, the uncertainties of the stochastic energy losses have not been considered, yet.
 Since the stochasticity of the muon affects the performances of separating leading muon, cascade or tau samples, an approach to include them is analyzed in this work.
+
+One of the largest systematic uncertainties is the flux of atmospheric neutrinos, which is often the limiting factor for the sensitivity of analysis.
+This can be avoided using e.g. an unfolding approach, which is independent of the flux model used in the simulations.
+However, if this is not feasible, the uncertainty of the flux needs to be taken into account, e.g. by using the so-called Barr parameters \cite{Barr06}.
 
 To take into account all of these systematics, simulation sets each varying one or two systematic parameters on a grid and interpolations between these grid points were used in analyses.
 However, this grid approach increases the number of required simulation sets for every further systematic parameter resulting in the curse of dimensionality.

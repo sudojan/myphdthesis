@@ -287,7 +287,7 @@ For hadronic decays, only the neutrino energy needs to get sampled.
 
 \subsection{Cross Sections}
 
-Next to the cross-sections relevant for the muon propagation described in section \ref{sec:xsection} there are further parametrizations available for some interactions to perform systematic studies on the effect of slightly different cross-sections on the propagation.
+Next to the cross-sections relevant for the muon propagation described in section \ref{sec:interactions} there are further parametrizations available for some interactions to perform systematic studies on the effect of slightly different cross-sections on the propagation.
 The additional interactions and parametrizations for electrons, positrons, and high energy photons to produce an electromagnetic shower are based on the simulation software EGS \cite{EGS5} and are described in \cite{Alameddine20Master}.
 For the neutrino propagation, the cross-sections of \cite{CSMS11NuXsection} are used which are already introduced for the weak interaction.
 Additional effects like the Glashow resonance or neutrino oscillation are not implemented, yet.
@@ -353,6 +353,8 @@ All cross-sections are implemented differential in the relative energy loss $v$ 
 Cross-sections that are also differential in a second parameter, i.e. the asymmetry $\rho$ in the electron and muon pair production and the momentum $Q^2$ for the Regge approach of the photonuclear interaction, this second dimension is interpolated numerically for a consistent treatment of the cross-sections.
 
 To create a cross-section in PROPOSAL, one has to define at least a \texttt{ParticleDef} and a \texttt{Medium} or \texttt{Component}, where the interaction takes place.
+It is also possible to scale a cross section using a \texttt{Multiplier}, which can be adapted for each interaction individually.
+Besides the implementation of different parametrizations for an interaction, this scaling can be used to analyze uncertainties of the cross section (c.f. \secref{sec:study}).
 For the total cross-section or the average energy loss, also the cut for the energy loss needs to be defined in case of non-catastrophic interactions.
 
 %
