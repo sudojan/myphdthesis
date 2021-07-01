@@ -23,7 +23,7 @@
 \usepackage[aux]{rerunfilecheck}
 
 % just list chapters and sections in the toc, not subsections or smaller
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 
 %------------------------------------------------------------------------------
 %------------------------------ Fonts, Unicode, Language ----------------------
@@ -100,6 +100,8 @@
 % keep figures and tables in the section
 \usepackage[section, below]{placeins}
 
+% \renewcommand{\floatpagefraction}{.8}%
+
 %------------------------------------------------------------------------------
 %-------------------------------- Drawing -------------------------------------
 %------------------------------------------------------------------------------
@@ -126,7 +128,8 @@
                    % german, has to be loaded with \setotherlanguages
                    % in the references.bib use langid={en} for english sources
   giveninits=true, % automatically abbreviate auther's first names
-  backref=true,    % ref back to the pages, where it is cited
+  backref=false,    % ref back to the pages, where it is cited
+  style=alphabetic,
 ]{biblatex}
 % the bib file to use
 \addbibresource{references/introduction.bib}
@@ -134,12 +137,13 @@
 \addbibresource{references/detection.bib}
 \addbibresource{references/interactions.bib}
 \addbibresource{references/simulation.bib}
-% \addbibresource{references/analysis.bib}
+\addbibresource{references/analysis.bib}
+\addbibresource{references/software.bib}
 \DefineBibliographyStrings{english}{andothers = {{et\,al\adddot}}}  % replace u.a. with et al.
 
 
 % Last packages, do not change order or insert new packages after these ones
-\usepackage[pdfusetitle, unicode, linkbordercolor=tugreen]{hyperref}
+\usepackage[pdfusetitle, unicode, linkbordercolor=tugreen, citebordercolor=tugreen]{hyperref}
 \usepackage{bookmark}
 \usepackage[shortcuts]{extdash}
 
@@ -149,58 +153,69 @@
 
 % Define Differential
 \newcommand{\dif}{\mathrm{d}}
-% Define Differential
-\newcommand{\logn}{\mathrm{ln}}
+% Define ln
+\newcommand{\logn}{\operatorname{ln}}
+% Define ln
+\newcommand{\dilog}{\operatorname{Li_2}}
 % Define \figref as abbreviation of "Figure~\ref{...}"
 \newcommand\figref{Figure~\ref}
 % Define \tabref as abbreviation of "Table~\ref{...}"
 \newcommand\tabref{Table~\ref}
+% Define \secref as abbreviation of "section~\ref{...}"
+\newcommand\secref{section~\ref}
 
 %------------------------------------------------------------------------------
 %-------------------------    Angaben zur Arbeit   ----------------------------
 %------------------------------------------------------------------------------
 
 \author{Jan Benjamin Soedingrekso}
-\title{Muons? - Muons!}
-\date{2020}
+\title{Systematic Uncertainties of High Energy Muon Propagation using the Leptonpropagator PROPOSAL}
+\date{2021}
 \birthplace{Wuppertal}
 \chair{Lehrstuhl für Experimentelle Physik V}
 \division{Fakultät Physik}
 \thesisclass{eines Doktors der Naturwissenschaften \\ (Dr. rer. nat.)}
-\submissiondate{31. Dezember 2020}
+\submissiondate{01. Juli 2021}
 \firstcorrector{Prof.~Dr.~Dr.~Wolfgang Rhode}
-\secondcorrector{Prof.~Dr.~Zweitgutachter}
+\secondcorrector{Prof.~Dr.~Bernhard Spaan}
 
 % tu logo on top of the titlepage
 \titlehead{\includegraphics[height=1.5cm]{logos/tu-logo.pdf}}
 
 \begin{document}
 \frontmatter
-% \maketitle
+\maketitle
 
 % Gutachterseite
-% \makecorrectorpage
+\makecorrectorpage
 
 % hier beginnt der Vorspann, nummeriert in römischen Zahlen
-% \input{content/00_abstract.tex}
+\input{content/00_abstract.tex}
 \tableofcontents
 
 \mainmatter
 % Hier beginnt der Inhalt mit Seite 1 in arabischen Ziffern
 \input{content/introduction.tex}
 \input{content/generation.tex}
-% \input{content/detection.tex}
-% \input{content/interactions.tex}
-% \input{content/simulation.tex}
-% \input{content/analysis.tex}
+\input{content/detection.tex}
+\input{content/interactions.tex}
+\input{content/simulation.tex}
+\input{content/analysis.tex}
+\input{content/outlook.tex}
 
-% \appendix
+\appendix
 % % Hier beginnt der Anhang, nummeriert in lateinischen Buchstaben
-% \input{content/a_appendix.tex}
+\input{content/a_appendix.tex}
+\input{content/a_study.tex}
+\input{content/a_software.tex}
+
+% \listoffigures
+% \listoftables
 
 \backmatter
 \printbibliography
 
-% \cleardoublepage
-% \input{content/eid_versicherung.tex}
+\cleardoublepage
+\input{content/acknowledgments.tex}
+\input{content/eid_versicherung.tex}
 \end{document}

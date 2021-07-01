@@ -251,17 +251,17 @@ However, the part of the Feynman diagram describing the nuclear interaction is j
 The upper bound is defined by the logarithms in the screening functions, described in section \ref{sec:brems_screen}, so the resulting cross-section does not become negative, which would be unphysical.
 Therefore, the edge of the phase space where the muon loses all its energy to the photon is not described properly, yet.
 For all calculations described in this section, the assumption of only relativistic particles is used i.e. $M \ll E$.
-
-The differential cross-section is shown in \figref{fig:brems_dsigma} mainly illustrating the $1/v$ dependency and the relevant processes influencing the cross-section.
-The following subsections describe these effects contributing including the elastic and inelastic nuclear and atomic form factor as well as the coulomb and radiation correction and finally the matter effects.
-All these processes do also appear for the pair production processes.
-To not duplicate the passages, these effects are mainly described in this section.
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{./plots/brems_contributions.pdf}
     \caption{Differential cross-section of the muon bremsstrahlung at an energy of \SI{1}{TeV} in Standard Rock ($Z=11, A=22$).}
     \label{fig:brems_dsigma}
 \end{figure}
+
+The differential cross-section is shown in \figref{fig:brems_dsigma} mainly illustrating the $1/v$ dependency and the relevant processes influencing the cross-section.
+The following subsections describe these effects contributing including the elastic and inelastic nuclear and atomic form factor as well as the coulomb and radiation correction and finally the matter effects.
+All these processes do also appear for the pair production processes.
+To not duplicate the passages, these effects are mainly described in this section.
 
 \subsection{Screening Functions for elastic Interactions} \label{sec:brems_screen}
 
@@ -547,7 +547,7 @@ Including the negative corrections of an extended nucleus, this results into the
     f(Z\alpha) .
 \end{align}
 Further investigations on Coulomb corrections on extended nuclei are have been made in \cite{Sandrock18Coulomb}.
-Similar to the vacuum polarization, this correction is not included in the simulation PROPOSAL, due to the small energy loss as shown in \figref{fig:brems_dsigma}.
+This correction was recently included in the simulation of PROPOSAL.
 
 \subsection{Bremsstrahlung in a Medium}
 
@@ -742,7 +742,7 @@ The contributions $\Phi_{e,\mu}$ can further be split into
 \end{align}
 where $L_{1,2}$ are similar to the screening functions of the bremsstrahlung cross-section in section \ref{sec:brems_screen}.
 
-\subsection{Approximated Screening}
+\subsection{Approximated Screening} \label{sec:epair_screen_approx}
 
 Analogous to \eqref{eq:screen_approx}, the screening functions can be approximated with $L_1 \approx L_2$ as introduced in \cite{Kelner68Sov}, which simplifies the individual contributions to $\Phi_{e,\mu} = C_{e,\mu} L_{e,\mu}$ using the expressions
 \begin{subequations} \label{eq:pair_expr_approx}
@@ -880,7 +880,7 @@ The corresponding cross-section has been calculated in \cite{Ivanov98photon, Iva
         - \frac{4}{3\pi} \frac{Z^2\alpha^4}{m_e} \frac{1-v}{v} C_e f(Z\alpha)
 \end{align}
 using the series for the recursive relation $f$ of \eqref{eq:coulomb_series}.
-Coulomb corrections are not yet included in the PROPOSAL simulation, since this correction to the differential cross-section is on the order of $\mathcal{O}(\num{e-3} - \num{e-4})$ as shown in \figref{fig:epair_dsigma}.
+This correction to the differential cross-section is on the order of $\mathcal{O}(\num{e-3} - \num{e-4})$ as shown in \figref{fig:epair_dsigma} and recently included in the PROPOSAL simulation.
 
 \subsection{LPM Effect}
 
@@ -925,7 +925,7 @@ and
 The effect is already shown in \figref{fig:dedx_lpm} and compared to the LPM effect of the bremsstrahlung, the decreasing effect on the pair production cross section starts at even higher energies, even above the GZK-cutoff.
 However, neutrino searches are looking for energies up to \SI{e30}{eV} and therefore it is necessary to include even these effects.
 
-\subsection{Radiative Correction}
+\subsection{Radiative Correction} \label{sec:epair_rad_corr}
 
 Radiative Corrections or NLO processes, already described in section \ref{sec:brems_nlo}, are suppressed by $\alpha$ and are necessary to reduce the uncertainty to a permille level.
 Only the NLO processes for the $e$-diagrams are considered, as the $\mu$-diagrams are already a correction to this process.
@@ -963,10 +963,10 @@ The vacuum polarization can be calculated independently of the other two process
 For the calculations, the tree-level cross-sections of the pair production of \cite{Bugaev77} are used, where also the bremsstrahlung is calculated.
 Next to the energy loss and the asymmetry, they are differential in the 4-momentum squared of the exchanging photons $K^2, Q^2$ where the first describes the photon between the muon and the electron line.
 This parametrization is used, since it provides all tensors of the individual fermion lines, making them easy to replace and extend.
-The cross-sections are in good agreement with the parametrizations described previously, shown in \figref{fig:epair_dsigma_loop_compare}.
+The cross-sections are in good agreement with the parametrizations described previously, shown in \figref{fig:epair_all_compare}.
 
 To enhance the tree-level cross-sections with the loop contributions, the expressions of vacuum polarization and soft bremsstrahlung calculated in \cite{Mork65} and the vertex correction from \cite{Akhiezer81} are used.
-Technical details to the numerical calculations are described in appendix \ref{sec:epair_nlo_calc}.
+Technical details to the numerical calculations are described in \secref{sec:epair_nlo_calc}.
 The resulting contribution of about a percent of these NLO diagrams are shown in \figref{fig:epair_dsigma}.
 
 \subsection{Remaining Uncertainties}
@@ -1052,7 +1052,7 @@ with
 The shadowing or screening function $G$ of the nucleons here denotes the fact, that the probability of a photon interacting with multiple nucleons is significant.
 Therefore the cross-section of the hole nucleus is smaller than the cross-section with a single nucleon times the atomic number since these cross-sections interfere destructively.
 The shadowing can be described by \cite{Bezrukov81}
-\begin{align}
+\begin{align} \label{eq:photo_vmd_shadow}
     G(x) = 
     \begin{cases}
         1, & Z = 1, \\
@@ -1085,21 +1085,22 @@ Another approach is by using electron-proton scattering data of the HERA experim
     \qquad \text{with} \qquad
     s = 2 \bar{m}_N \nu
 \end{align}
-Following \cite{Rhode93PhD}, the HERA data can also be interpolated directly to properly include resonances occurring at lower energies (further described in section \ref{sec:photo_rhode}). For high energies above \SI{200}{GeV} also the parametrization of \eqref{eq:photo_gammaN_caldwell} is used.
+Following \cite{Rhode93PhD}, the HERA data (listed in \tabref{tab:photo_rhode_data}) can also be interpolated directly to properly include resonances occurring at lower energies.
+For high energies above \SI{200}{GeV} also the parametrization of \eqref{eq:photo_gammaN_caldwell} is used.
 
 For muons and taus, perturbative corrections or the hard component has been parameterized in \cite{Bugaev04HardComponent} using the polynomial function
 \begin{align}
     \left. \frac{\dif \sigma}{\dif v} \right|_{\text{hard}} =
     \frac{A}{v} \sum\limits_{k=0}^7 a_k \log_{10}^k v
 \end{align}
-with the coefficients $a_k$ listed in \tabref{tab:photo_hard}.
+with the coefficients $a_k$ listed in Tab. 2 of \cite{Bugaev04HardComponent}.
 Unfortunately, these perturbative corrections can just be included for muons and taus and no other particles.
 Moreover, in \cite{Bugaev04HardComponent} the coefficients have just been tabulated for energies between \SIrange{100}{e9}{GeV} and energy losses above \num{e-7}.
 This causes a kink in the cross-section or energy loss at these thresholds and needs to be extended in the future.
 This kink, as well as the growing influence of the perturbative contribution, is shown in \figref{fig:photo_dedx_compare}.
-The effect of the different parametrizations of $\sigma_{\gamma N}$ on the differential cross-section is shown in \figref{fig:photo_dsigma_compare}.
+The effect of the different parametrizations of $\sigma_{\gamma N}$ on the differential cross-section is shown in \figref{fig:photo_dsigma}.
 
-\subsection{Regge Model}
+\subsection{Regge Model} \label{sec:photo_regge}
 
 In the Regge model, the interaction of the photon with the nucleus is described with the so-called quasi-particles \textit{Pomeron} and \textit{Reggeon} as exchange particles.
 At smaller energies, the Reggeon dominates corresponding to the limiting case of photoabsorption, while at higher energies, the Pomeron is used for the slowly increasing cross-section and an improved description in the diffractive region.
@@ -1232,7 +1233,7 @@ In contrast to the electron pair production, two particles of the same kind occu
 
 Due to the two secondary particles, the cross-section is, next to the energy loss, also differential in an asymmetry parameter, similar to \eqref{eq:epair_rho}.
 Following the calculation of \cite{Kelner00mupair} the cross-section has a similar form compared to the electron pair production (since they are the same authors)
-\begin{align}
+\begin{align} \label{eq:mupair_dsigma}
     \frac{\dif \sigma}{\dif v \dif \rho} =
     \frac{2}{3\pi} (Z \alpha r_\mu)^2 \frac{1 - v}{v} C \logn X .
 \end{align}

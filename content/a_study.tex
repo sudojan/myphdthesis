@@ -1,0 +1,793 @@
+\chapter{Plots of the Feasibility Study}
+
+\section{Energy Reconstruction Plots}
+
+\subsection{Calibration of Truncated Energy} \label{sec:study_ereco_calib}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.7\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/te_model_e0_200_b1000_000_l1000_000_v1000_000_c100_000.pdf}
+        \caption{High resolution.}
+        \label{fig:study_ereco_trunc_calib_high}
+    \end{subfigure}
+    \begin{subfigure}{0.7\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/te_model_e0_800_b2000_000_l10000_000_v3000_000_c5000_000.pdf}
+        \caption{Low resolution.}
+        \label{fig:study_ereco_trunc_calib_low}
+    \end{subfigure}
+    \caption{The Calibration of truncated energy reconstruction by fitting a spline (red curve) through with the correlation between the average energy loss of the truncated track segments and the true muon energy.}
+    \label{fig:study_ereco_trunc_calib}
+\end{figure}
+
+%
+
+\subsection{Resolution of Energy Reconstruction} \label{sec:study_ereco_perform_all}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_0.100.pdf}
+        \caption{\SI{10}{\%} of the events.}
+        \label{fig:study_ereco_nn_high_perform_0.1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_0.500.pdf}
+        \caption{\SI{50}{\%} of the events.}
+        \label{fig:study_ereco_nn_high_perform_0.5}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_0.800.pdf}
+        \caption{\SI{80}{\%} of the events.}
+        \label{fig:study_ereco_nn_high_perform_0.8}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_1.000.pdf}
+        \caption{All events.}
+        \label{fig:study_ereco_nn_high_perform_1.0}
+    \end{subfigure}
+    \caption{The performance of the neural network reconstruction of the muon energy for the high resolution. An uncertainty cut is applied filtering the best reconstructed events.}
+    \label{fig:study_ereco_nn_high_perform}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_0.100.pdf}
+        \caption{\SI{10}{\%} of the events.}
+        \label{fig:study_ereco_nn_base_perform_0.1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_0.500.pdf}
+        \caption{\SI{50}{\%} of the events.}
+        \label{fig:study_ereco_nn_base_perform_0.5}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_0.800.pdf}
+        \caption{\SI{80}{\%} of the events.}
+        \label{fig:study_ereco_nn_base_perform_0.8}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_1.000.pdf}
+        \caption{All events.}
+        \label{fig:study_ereco_nn_base_perform_1.0}
+    \end{subfigure}
+    \caption{The performance of the neural network reconstruction of the muon energy for the baseline resolution. An uncertainty cut is applied filtering the best reconstructed events.}
+    \label{fig:study_ereco_nn_base_perform}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_0.100.pdf}
+        \caption{\SI{10}{\%} of the events.}
+        \label{fig:study_ereco_nn_low_perform_0.1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_0.500.pdf}
+        \caption{\SI{50}{\%} of the events.}
+        \label{fig:study_ereco_nn_low_perform_0.5}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_0.800.pdf}
+        \caption{\SI{80}{\%} of the events.}
+        \label{fig:study_ereco_nn_low_perform_0.8}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_1.000.pdf}
+        \caption{All events.}
+        \label{fig:study_ereco_nn_low_perform_1.0}
+    \end{subfigure}
+    \caption{The performance of the neural network reconstruction of the muon energy for the low resolution. An uncertainty cut is applied filtering the best reconstructed events.}
+    \label{fig:study_ereco_nn_low_perform}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_0.100.pdf}
+        \caption{\SI{10}{\%} of the events.}
+        \label{fig:study_ereco_te_high_perform_0.1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_0.500.pdf}
+        \caption{\SI{50}{\%} of the events.}
+        \label{fig:study_ereco_te_high_perform_0.5}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_0.800.pdf}
+        \caption{\SI{80}{\%} of the events.}
+        \label{fig:study_ereco_te_high_perform_0.8}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e0_500_b500_000_l1000_000_v200_000_c10_000__fraction_1.000.pdf}
+        \caption{All events.}
+        \label{fig:study_ereco_te_high_perform_1.0}
+    \end{subfigure}
+    \caption{The performance of the truncated energy reconstruction of the muon energy for the high resolution. An uncertainty cut is applied filtering the best reconstructed events.}
+    \label{fig:study_ereco_te_high_perform}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_0.100.pdf}
+        \caption{\SI{10}{\%} of the events.}
+        \label{fig:study_ereco_te_base_perform_0.1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_0.500.pdf}
+        \caption{\SI{50}{\%} of the events.}
+        \label{fig:study_ereco_te_base_perform_0.5}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_0.800.pdf}
+        \caption{\SI{80}{\%} of the events.}
+        \label{fig:study_ereco_te_base_perform_0.8}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_1.000.pdf}
+        \caption{All events.}
+        \label{fig:study_ereco_te_base_perform_1.0}
+    \end{subfigure}
+    \caption{The performance of the truncated energy reconstruction of the muon energy for the baseline resolution. An uncertainty cut is applied filtering the best reconstructed events.}
+    \label{fig:study_ereco_te_base_perform}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_0.100.pdf}
+        \caption{\SI{10}{\%} of the events.}
+        \label{fig:study_ereco_te_low_perform_0.1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_0.500.pdf}
+        \caption{\SI{50}{\%} of the events.}
+        \label{fig:study_ereco_te_low_perform_0.5}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_0.800.pdf}
+        \caption{\SI{80}{\%} of the events.}
+        \label{fig:study_ereco_te_low_perform_0.8}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \vspace{0.5cm}
+        \centering
+        \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_500_b3000_000_l10000_000_v1000_000_c100_000__fraction_1.000.pdf}
+        \caption{All events.}
+        \label{fig:study_ereco_te_low_perform_1.0}
+    \end{subfigure}
+    \caption{The performance of the truncated energy reconstruction of the muon energy for the low resolution. An uncertainty cut is applied filtering the best reconstructed events.}
+    \label{fig:study_ereco_te_low_perform}
+\end{figure}
+
+%
+
+\subsection{Sensitivity to Bremsstrahlung Multiplier} \label{sec:study_pull_dist}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/reco_test/extreme/TruncatedEnergyResolution.pdf}
+    \caption{The pull distribution of reconstructed energies using the truncated energy method for the three resolution settings and muon energies. The multiplier, scaling the bremsstrahlung cross-section is varied between \num{e-2} and \num{e2}, and the mean and standard deviation for each multiplier dataset is estimated.}
+    \label{fig:study_ereco_pull_te_extreme}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/reco_test/NeuralNetworkResolution.pdf}
+    \caption{The pull distribution of reconstructed energies using a neural network for the three resolution settings and muon energies. The multiplier, scaling the bremsstrahlung cross-section is varied between \num{0.9} and \num{1.1}, and the mean and standard deviation for each multiplier dataset is estimated.}
+    \label{fig:study_ereco_pull_nn}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/reco_test/extreme/NeuralNetworkResolution.pdf}
+    \caption{The pull distribution of reconstructed energies using a neural network for the three resolution settings and muon energies. The multiplier, scaling the bremsstrahlung cross-section is varied between \num{e-2} and \num{e2}, and the mean and standard deviation for each multiplier dataset is estimated.}
+    \label{fig:study_ereco_pull_nn_extreme}
+\end{figure}
+
+%
+
+\section{Parameterizing the Energy Loss Distribution} \label{sec:study_append_interpol}
+
+\subsection*{Interpolation of the Bremsstrahlung Multiplier using the Monte-Carlo Truth}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/mc_hist/Multiplier/interpol/interpol_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for the true muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_mc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/mc_hist/Multiplier/interpol/interpol_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for the true muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_mc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/mc_hist/Multiplier/interpol/interpol_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for the true muon energies from \SI{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_mc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/mc_hist/Multiplier/interpol/interpol_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for the true muon energies from \SI{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_mc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/mc_hist/Multiplier/interpol/interpol_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for the true muon energies from \SI{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_mc}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the Bremsstrahlung Multiplier using the Truncated Energy Reconstruction and High Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_0/Multiplier/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_te_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_0/Multiplier/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_te_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_0/Multiplier/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_te_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_0/Multiplier/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_te_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_0/Multiplier/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_te_high}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the Bremsstrahlung Multiplier using the Neural Network Energy Reconstruction and High Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_high}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_high}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the Bremsstrahlung Multiplier using the Neural Network Energy Reconstruction and Baseline Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_base}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_base}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_base}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_base}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_base}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the Bremsstrahlung Multiplier using the Neural Network Energy Reconstruction and Low Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_low}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_low}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_low}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_low}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_low}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the DOM Efficiency using the Neural Network Energy Reconstruction and High Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_high_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_high_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_high_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_high_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_high_eff}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the DOM Efficiency using the Neural Network Energy Reconstruction and Baseline Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_base_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_base_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_base_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_base_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_base_eff}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the DOM Efficiency using the Neural Network Energy Reconstruction and Low Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_low_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_low_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_low_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_low_eff}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/DomEfficiency/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different DOM efficiencies for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_low_eff}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the Spectral Index using the Neural Network Energy Reconstruction and High Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_high_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_high_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_high_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_high_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_high_gamma}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the Spectral Index using the Neural Network Energy Reconstruction and Baseline Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_base_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_base_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_base_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_base_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_base_gamma}
+\end{figure}
+
+%
+
+\subsection*{Interpolation of the Spectral Index using the Neural Network Energy Reconstruction and Baseline Resolutions}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_0.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{1}{2.15}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu0_nn_low_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_1.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{2.15}{4.64}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu1_nn_low_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_2.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{4.64}{10}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu2_nn_low_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{10}{31.6}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu3_nn_low_gamma}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/Gamma/interpol/interpol_param_muon_energy_bin_4.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different spectral indices for reconstructed muon energies from \SIrange{31.6}{100}{TeV}. A coefficient of determination threshold of \num{0.99} is used to mark all energy loss bins (red colored legend box), which would not be included in the fit.}
+    \label{fig:study_1d_interpol_mu4_nn_low_gamma}
+\end{figure}
+
+%
+\section{Performance of the Measurement} \label{sec:study_perform_result_all}
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/performance/show_all.pdf}
+    \caption{Pull distribution of the estimated results of the MCMC samplings with the high resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_pull_high_nn}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/performance/show_all2.pdf}
+    \caption{Correlation of the true values and the estimated results of the MCMC samplings with the high resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_corr_high_nn}
+\end{figure}
+
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_0/performance/show_all.pdf}
+    \caption{Pull distribution of the estimated results of the MCMC samplings with the high resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the truncated energy method. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_pull_high_te}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_0/performance/show_all2.pdf}
+    \caption{Correlation of the true values and the estimated results of the MCMC samplings with the high resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the truncated energy method. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_corr_high_te}
+\end{figure}
+
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/performance/show_all.pdf}
+    \caption{Pull distribution of the estimated results of the MCMC samplings with the baseline resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_pull_base_nn}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/performance/show_all2.pdf}
+    \caption{Correlation of the true values and the estimated results of the MCMC samplings with the baseline resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_corr_base_nn}
+\end{figure}
+
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_0/performance/show_all.pdf}
+    \caption{Pull distribution of the estimated results of the MCMC samplings with the baseline resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the truncated energy method. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_pull_base_te}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_0/performance/show_all2.pdf}
+    \caption{Correlation of the true values and the estimated results of the MCMC samplings with the baseline resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the truncated energy method. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_corr_base_te}
+\end{figure}
+
+
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/performance/show_all.pdf}
+    \caption{Pull distribution of the estimated results of the MCMC samplings with the low resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_pull_low_nn}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_1/performance/show_all2.pdf}
+    \caption{Correlation of the true values and the estimated results of the MCMC samplings with the low resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_corr_low_nn}
+\end{figure}
+
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_0/performance/show_all.pdf}
+    \caption{Pull distribution of the estimated results of the MCMC samplings with the low resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the truncated energy method. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_pull_low_te}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.500_b3000.000_l10000.000_v1000.000_c100.000/normmethod_2_energyreco_0/performance/show_all2.pdf}
+    \caption{Correlation of the true values and the estimated results of the MCMC samplings with the low resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the truncated energy method. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_corr_low_te}
+\end{figure}
+
+
+
+
+
+

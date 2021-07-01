@@ -1,3 +1,247 @@
-\chapter{Additional Information}
+\chapter{Appendix}
 
-If you didn't get enough ... here is even more fun :)
+
+\section{Tables of the Photonuclear Interactions} \label{sec:photo_tables}
+
+\begin{table}
+    \centering
+    \caption{Measured Photon-Nucleon cross-section $\sigma_{\gamma N}$ used in the photonuclear cross-section of the Rhode parametrization\cite{Rhode93PhD}, described in \secref{sec:photo_vmd}. The the photon energies $E_\gamma$ are equally distributed in $\log_{10}$ space.}
+    \label{tab:photo_rhode_data}
+    \sisetup{table-format = 1.4e1}
+    \begin{tabular}{S[table-format=1.4e+1] S[table-format=3.6] | S S[table-format=3.2] | S S[table-format=3.2]}
+        \toprule
+        {$E_\gamma$/GeV} & {$\sigma_{\gamma N}/\mu$b} & {$E_\gamma$/GeV} & {$\sigma_{\gamma N}/\mu$b} & {$E_\gamma$/GeV} & {$\sigma_{\gamma N}/\mu$b} \\
+        \midrule
+        1.0000e-01 & 0.066667 & 5.2481e+01 & 114.37 & 2.7542e+04 & 211.78 \\
+        1.4454e-01 & 0.096363 & 7.5858e+01 & 114.79 & 3.9811e+04 & 223.50 \\
+        2.0893e-01 & 159.74 & 1.0965e+02 & 115.86 & 5.7544e+04 & 235.88 \\
+        3.0200e-01 & 508.10 & 1.5849e+02 & 117.61 & 8.3176e+04 & 248.92 \\
+        4.3652e-01 & 215.77 & 2.2909e+02 & 120.01 & 1.2023e+05 & 262.63 \\
+        6.3096e-01 & 236.40 & 3.3113e+02 & 123.08 & 1.7378e+05 & 277.01 \\
+        9.1201e-01 & 201.92 & 4.7863e+02 & 126.81 & 2.5119e+05 & 292.05 \\
+        1.3183e+00 & 151.38 & 6.9183e+02 & 131.21 & 3.6308e+05 & 307.75 \\
+        1.9055e+00 & 145.41 & 1.0000e+03 & 136.28 & 5.2481e+05 & 324.12 \\
+        2.7542e+00 & 132.10 & 1.4454e+03 & 142.01 & 7.5858e+05 & 341.16 \\
+        3.9811e+00 & 128.55 & 2.0893e+03 & 148.40 & 1.0965e+06 & 358.86 \\
+        5.7544e+00 & 125.05 & 3.0200e+03 & 155.46 & 1.5849e+06 & 377.22 \\
+        8.3176e+00 & 121.86 & 4.3652e+03 & 163.19 & 2.2909e+06 & 396.25 \\
+        1.2023e+01 & 119.16 & 6.3096e+03 & 171.57 & 3.3113e+06 & 415.95 \\
+        1.7378e+01 & 117.02 & 9.1201e+03 & 180.63 & 4.7863e+06 & 436.31 \\
+        2.5119e+01 & 115.50 & 1.3183e+04 & 190.35 & 6.9183e+06 & 457.33 \\
+        3.6308e+01 & 114.61 & 1.9055e+04 & 200.73 & 1.0000e+07 & 479.02 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}
+    \caption{Fit values of the ALLM parametrization estimated in ALLM91\cite{Abramowicz91}, ALLM97 \cite{Abramowicz97}, and AbtFT\cite{Abt17PhotoQ2}, described in \secref{sec:photo_regge}.}
+    \label{tab:photo_q2_params}
+    \begin{center}
+    \begin{tabular}{l | S[table-format=+2.5] S[table-format=+2.5] S[table-format=+2.4]}
+        \toprule
+        Parameters & {ALLM91} & {ALLM97} & {AbtFT17} \\
+        \midrule
+        $a_{1,R}$ & 0.60408 & 0.58400 & 0.882 \\
+        $a_{2,R}$ & 0.17353 & 0.37888 & 0.082 \\
+        $a_{3,R}$ & 1.61812 & 2.6063 & -8.5 \\
+        $b_{1,R}$ & 1.26066 & 0.01147 & 0.339 \\
+        $b_{2,R}$ & 1.83624 & 3.7582 & 3.38 \\
+        $b_{3,R}$ & 0.81141 & 0.49338 & 1.07 \\
+        $c_{1,R}$ & 0.67639 & 0.80107 & -0.636 \\
+        $c_{2,R}$ & 0.49027 & 0.97307 & 3.37 \\
+        $c_{3,R}$ & 2.66275 & 3.4942 & -0.660 \\
+        \midrule
+        $a_{1,P}$ & -0.04503 & -0.0808 & -0.075 \\
+        $a_{2,P}$ & -0.36407 & -0.44812 & -0.470 \\
+        $a_{3,P}$ & 8.17091 & 1.1709 & 9.2 \\
+        $b_{1,P}$ & 0.49222 & 0.36292 & -0.477 \\
+        $b_{2,P}$ & 0.52116 & 1.8917 & 54.0 \\
+        $b_{3,P}$ & 3.55115 & 1.8439 & 0.073 \\
+        $c_{1,P}$ & 0.26550 & 0.28067 & 0.356 \\
+        $c_{2,P}$ & 0.04856 & 0.22291 & 0.171 \\
+        $c_{3,P}$ & 1.04682 & 2.1979 & 18.6 \\
+        \midrule
+        $m_\gamma^2$ / \si{GeV^2} & 0.30508 & 0.31985 & 0.388 \\
+        $m_R^2$ / \si{GeV^2} & 0.20623 & 0.15052 & 0.838 \\
+        $m_P^2$ / \si{GeV^2} & 10.67564 & 49.457 & 50.8 \\
+        $\Lambda^2$ / \si{GeV^2} & 0.06527 & 0.06527 & {\num{4.4e-9}} \\
+        $(Q_0^2 - \Lambda^2)$ / \si{GeV^2} & 0.27799 & 0.52544 & {\num{1.87e-5}} \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{table}
+
+%%%
+%%%
+%%%
+
+\section{Radiative Corrections to the Pair Production} \label{sec:epair_nlo_calc}
+
+In this section, radiative corrections of the pair production for the muon line are calculated, as described in \secref{sec:epair_rad_corr}, considering only the $e$-diagrams, since they are the dominating process.
+
+Before describing the calculation, the used dilogarithm is defined by
+\begin{align} \label{eq:dilog}
+    \dilog(x) = - \mathrm{Re} \int_{0}^{x} \frac{\logn(1 - t)}{t} \dif t .
+\end{align}
+
+The tree-level cross-section of pair production and bremsstrahlung calculated by Bugaev \cite{Bugaev77} are used as base to estimate radiative corrections.
+Due to the modular structure of the parametrization, dividing the cross-section into the muon line, the electron line, and the nuclear Interaction as three distinct tensors, each tensor can easily replaced introducing e.g. a correction to a fermion line.
+Furthermore, the bremsstrahlung cross-section is calculated in the same formalism allowing a combination of both processes due the their consistent treatment.
+
+The differential cross section is given by
+\begin{align}
+    \frac{\dif \sigma}{\dif \omega \dif \varepsilon_+ \dif k^2 \dif q^2 \dif \nu} =
+        \frac{Z^2 \alpha^4 m_e^2}{16 \pi^2 p^2} \frac{1}{k^2 q^2}
+        (W_1(L_1 M_{\alpha \alpha}^{\mu \mu} - L_2 M_{44}{\mu \mu})
+        + W_2 (L_2 M_{44}^{44} - L_1 M_{\alpha \alpha}^{44})) ,
+\end{align}
+where $k^2$ and $q^2$ are the squared momentum and $\omega and \nu$ the energies of the virtual photons connecting the electron with the muon line and the electron line with the nucleus respectively.
+The tensors of the nucleus $W$, the electron line $M$ and the muon line $L$ are already contracted.
+Instead of being differential in the asymmetry $\rho$, this cross section uses the energy of the positron $\varepsilon_+$.
+
+To simplify the calculation, the same relativistic approximations as described in \cite{Bugaev77} are applied, consisting of
+\begin{itemize}
+    \item a high $\gamma$ factor of the muon and the electron-positron pair ($E_\mu^2 \gg m_\mu^2$ and $\varepsilon_+^2 \gg m_e^2$)
+    \item small momentum transfers ($k^2, q^2 \ll E_\mu^2$)
+    \item not the smallest energy losses ($\omega^2 \gg m_\mu^2$)
+\end{itemize}
+Furthermore, the nucleus is assumed to be heavy and have no recoil, thus neglecting the energy transfered to the nucleus $\nu \approx 0$.
+Therefore, also the spatial components of the electromagnetic structure functions are neglected $W_1 \approx 0$, while $W_2$ is defined by
+\begin{align}
+    W_2 (q^2) = -((f_n - f_a)^2 + 1/Z*(f_{n,\mathrm{in}} + f_{a,\mathrm{in}})) .
+\end{align}
+The form factors are taken from \cite{Tsai74, Tsai77, Andreev94Brems}
+\begin{subequations}
+\begin{align}
+        f_n &= (1 + a^2 * q^2/12)^{-2}, % alternatively = Fn_fermi(q2)
+        & f_a &= (1 + b^2 * q^2)^{-1}, \\
+        f_{n,\mathrm{in}} &= 1 - f_n^2,
+        & f_{a,\mathrm{in}} &= \left(\frac{c^2 q^2}{1 + c^2 q^2} \right)^2 ,
+\end{align}
+\end{subequations}
+with
+\begin{subequations}
+\begin{align}
+    a = (0.58 + 0.82*self.A^{\sfrac13}) \cdot 5.07/\si{GeV},
+    \\
+    b = \frac{B_{\mathrm{el}}}{\sqrt{e} m_e} * Z^{-\sfrac13},
+    \\
+    c = \frac{B_{\mathrm{inel}}}{\sqrt{e} m_e} * Z^{-\sfrac23}.
+\end{align}
+\end{subequations}
+
+For the tree-level process, the functions for the muon line $L_{1,2}$ can be described with eq. (44) of \cite{Bugaev77}
+% \begin{align}
+%     L_1(k^2) = \frac{2}{k^{\ast}} \left( \frac{k^2}{2} - m_\mu^2 - \frac{k^2}{{k^{\ast}}^2} ( E_\mu E_{\mu} + k^2 / 4) \right)
+%     \qquad
+%     L_2(k^2) = \frac{2 k^2}{k^{\ast}^3} \left( \frac{k^2}{2} - m_\mu^2 - 3 \frac{k^2}{{k^{\ast}}^2} ( E_\mu E_{\mu} + k^2 / 4) \right)
+% \end{align}
+and tensors of the electron line $M_{44}^{44}$ and $M_{\alpha \alpha}^{44}$ with eq. (36) of \cite{Bugaev77}.
+Integrating the tree-level diagram over $q^2, k^2$, and $\varepsilon_+$ results in a similar differential cross-section in the energy loss, compared to the $e$-diagram of Kelner et al. (c.f. \secref{sec:epair_screen_approx}), as shown in \figref{fig:epair_all_compare}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{./plots/radiative_corrections/plot_epair_dsigma_loop3.pdf}
+    \caption{Differential cross section of the pair production cross section including the tree-level of the $e$-diagram (Bugaev) and its radiative corrections along the muon line, vacuum polarization, vertex correction, and soft and hard bremsstrahlung. The $e$-diagram of the Kelner et al. parametrization is included and compared to the calculated $e$.
+    Also the $\mu$-diagram of Kelner et al. is included.}
+    \label{fig:epair_all_compare}
+\end{figure}
+
+The overall correction due to the radiative corrections are in the percent level. However, regarding the differential cross-section, this correction can have larger effect, especially at higher energy losses.
+This is mainly driven by the hard bremsstrahlung with an energy loss spectrum similar to the $\mu$-diagram.
+In future works, this only numerically integrated contribution needs to parameterized to be usable in simulations like PROPOSAL, as the correction is on the order as the $\mu$-diagram.
+
+In the following subsections, the calculation of the radiative correction is described.
+
+\subsection{Vacuum Polarization}
+
+Out of the tree-level cross-section, the vacuum polarization can simply be included with a correction factor before the integration over $k^2$, since it only depends on $k^2$.
+The correction factor to the tree process was calculated in \cite{Mork65} eq. (IV.2/3) and without setting the electron mass to 1 this results in
+\begin{align}
+s_{\mathrm{vac}}(k^2) = -\frac{2 \alpha}{3 \pi}
+        \left[ \frac53 - \zeta - \left( 1-\frac{\zeta}{2} \right) \sqrt{1+\zeta} 
+        \logn \left( \frac{k^2 + k^2 \sqrt{1 + \zeta}}{2m_e^2} + 1 \right) \right]
+\end{align}
+using
+\begin{align}
+    \zeta = \frac{4 m_e^2}{k^2} .
+\end{align}
+
+\subsubsection{Vertex Correction and Soft Bremsstrahlung}
+
+The Vertex correction to a fermion line for an outgoing space-like photon has been calculated in \cite{Akhiezer81} in eq. (5.1.37) leading to the renormalized form
+\begin{align}
+    \Lambda_\mu = \frac{\alpha}{\pi} \left( \gamma_\mu \Lambda_1 + i \frac{\gamma_\mu \hat{k} - \hat{k} \gamma_\mu}{8 M} \Lambda_2 \right) ,
+\end{align}
+with the expressions
+\begin{subequations} \label{eq:lambda_vertex}
+\begin{align}
+    \Lambda_1 &= \left( \logn \frac{M}{\lambda} - 1 \right)
+        \left( \frac{1 + a^2}{2a} \logn b + 1 \right)
+        + \frac{\logn b}{4a} ,
+        \\
+        &\quad - \frac{1 + a^2}{4a} \left( -\frac{\pi^2}{6} + \frac{\logn^2 b}{2} - 2 \logn b \logn(1 + b) - 2 \dilog (-b) \right) \nonumber \\
+    \Lambda_2 &= \frac{a^2 - 1}{2a} \logn b ,
+\end{align}
+\end{subequations}
+using abbreviations
+\begin{align}
+    a = \sqrt{1 + \frac{4 M^2}{k^2}}, \qquad
+    b = \frac{a - 1}{a + 1}.
+\end{align}
+The tensor of the muon line including the vertex correction can be written as 
+\begin{align}
+    L_{\mu\nu} = \Lambda_{\mu} (i \hat{p}_1 - M) \gamma_\nu (i \hat{p}_2 - M) .
+\end{align}
+To contract these tensors, and calculating the traces over the gamma matrices, the computer algebra program FORM \cite{Vermaseren00Form} was used resulting in
+\begin{subequations} \label{eq:vacuum_l12}
+\begin{align}
+    \delta^{\mu\nu} L_{\mu\nu} = L_{\mu\mu} &= \left( \frac{k^2}{2} - M^2 \right) \Lambda_1 - 3 k^2 \Lambda_2, \\
+    \frac{1}{M^2} p^\mu p^\nu L_{\mu\nu} = L_{44} &= \left( \frac{k^2}{4} - E_1 E_2 \right)\Lambda_1 - {k^{\ast}}^2 \Lambda_2 .
+\end{align}
+\end{subequations}
+Including \eqref{eq:vacuum_l12} into the definition of $L_{1,2}$ in eq. (9) of \cite{Bugaev77}, eq. (44) of \cite{Bugaev77} changes to
+\begin{subequations}
+\begin{align}
+    L_1 &= \frac{2}{k^\ast} L_{\mu\mu} - \frac{k^2}{{k^{\ast}}^2} L_{44}, \\
+    L_2 &= \frac{2k^2}{{k^{\ast}}^3} L_{\mu\nu} - 3\frac{k^2}{{k^{\ast}}^2} L_{44} .
+\end{align}
+\end{subequations}
+In \eqref{eq:lambda_vertex} an effective photon mass $\lambda$ was introduced to avoid the infrared divergence of this NLO process.
+
+This unphysical photon mass get canceled out by including also a soft bremsstrahlung contribution using the same photon mass.
+For the soft bremsstrahlung, the correction calculated in \cite{Mork65} is used
+\begin{equation}
+\begin{aligned}
+    I_{\text{soft}} &= 2(1 - 2y \coth (2y) \logn \frac{E_{\gamma, \text{max soft}} m_\mu}{\lambda \sqrt{E_1 E_2}}
+    \\
+    &\quad + \frac12 \coth (2y) \left[
+        2y \logn \frac{(1 - \zeta^2)(\zeta^2\eta^2 - 1)}{4 \zeta^2 (\eta^2 - 1)}
+        + \logn \frac{\eta + 1}{\eta - 1} \logn \frac{\zeta \eta + 1}{\zeta \eta - 1} \right.
+    \\
+    &\quad \hphantom{+ \frac12 \coth (2y) +}
+        + \dilog \left( \frac{(1 + \zeta)(\zeta \eta + 1)}{2 \zeta (\eta + 1)} \right)
+        - \dilog \left( \frac{(1 - \zeta)(\zeta \eta - 1)}{2 \zeta (\eta + 1)} \right)
+    \\
+    &\quad \hphantom{+ \frac12 \coth (2y) +} \left.
+        + \dilog \left( \frac{(1 + \zeta)(\zeta \eta - 1)}{2 \zeta (\eta - 1)} \right)
+        - \dilog \left( \frac{(1 - \zeta)(\zeta \eta - 1)}{2 \zeta (\eta - 1)} \right)
+    \right] ,
+\end{aligned}
+\end{equation}
+with
+\begin{align}
+    y = \operatorname{arsinh} \sqrt{\frac14 \frac{k^2}{M^2}} ,
+    \qquad
+    \zeta = \tanh y ,
+    \qquad
+    \eta = \frac{E_1 + E_2}{-E_1 + E_2}
+\end{align}
+since it only valid for small photon energies, a maximum photon energy $E_{\gamma, \text{max soft}}$ is introduced.
+
+\subsection{Hard Bremsstrahlung}
+
+The bremsstrahlung cross-section can be derived from the $\mu$-diagram by setting $k^2 = 0$.
+To include the hard bremsstrahlung into the $e$-diagram, the muon line of the $e$-diagram $L_{1,2}$ gets replace by the muon line of the bremsstrahlung $M_{\alpha \alpha}^{44}$ and $M_{\alpha \alpha}^{\mu \mu}$.
+Compared to described in eq. (49) of \cite{Bugaev77}, the substitutions $\omega \to \omega_{\mathrm{brems}}$, $\nu \to -\omega$, and $q^2 \to k^2$ is necessary.
+Now, the differential cross section is additionally differential in the energy of the hard bremsstrahlung photon $\omega_{\mathrm{brems}}$ with the lower integration limit defined by the maximum energy of the soft photon $E_{\gamma, \text{max soft}}$.
+

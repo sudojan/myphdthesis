@@ -1,7 +1,7 @@
 \chapter{Analyzing Muon Properties} \label{sec:analysis}
 
 Providing the ability to perform studies on the systematic uncertainties of muon cross-sections is one of the main goals and advantages of the simulation library PROPOSAL.
-The main questions for improved cross-sections in simulations are, what effects do these improvements have on simulated events.
+The main questions for improved cross-sections in simulations are, what effects do these improvements have on simulated events and their agreement with measured data.
 Thereby, the effects can either be analyzed in simulated event distributions regarding only the particle physics properties independent of the detector.
 In air shower simulations, the longitudinal and lateral distribution of the occurring particle types are that kind of relevant parameters, that can be compared.
 Regarding muons in deep underground experiments, the energy and zenith distribution of the incoming muon flux as well as the energy loss behavior are the most important parameters.% depending on an accurate description of the survival probability or propagated range.
@@ -20,7 +20,7 @@ In this chapter, these three approaches of detector independent and detector spe
 For muon energies above a TeV, the energy loss is dominated by pair production for small energy losses and bremsstrahlung for large energy losses.
 Both interactions contribute nearly equally to the average energy loss as shown in \figref{fig:dedx_all}.
 Next to the widely used standard cross-sections, which for both interactions the parametrizations were calculated by the group labeled \textit{KelnerKokoulinPetrukhin} (KKP95), also improved bremsstrahlung and pair production cross-sections labeled \textit{SandrockSoedingreksoRhode} (SSR19) are implemented in PROPOSAL.
-The differences between these parametrizations are an improved treatment of the screening for both processes and radiative corrections for the bremsstrahlung, which is described in \secref{sec:interactions}.
+The differences between these parametrizations are an improved treatment of the screening effect for both processes and radiative corrections for bremsstrahlung, which is described in \secref{sec:interactions}.
 As shown in \figref{fig:dedx_kkp_ssr}, the average energy loss of the bremsstrahlung increases by around \SI{2}{\%}, mainly driven by the additional radiative corrections.
 The improved screening for pair production decreases the average energy loss by half a percent.
 \begin{figure}
@@ -84,15 +84,13 @@ Thereby, the combined effect of increased bremsstrahlung and decreased pair prod
         \label{fig:sec_dist_mupair}
     \end{subfigure}
     \caption{Comparison of the secondary energy distribution of \num{e7} muons propagated with an initial energy of \SI{10}{TeV} through \SI{100}{m} of ice with an energy loss cut of \SI{500}{MeV}.}
-    \label{fig:sec_dist_comapre}
+    \label{fig:sec_dist_compare}
 \end{figure}
-
 Also, the effect of including the muon pair production is compared, shown in \figref{fig:sec_dist_mupair}, slightly indicating more low energy losses driven by the additional low energy muons.
 But this is less significant compared to the clear deviation due to the bremsstrahlung and pair production cross-sections.
 The next step is now to analyze if this deviation is still visible on detector level, described in the next section.
+The results of this section were also presented in \cite{Soedingrekso19ICRC}.
 % The main task of this study is to find out which detector resolution and event statistic is required to measure the effect of a higher bremsstrahlung cross section of a few percent regarding the differences in the energy loss spectrum.
-
-The results of this section were presented in \cite{Soedingrekso19ICRC}.
 
 %
 
@@ -103,16 +101,16 @@ This would then also affect e.g. the energy flux measurements of astrophysical n
 A further question is, whether the energy loss distribution can even be measured.
 This would validate the theory of both pair production and bremsstrahlung calculations, which dominate in different parts of the energy loss spectrum.
 
-There have been measurements of the muon cross-section with the ATLAS detector until \SI{100}{GeV} \cite{Amaral01MuonMeasure} and less precise measurements using cosmic-ray induced muons up to \SI{1}{TeV} \cite{Sakumoto92TeVMuonMeasure}, where the ionization is still dominating the energy loss.
+There have been measurements of the muon cross-section with the ATLAS detector below \SI{100}{GeV} \cite{Amaral01MuonMeasure} and less precise measurements using cosmic-ray induced muons up to \SI{1}{TeV} \cite{Sakumoto92TeVMuonMeasure}, where the ionization is still dominating the energy loss.
 Since the stochastic processes start to dominate at energies around a TeV, such a measurement is still required.
-Hereby, large volume neutrino telescopes like IceCube, measuring muons with energies from below a TeV up to the PeV region, provides the unique opportunity to perform such a measurement, which would be the first in this energy region.
+Hereby, large volume neutrino telescopes like IceCube, measuring muons with energies from below a TeV up to the PeV region, provide the unique opportunity to perform such a measurement, which would be the first in this energy region.
 
-In this section, a feasibility study is described to measure the cross-section using the energy loss profile along the produced tracks inside a cubic kilometer scaled detector.
-Regarding the reconstruction of single energy losses along the muon track, small energy losses can not be distinguished and rather measured as continuous loss, especially for a sparsely instrumented detector, like neutrino telescopes, while large stochastic losses can be identified and reconstructed as single high energy loss or cascade.
-Since bremsstrahlung interactions are dominating those high energy losses, this study concentrates on measuring the bremsstrahlung cross-section.
+In this section, a feasibility study is described to measure the cross-section using the energy loss profile along the produced tracks inside a cubic kilometer scale detector.
+Regarding the reconstruction of single energy losses along the muon track, small energy losses can not be distinguished and rather measured as continuous loss, especially for a sparsely instrumented detector, like neutrino telescopes, while large stochastic losses can be identified and reconstructed as a single high energy loss or cascade.
+Since bremsstrahlung interactions are dominating those high energy losses, this study focuses on measuring the bremsstrahlung cross-section.
 
-Also, the efficiency of the photomultipliers and the spectral index of the muon flux are included as further systematic parameters to analyze their correlation to this study.
-Although both systematic parameters will have larger impacts on the energy loss distribution, this will affect the whole secondary distribution, while the bremsstrahlung only affects the largest losses.
+Also, the efficiency of the photomultipliers and the spectral index of the muon flux are included as further systematic parameters to analyze their correlation with this study.
+Although both systematic parameters will have larger impacts on the energy loss distribution, this will affect the whole secondary distribution, while bremsstrahlung only affects the largest losses.
 
 The created toy Monte-Carlo simulation and reconstruction is adapted to imitate the simulation and reconstruction methods used in the IceCube experiment.
 Also, the statistic of the used event sample and energy spectrum are based on public IceCube analysis.
@@ -175,13 +173,13 @@ The initial energy of the propagated muons is sampled from a power-law $\propto 
 With this flat spectrum also high energy muons get simulated with a decent statistic to estimate their contribution to this study.
 The transformation to a more realistic energy spectrum of the muons can be considered by re-weighting the events.
 
-The maximum distance, muons are allowed to propagate, is varied between \SI{100}{m} and \SI{1}{km} and is randomly chosen from a uniform distribution to take into account the different propagation lengths inside the detector.
+The maximum distance muons are allowed to propagate is varied between \SI{100}{m} and \SI{1}{km} and is randomly chosen from a uniform distribution to take into account the different propagation lengths inside the detector.
 Although a description of the length distribution for the used muon sample is not publicly available, a uniform distribution is a conservative assumption, since the selection of muons favors long tracks.
 Especially as the propagation lengths inside the detector can also reach \SI{1.5}{km}.
 
-A smearing of the energy loss profile, compared to the differential cross section in \figref{fig:dsigma_dv_all} is included intrinsically in the simulation setup as just the starting muon energy (that is the energy when the muon enters the detector) for all the energy losses of the track is used and not the muon energy at each energy loss.
+A smearing of the energy loss profile, compared to the differential cross section is included intrinsically in the simulation setup as just the starting muon energy (that is the energy when the muon enters the detector) for all the energy losses of the track is used and not the muon energy at each energy loss.
 However, on average, a TeV muon is not losing much of its energy within a kilometer, as shown in \figref{fig:energy_ssr_kkp}.
-Regarding initial energies around \SI{10}{TeV} and a propagated distance of \SI{1}{km}, energy losses of more than \SI{10}{\%} of the muon energy occur less than once per muon, which can be seen in \figref{fig:sec_dist_comapre}.
+Regarding initial energies around \SI{10}{TeV} and a propagated distance of \SI{100}{m}, energy losses of more than \SI{10}{\%} of the muon energy occur less than once per muon, which can be seen in \figref{fig:sec_dist_ssr_kkp}.
 Since this study is focused on high energy losses, this does not affect the analysis significantly. 
 Besides, this effect is included in all energy loss distributions and here, just the differences between these distributions are of interest.
 
@@ -198,8 +196,8 @@ To create a toy Monte Carlo including semi-realistic detector effects, the follo
     \item The position or vertex of each stochastic loss is smeared out. Thereby, the energy loss is not deposited at a single point, but along the track according to a Gaussian distribution with the width $\sigma_V$.
     \item Each muon track is divided into equidistant track segments of a certain length $\Delta X$.
     \item The expected energy loss in each segment is accumulated from the smeared out stochastic losses distributed on the track segments and the number of continuous losses according to their fraction in each segment.
-    \item To model hits in the photo multipliers of the detector, the resulting energy losses per track segment in MeV are sampled using a Poisson distribution.
-    \item Due to the finite energy resolution, these hits, representing the energy, are further smeared out using a Gaussian distribution. The width of the Gaussian distribution $\sigma_E = \sigma_{text{base}} \cdot f_E$ consists of a scaling parameter $f_E$ and an energy-dependent resolution $\sigma_{\text{base}}$ similar to the energy resolution of IceCube \cite{IceCube2014Ereco} shown in \figref{fig:study_energy_resolution_curve}.
+    \item To model hits in the photo multipliers of the detector, the expected energy losses per track segment in MeV are sampled using a Poisson distribution.
+    \item Due to the finite energy resolution, these hits, representing the energy, are further smeared out using a Gaussian distribution. The width of the Gaussian distribution $\sigma_E = \sigma_{\text{base}} \cdot f_E$ consists of a scaling parameter $f_E$ and an energy-dependent resolution $\sigma_{\text{base}}$ similar to the energy resolution of IceCube \cite{IceCube2014Ereco} shown in \figref{fig:study_energy_resolution_curve}.
     \item The energy measured in each track segment can be scaled according to a given efficiency of the photomultipliers, taking into account a further systematic uncertainty parameter.
     \item Finally, a threshold $E_{\text{cut}}$ is applied and segments with an energy below this threshold are discarded, taking into account the limited detector sensitivity.
 \end{enumerate}
@@ -233,27 +231,27 @@ Independent of the simulation of the measured energy loss of the segments, the m
 
 This study is performed using three different settings for the detector resolution, listed in \tabref{tab:study_resolutions}; one considered as baseline setting, one with a low resolution, and one with high resolution.
 These three settings are comparable to the main IceCube array, the DeepCore, and the IceCube-Gen2 expansions respectively.
-For an exemplary muon track, \figref{fig:study_ereco_eloss_profile} shows the energy loss profile reconstructed with the three resolution settings compared to the true energy loss profile.
+For an example muon track, \figref{fig:study_ereco_eloss_profile} shows the energy loss profile reconstructed with the three resolution settings compared to the true energy loss profile.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{./plots/results_study/ereco/energy_loss_reco_v1_00000014.png}
-    \caption{The final energy loss profile for an exemplary muon track reconstructed with the three resolution settings according to \tabref{tab:study_resolutions}. The true energy losses use a track segment length of \SI{2}{m} to compare the results.}
+    \caption{The final energy loss profile for an example muon track reconstructed with the three resolution settings according to \tabref{tab:study_resolutions}. The true energy losses use a track segment length of \SI{2}{m} to compare the results.}
     \label{fig:study_ereco_eloss_profile}
 \end{figure}
 
 %
 
-\subsection{Energy Reconstruction}
+\subsection{Energy Reconstruction} \label{sec:study_ereco}
 
 Next to the two \enquote{measured} parameters, the length and the energy losses, also the reconstructed energy is required for this study, which is estimated using the energy losses per track segment.
 The energy of the muon when it enters the detector is reconstructed using two independent reconstruction methods to validate their results.
 
 To calibrate both energy reconstruction methods a dataset with \num{e6} muons and a spectral index of $\gamma=1$ is created.
-A larger energy range from \SI{1}{GeV} to \SI{100}{PeV} is used to avoid boundary effects and correctly reconstruct also the edge cases.
+A larger energy range from \SI{1}{GeV} to \SI{100}{PeV} is used to avoid boundary effects and also correctly reconstruct the edge cases.
 To use just events with enough information, only events with a track length $l > \SI{100}{m}$ are selected for the calibration.
 
 In the so-called \enquote{truncated energy} method the linear behavior of the overall continuous energy loss to the muon energy (c.f. \figref{fig:dedx_all}) is used.
-It is similar to the method described in \cite{IceCube2014Ereco}, which is the default energy reconstruction for high energy muon in IceCube.
+It is similar to the method described in \cite{IceCube2014Ereco}, which is the default energy reconstruction for high energy muons in IceCube.
 This dependency is mainly driven by the pair production interaction, where the amount of low energy losses just increases linearly with the muon energy.
 On the other side, the bremsstrahlung-driven energy losses are equally distributed in the log space of the muon energy.
 This results in mainly stochastic losses that are uncorrelated with the muon energy.
@@ -261,6 +259,7 @@ Therefore the stochastic losses are cut out for this method and the \enquote{tru
 Here, the \SI{10}{\%} of the track segments with the highest losses are ignored.
 The dependency of the remaining energy losses and the muon energy is calibrated using a spline-fit.
 For the baseline resolution, the calibration and the performance of this method are shown in \figref{fig:study_ereco_trunc}.
+For the other two resolutions, this is shown in \secref{sec:study_ereco_calib}
 \begin{figure}
     \centering
     \begin{subfigure}{0.47\textwidth}
@@ -274,7 +273,7 @@ For the baseline resolution, the calibration and the performance of this method 
         \centering
         \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_te_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_1.000.pdf}
         \caption{The performance of the reconstruction.}
-        \label{fig:study_ereco_trunc_perf_base}
+        \label{fig:study_ereco_trunc_perf_base_show}
     \end{subfigure}
     \caption{The truncated energy reconstruction for the baseline resolution setting. On the left side, the correlation between the average energy loss of the truncated track segments and the true muon energy is calibrated, using a spline fit. On the right side, the performance using this calibration is evaluated on an independent dataset.}
     \label{fig:study_ereco_trunc}
@@ -289,10 +288,10 @@ Varying the cross-sections and changing the relation between small continuous lo
 However, the analysis should be sensitive to changes in the energy loss distribution, while other parameters should remain stable.
 A shift also in the energy reconstruction would mean, that muons of different energy regions would get compared, directly lead to a different energy loss profile, disturbing the cross-section measurement.
 
-Therefore, a second and independent method to reconstruct the energy using a neuronal network is implemented, also as a cross-check to the truncated energy method.
+Therefore, a second and independent method to reconstruct the energy using a neural network is implemented, also as a cross-check to the truncated energy method.
 This machine learning method has shown comparable or even improved performances in IceCube compared to the best likelihood-based energy proxies like truncated energy \cite{Huennefeld17ICRC, Huennefeld19VLVNT}.
 In principle, the network can learn the same truncated energy method described above, while using the available information to learn also the other reconstruction methods, e.g. the track length correlation or using the stochastic losses as a lower limit.
-Here a combination of convolutional layers, to learn the correlation between the neighboring segments, and dense layers, combining the elements, is used to estimate the energy.
+Here, a combination of convolutional layers, to learn the correlation between the neighboring segments, and dense layers, combining the elements, is used to estimate the energy.
 The rather small network architecture for this light-weighted study is listed in \tabref{tab:nn_layers_ereco}.
 \begin{table}
     \caption{The convolutional neural network architecture used for the energy reconstruction.}
@@ -320,25 +319,25 @@ The rather small network architecture for this light-weighted study is listed in
     \end{tabular}
 \end{table}
 
-Comparing the performance of these two energy reconstruction methods, regarding Figure \ref{fig:study_ereco_trunc_perf_base} and \ref{fig:study_ereco_nn_base_perform_all}, the truncated energy method performs slightly better at the relevant energies above a TeV.
-The neuronal network provides stable performances also at lower energies, probably using the track length dependency for these events.
-But in general, both methods provide similar results and can be used as realistic energy reconstruction methods.
+Comparing the performance of these two energy reconstruction methods, regarding Figure \ref{fig:study_ereco_trunc_perf_base_show} and \ref{fig:study_ereco_nn_base_perform_all_show}, the truncated energy method performs slightly better at the relevant energies above a TeV.
+The neural network provides stable performances also at lower energies, probably using the track length dependency for these events.
+But in general, both methods provide similar results, shown in detail in \secref{sec:study_ereco_perform_all}, and can be used as realistic energy reconstruction methods.
 \begin{figure}
     \centering
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_1.000}
-        \caption{Performance of all events.}
-        \label{fig:study_ereco_nn_base_perform_all}
+        \caption{All events.}
+        \label{fig:study_ereco_nn_base_perform_all_show}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./plots/results_study/ereco/energy_correlation_nn_model_e1_000_b1500_000_l5000_000_v500_000_c50_000__fraction_0.500.pdf}
-        \caption{Performance using an uncertainty cut of \num{0.5}.}
-        \label{fig:study_ereco_nn_base_perform_unc_05}
+        \caption{\SI{50}{\%} of the events.}
+        \label{fig:study_ereco_nn_base_perform_0.5_show}
     \end{subfigure}
-    \caption{The performance of the Neuronal Network reconstruction for the muon energy. On the right side, an uncertainty cut estimated by a different network is applied to discard badly reconstructed events.}
+    \caption{The performance of the neural network reconstruction of the muon energy for the baseline resolution. On the right side, an uncertainty cut is applied filtering \SI{50}{\%} of the best reconstructed events compared to the full event sample on the left side.}
     \label{fig:study_ereco_nn_base_perform}
 \end{figure}
 % \begin{table}[]
@@ -347,7 +346,7 @@ But in general, both methods provide similar results and can be used as realisti
 %     \centering
 %     \begin{tabular}{l | ccc | ccc}
 %         \toprule
-%          & \multicolumn{3}{c}{Truncated Energy} & \multicolumn{3}{c}{Neuronal Network} \\
+%          & \multicolumn{3}{c}{Truncated Energy} & \multicolumn{3}{c}{Neural Network} \\
 %         Name & High & Medium & Low & High & Medium & Low \\
 %         \midrule
 %         Res. Mean & $-0.062$ & $-0.065$ & $-0.111$ & 0.005 & $-0.062$ & $-0.090$ \\
@@ -363,10 +362,10 @@ But in general, both methods provide similar results and can be used as realisti
 
 To discard the muons with large mis-reconstructed energies, disturbing the energy loss spectrum and reducing the sensitivity of this study, an estimation of the uncertainty of the energy reconstruction is required.
 Recent developments show, that such uncertainty estimators provide accurate and robust estimations of the real deviation, useful in IceCube analysis \cite{Huennefeld17ICRC}.
-Again a neuronal network is used with nearly the same network architecture as for the energy reconstruction but using the absolute function for the activation.
+Again a neural network is used with nearly the same network architecture as for the energy reconstruction but using the absolute function for the activation.
 The network then returns the absolute value of the estimated deviation of the reconstructed energy in the log space.
-The increase in the performance of the energy reconstruction using a cut of the energy uncertainty estimator is indicated in \figref{fig:study_ereco_nn_base_perform_unc_05}.
-However, this uncertainty cut reduces also the statistic of the data sample and for each resolution setting a trade-off between a high sample statistic and good reconstructed events is made for the selection.
+The increase in the performance of the energy reconstruction using a cut of the energy uncertainty estimator is indicated in \figref{fig:study_ereco_nn_base_perform_0.5_show}.
+However, this uncertainty cut reduces also the size of the data sample and for each resolution setting a trade-off between a high sample statistic and good reconstructed events is made for the selection.
 
 For a final check of the energy reconstruction, its correlation to the scaling of the bremsstrahlung cross-section has to be analyzed.
 As already mentioned, a correlation between these parameters would be a circle conclusion, since the energy loss distributions are created according to the reconstructed energy.
@@ -383,9 +382,9 @@ But the energy reconstruction should be robust against small changes in the brem
     \label{fig:study_ereco_pull_te}
 \end{figure}
 
-Regarding changes of $\pm \SI{10}{\percent}$ in the bremsstrahlung cross-section, no changes of the energy reconstruction are observed, as shown in \figref{fig:study_ereco_pull_te}
-Just for large scalings of the bremsstrahlung by orders of magnitudes, the relation between continuous and stochastic losses changes significantly and the correlation gets visible, shown in \figref{fig:study_ereco_pull_te_extrem}.
-This independence of the energy reconstruction from small bremsstrahlung changes is observed for each resolution setting and both reconstruction approaches.
+Regarding changes of $\pm \SI{10}{\percent}$ in the bremsstrahlung cross-section, no changes of the energy reconstruction are observed, as shown in \figref{fig:study_ereco_pull_te}.
+Just for large scalings of the bremsstrahlung by orders of magnitudes, the relation between continuous and stochastic losses changes significantly and the correlation gets visible, shown in \figref{fig:study_ereco_pull_te_extreme}.
+This independence of the energy reconstruction from small bremsstrahlung changes is observed for each resolution setting and both reconstruction approaches (see \secref{sec:study_pull_dist}).
 In general, the cross-check of the energy reconstruction was successful, since both approaches produce similar and robust results.
 
 %
@@ -419,7 +418,7 @@ This corresponds approximately to the energy ranges listed in \tabref{tab:study_
     \end{tabular}
 \end{table}
 
-Using the reconstructed energy losses per track segment, an energy losses histogram is created for each muon energy bin according to the weight of the given energy spectrum.
+Using the reconstructed energy losses per track segment, an energy loss histogram is created for each muon energy bin according to the weight of the given energy spectrum.
 % Hence, the Monte Carlo simulation is created with a small spectral index of 1 to have enough statistic also at higher energies, the events or their energy loss distribution needs to be weighted to the assumed spectral index.
 Assuming a Poisson distribution for the content of each energy loss bin, the normalized energy loss distribution $H$ and its error $E$ can be expressed by
 \begin{align}
@@ -428,7 +427,7 @@ Assuming a Poisson distribution for the content of each energy loss bin, the nor
     E = \frac{\sum L_i w_i^2}{\sum w_i d_i}.
 \end{align}
 with the energy loss histograms $L$ the energy weight $w$ and the propagated distances $d$ per event $i$.
-Since the energy losses histogram is just comparable with the same propagated distance, they are normed by the weighted propagation length.
+Since the energy losses histogram is just comparable with the same propagated distance, they are normalized by the weighted propagation length.
 Using the produced energy loss distributions, the main task is to parameterize and fit the differences between these energy loss histograms according to the fit parameters.
 The variations of the three fit parameters are listed in \tabref{tab:study_interpol_set}.
 \begin{table}
@@ -448,16 +447,16 @@ The variations of the three fit parameters are listed in \tabref{tab:study_inter
     \end{tabular}
 \end{table}
 
-For each scaling of the bremsstrahlung cross-section, short Multiplier, \num{1e7} muons are simulated between \SI{100}{GeV} and \SI{1}{PeV} with a spectral index of \num{1}.
-Then, each bremsstrahlung multiplier dataset is reconstructed with the different efficiency of the photomultipliers, short DOM efficiency.
+For each scaling of the bremsstrahlung cross-section (Multiplier) \num{1e7} muons are simulated between \SI{100}{GeV} and \SI{1}{PeV} with a spectral index of \num{1}.
+Then, each bremsstrahlung multiplier dataset is reconstructed with the different efficiency of the photomultipliers (DOM efficiency).
 Therefore the different DOM efficiency data points are correlated and not created using independent Monte-Carlo simulations.
 However, this approximation was made to reduce the runtime of the simulation.
-This gets even more relevant for the spectral index, short Gamma, as these datasets are just re-weighting the events for each bremsstrahlung simulation and DOM efficiency reconstruction data set.
-The interpolation points are placed with an equidistant spacing between each other and span a grid of $9\times9\times9$ points in the fit parameter space for each bin, as shown in \figref{fig:study_interpol_3d_show}.
+This gets even more relevant for the spectral index (Gamma) as these datasets are just re-weighting the events for each bremsstrahlung simulation and DOM efficiency reconstruction data set.
+The interpolation points are placed with an equidistant spacing between each other and span a grid of $9\times9\times9$ points in the fit parameter space for each bin, shown in \figref{fig:study_interpol_3d_show}.
 \begin{figure}
     \centering
-    \includegraphics[scale=0.5, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_3.pdf}
-    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier for reconstructed muon energies between \SI{10}{TeV} and \SI{31.6}{TeV}. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red label box), which would not be included in a fit of the bremsstrahlung.}
+    \includegraphics[scale=0.45, angle=270]{./plots/results_study/create_m/e0.500_b500.000_l1000.000_v200.000_c10.000/normmethod_2_energyreco_1/Multiplier/interpol/interpol_param_muon_energy_bin_3.pdf}
+    \caption{One dimensional interpolation of the differences between the energy loss histograms created with different bremsstrahlung multiplier. The baseline resolution is used and reconstructed muon energies between \SI{10}{TeV} and \SI{31.6}{TeV} using neural networks are selected. A coefficient of determination threshold of \num{0.9} is used to mark all energy loss bins (red colored legend box), which would not be included in a fit of the bremsstrahlung.}
     \label{fig:study_1d_interpol_mu3_te}
 \end{figure}
 
@@ -465,7 +464,7 @@ The interpolation points are placed with an equidistant spacing between each oth
 
 To get an impression of how the energy loss bins change by varying the fit parameter and how the shape looks, one-dimensional interpolations are created.
 Thereby only one parameter is changed, while for the other two parameters, the default value is used.
-For the Bremsstrahlung multiplier, this is exemplarily shown in \figref{fig:study_1d_interpol_mu3_te}, and in \secref{sec:append_analysis} for the other settings.
+For the Bremsstrahlung multiplier, this is shown in \figref{fig:study_1d_interpol_mu3_te}, and in \secref{sec:study_append_interpol} for the other settings.
 Compared to the DOM efficiency and spectral index, the effect of the bremsstrahlung multiplier is less significant.
 One reason is, that the bremsstrahlung datasets are independent of each other, while the other two interpolations are built on the same dataset.
 But the main reason for this is, that the Bremsstrahlung is just a smaller effect compared to the DOM efficiency and the spectral index, which are considered in every IceCube analysis.
@@ -498,15 +497,15 @@ Thereby, $y$ represents the difference between the energy loss bins and $f(x)$ t
         \caption{3D-Interpolation of the spectral index, DOM efficiency, and the bremsstrahlung multiplier.}
         \label{fig:study_interpol_3d_show}
     \end{subfigure}
-    \caption{The interpolation of the differences of the energy loss histogram for muons with reconstructed energies between \SI{1}{TeV} and \SI{31.6}{TeV} using neuronal networks for the energy reconstruction. The high resolution setting is considered, here. For the 2D-interpolation the color bar equals the z-axis, and is shown for a clearer understanding. In the 3D-interpolation only the color bar represents the bin difference.
+    \caption{The interpolation of the differences of the energy loss histogram for muons with reconstructed energies between \SI{1}{TeV} and \SI{31.6}{TeV} using neural networks for the energy reconstruction. The high resolution setting is considered, here. For the 2D-interpolation the color bar equals the z-axis, and is shown for a clearer understanding. In the 3D-interpolation only the color bar represents the bin difference.
     The coefficient of determination $R$ is calculated.}
     \label{fig:study_interpol_show}
 \end{figure}
 
 Due to the correlations between the fit variables, one-dimensional interpolations do not take into account all these effects.
-This can exemplarily be seen in \figref{fig:study_interpol_2d_show} in a 2D interpolation of the bremsstrahlung multiplier and the DOM efficiency.
+This can be seen in \figref{fig:study_interpol_2d_show} in a 2D interpolation of the bremsstrahlung multiplier and the DOM efficiency.
 Although it is also possible to treat the spectral index rather independently of the other two processes in a 1D interpolation, assuming negligible correlation to the other parameters.
-In this analysis, a 3D-interpolation, exemplarily shown in \figref{fig:study_interpol_3d_show}, is used with the function
+In this analysis, a 3D-interpolation, shown in \figref{fig:study_interpol_3d_show}, is used with the function
 \begin{align}
     f(x_{\text{brems}}, x_{\text{eff}}, x_{\text{gamma}}) 
         &= a_0
@@ -522,7 +521,7 @@ For this study, the values are already listed in \tabref{tab:study_resolutions}.
 
 %
 
-\subsection{Performance of the Measured}
+\subsection{Performance of the Measurement}
 
 With these interpolations, a Poisson Likelihood is defined to describe the bin contents of the energy loss distributions.
 A Marcov-Chain-Monte-Carlo (MCMC) sampling is then applied to estimate the three parameters including their correlations, shown exemplarily in \figref{fig:study_mcmc_show}.
@@ -535,13 +534,13 @@ A Marcov-Chain-Monte-Carlo (MCMC) sampling is then applied to estimate the three
 % The settings for the MCMC are listed in table \ref{}.
 
 To estimate the performance of the bremsstrahlung multiplier measurement for the different resolutions, Monte-Carlo simulation sets, each with random bremsstrahlung multipliers and fixed systematic parameters are produced propagating \num{e6} muons.
-The results for the baseline resolution setting are shown in \figref{fig:study_result_show}.%and performances are listed in table \ref{}.
-Further results with different resolution settings or energy reconstruction methods are shown in \secref{sec:append_study}.
+The results for the baseline resolution setting are shown in \figref{fig:study_result_corr}.
+Further results with different resolution settings or energy reconstruction methods are shown in \secref{sec:study_perform_result_all}.
 The values outside the fit range, defined in \tabref{tab:study_interpol_set}, are on the one site calculated to analyze the effect.
 But on the other side, these values are discarded from the performance estimation, due to boundaries effects biasing parameters at the edge of the ranges towards the center.
 
 There is no notable difference in the performance between the truncated energy and the neural network approach to estimate the muon energy.
-For the high resolution, the bremsstrahlung multiplier can be estimated within $\pm\SI{1}{\%}$ and for the baseline resolution, this increases to $\pm\SI{4}{\%}$.
+For the high resolution, the bremsstrahlung multiplier can be estimated within $\pm\SI{1}{\%}$ and for the baseline resolution, this increases to $\pm\SI{4}{\%}$ (shown in \figref{fig:study_result_pull}).
 For the low resolution, it is not feasible to estimate the bremsstrahlung multiplier, since the likelihood landscape for the \SI{68}{\%} central interval already exceeds the boundaries of the interpolated range (shown in \tabref{tab:study_interpol_set}).
 However, boundary effects can also be observed for higher resolutions, like in \figref{fig:study_mcmc_show}.
 
@@ -549,31 +548,26 @@ The DOM efficiency can be measured with the highest precision and the spectral i
 The precision and the bremsstrahlung multiplier with the lowest accuracy, which is expected as the effect of the Bremsstrahlung on the energy loss distribution is already smaller and just significant at higher energy losses.
 \begin{figure}
     \centering
-    \begin{subfigure}{0.65\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/performance/show_all.pdf}
-        \caption{Pull distribution of the .}
-        \label{fig:study_result_pull}
-        \vspace{0.5cm}
-    \end{subfigure}
-    \begin{subfigure}{0.65\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/performance/show_all2.pdf}
-        \caption{Correlation of the fitted value and the truth.}
-        \label{fig:study_result_corr}
-    \end{subfigure}
-    \caption{Results of the MCMC samplings with the high resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the truncated energy method. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%}} central interval and the best fit value, the median.
-    \label{fig:study_result_show}
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/performance/show_all2.pdf}
+    \caption{Correlation of the true values and the estimated results of the MCMC samplings with the baseline resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_corr}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./plots/results_study/test_m/e1.000_b1500.000_l5000.000_v500.000_c50.000/normmethod_2_energyreco_1/performance/show_all.pdf}
+    \caption{Pull distribution of the estimated results of the MCMC samplings with the baseline resolution settings for the spectral index, the DOM efficiency and the bremsstrahlung multiplier. The muon energy is reconstructed using the neural network. The region below 0.95 and above 1.05 is neglected for the performance to avoid boundary effects during the MCMC sampling at the edge of the allowed interpolation region. The error represents the \SI{68}{\%} central interval and the best fit value, the median.}
+    \label{fig:study_result_pull}
 \end{figure}
 
 Concluding the results, it is possible to measure the bremsstrahlung multiplier with high resolutions similar to a cubic kilometer-sized DeepCore detector, in the percent level.
-Regarding resolution setting similar to IceCube, a measurement is still feasible, but with higher uncertainties of around \SI{5}{\%}.
+Regarding resolution setting similar to IceCube, a measurement is still feasible, but with higher uncertainties of around \SI{4}{\%}.
 For a detector as sparsely instrumented as the IceCube-Gen2 detector or with similar resolutions, a measurement of the bremsstrahlung using the same techniques is not feasible.
 Thereby the amount of events surviving the cuts of a track length and in particular of the uncertainty of the energy estimation is reduced significantly with nearly no muons left to analyze.
 However, since Gen2 is designed to detect more muons at higher energies, the setup should be adapted to these energies and sizes.
 
 The spectral index and the DOM efficiency can be measured in every setup, also for low resolutions.
-In this analysis, the spectral index is only taken into account as nuisance parameter, as it describes only the spectrum of muons entering the detector, not relevant for other analyses.
+In this analysis, the spectral index is only taken into account as a nuisance parameter, as it describes only the spectrum of muons entering the detector, not relevant for other analyses.
 The DOM efficiency, however, is a systematic parameter relevant for every analysis.
 A measurement or reduction of the region, that needs to be considered for the DOM efficiency would directly increase the sensitivity for these analyses.
 But a more precise measurement of the DOM efficiency can be performed using a stopping muon sample with their minimal Ionizing muons.
@@ -581,32 +575,31 @@ Further possible measurements of muon properties or systematics are described in
 
 %
 
-\section{Outlook of Measurements using Atmospheric Muons}
+\section{Outlook of Measurements using Atmospheric Muons} \label{sec:global_muon_fit}
 
 The study described above using a neutrino-induced muon sample is one way to measure muon properties using large volume detectors like IceCube.
 To measure further parts of the muon cross-section, other approaches including atmospheric muon samples are required.
-The big benefit in using atmospheric muons is the much higher event statistic of several orders of magnitude, being able to make a more rigorous selection demanding a high reconstruction quality.
+The big benefit in using atmospheric muons is the increased sample size of several orders of magnitude, being able to make a more rigorous selection demanding a high reconstruction quality.
 
 A dataset selecting stopping muons mainly consists of single muons \cite{Hoinka17Master, Ninfa19Master}.
-Usually, the latest surviving muon is the highest energetic particle of the muon bundle produced in the air shower.
-Most of these muons are far below a TeV and with no stochastic loss and therefore not interesting for this analysis.
-However, at these energies, the ionization is dominating the energy loss with its nearly constant energy loss probability.
-Either the DOM efficiency or the ionization can be measured while fixing the other parameter or while estimating this parameter also in another cross-section analysis.
+Usually, the last surviving muon is the highest energetic particle of the muon bundle produced in the air shower.
+Most of these muons are far below a TeV and with no stochastic loss and therefore not interesting for the study described in the previous section.
+However, at these energies, the ionization is dominating the energy loss with its nearly energy independent and constant energy loss probability.
+Either the DOM efficiency or the ionization cross-section can be measured while fixing the other parameter.% or while estimating this parameter also in another cross-section analysis.
 
 Next to the calibration advantages, this sample can also be used to measure the muon energy distribution at the surface.
-The range to the surface of these muons can be determined using their reconstructed direction.
-Regarding IceCube, for zenith angles of up to \SI{80}{\degree} these muons are dominated by atmospheric muons and at higher energies, neutrinos contribute significantly to the selection.
+The range of these muons to the surface can be determined using their reconstructed direction for zenith angles below \SI{80}{\degree}, where the incoming muon flux is dominated by atmospheric muons and the neutrinos contribution is sub-dominant.
 Then, the energy distribution of the muons can be unfolded using the relation between the range and average energy loss, described in \secref{sec:dedx}.
 Furthermore, the differences between the muons traveling short distances through the ice and muons traveling long distances can be used to verify the muon cross-sections assuming both originate from the same distribution.
-By comparing them also most systematic parameters cancel out, as just the comparison or ratio of the same sample is regarded.
+Due to the relative comparison of the same sample, most systematic parameters cancel out.
 
-Another approach is by using is a leading muon sample selecting atmospheric muon bundles where one muon contains most of the bundle energy.
+Another approach is by using a leading muon sample selecting atmospheric muon bundles where a single muon contains most of the bundle energy.
 For bundles with an equal energy distribution between the muons, the event signature is a homogeneous bright track where all the stochastic losses by the different muon are 'washed' out.
-If a single muon contains most of the bundle energy, there is a higher fluctuation of the brightness of the track and more visible stochasticity.
-With this sample also higher energetic muons can be selected, but couldn't be used for the analysis above as it depends on the ratio of high energy losses.
+If a single muon contains most of the bundle energy, there is a higher fluctuation of the brightness along the track and more visible stochasticity.
+With this sample also higher energetic muons can be selected, but couldn't be used for the analysis above as it depends on the relation of high stochastic and low continuous energy losses.
 Fitting the Bremsstrahlung cross-section with this sample would therefore be a circle conclusion as just events with higher energy losses are selected.
+Due to the higher energy range, this dataset is used in an ongoing analysis to estimate the prompt atmospheric muon spectrum, similar to \cite{Fuchs16PhD, Fuchs16ECRS}.
 
-Due to the higher energy range, this dataset is used to estimate the prompt atmospheric muon spectrum, but it is still under investigation and therefore just mentioned in the outlook here.
-\cite{IceCube2019SnowStorm}
-
-
+A goal would finally be to combine these three datasets low energetic stopping muons, muons and neutrino-induced single muons, and high energetic leading muons.
+Due to shared systematic parameters, a precise measurements of muon properties can be performed.
+Although large volume neutrino telescopes are not designed to measure muon properties, they provide the unique opportunity to analyze and verify muon physics at energies not feasible for accelerator detectors of the current and the next generation..
