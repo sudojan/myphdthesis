@@ -98,8 +98,9 @@ def plot_time(energy, output, args, npts=100):
 
     ax2.plot(e_f, time_approx_val/time_val, label=r'$c_0$ Approximation / Time Integral')
 
-    ax1.set_ylabel(r'Time at Interaction / $\mu$s')
+    ax1.set_ylabel(r'Elapsed Time / $\mu$s')
     ax2.set_ylabel(r'Ratio')
+    ax2.set_xlabel(r'Energy at the next Interaction $E_f$ / MeV')
 
     ax1.legend()
     ax2.legend()
@@ -177,7 +178,7 @@ def plot_loss(energy, output, args, npts=int(1e5), eps=1e-3):
 
     ax.set_xlim(right=1, left=eps)
     ax.set_xlabel(r'Random Number $\xi$')
-    ax.set_ylabel(r'relative Energy Loss $v$')
+    ax.set_ylabel(r'Relative Energy Loss $v$')
     ax.set_xscale('log')
     ax.set_yscale('log')
 
@@ -201,6 +202,6 @@ if __name__ == '__main__':
         "cuts": pp.EnergyCutSettings(500, 1, False)
     }
 
-    plot_dist(2e5, 'prop_util_next_int.pdf', args)
+    # plot_dist(2e5, 'prop_util_next_int.pdf', args)
     # plot_time(1e5, 'prop_util_next_time.pdf', args)
-    # plot_loss(1e7, 'prop_util_stoch_loss.pdf', args, int(3e6), 1e-4)
+    plot_loss(1e7, 'prop_util_stoch_loss.pdf', args, int(3e6), 1e-4)

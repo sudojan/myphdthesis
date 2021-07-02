@@ -101,7 +101,7 @@ def plot_secondary_dist(args, output, energy, nmuons=int(1e5), max_dist=1e5):
 
     ax.set_xscale('log')
     ax.set_yscale('log')
-    ax.set_xlabel(r'Stochastic Energy Loss / MeV')
+    ax.set_xlabel(r'Energy Loss / MeV')
     ax.set_ylabel('Number of Stochastic Losses')
     ax.legend()
 

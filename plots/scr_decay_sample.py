@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib import gridspec
 from tqdm import tqdm
 from scipy import constants
+from matplotlib import rc
 
 rc('font', **{'family': 'serif',
    'serif': ['Computer Modern']})
@@ -88,7 +89,7 @@ def plot_spectrum(particle_def, products, statistics):
         gs = gridspec.GridSpec(2, 1, height_ratios=[2, 1])
         ax1 = fig.add_subplot(gs[0])
         ax2 = fig.add_subplot(gs[1], sharex=ax1)
-        ax1.set_title('{} decay spectrum for {}'.format(particle_def.name, products[idx].name))
+        # ax1.set_title('{} decay spectrum for {}'.format(particle_def.name, products[idx].name))
 
         ax1.plot(bincenters, spec_hist[0, idx],
                 drawstyle='steps-mid', label=decay_channel_names[0])
@@ -112,7 +113,7 @@ def plot_spectrum(particle_def, products, statistics):
         ax2.set_ylabel(r'Ratio')
         ax2.legend()
 
-        plt.subplots_adjust(hspace=.0)
+        plt.subplots_adjust(hspace=.1)
         plt.setp(ax1.get_xticklabels(), visible=False)
 
         fig.savefig(
@@ -164,7 +165,7 @@ if __name__ == '__main__':
                         pp.particle.PiMinusDef(),
                         pp.particle.NuTauDef()]
 
-    plot_spectrum(mu_def, products, int(1e6))
-    # plot_spectrum(tau_def, tau_mu_products, int(1e7))
+    # plot_spectrum(mu_def, products, int(1e7))
+    plot_spectrum(tau_def, tau_mu_products, int(1e7))
 
 
