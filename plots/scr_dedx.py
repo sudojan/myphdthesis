@@ -146,8 +146,8 @@ def plot_ranges(energy_min=1e3, energy_max=1e12, n_energies=200,
     ax.set_yscale('log')
     ax.set_xlabel('Muon Energy / GeV')
     ax.set_xlim(energy_min/1e3, energy_max/1e3)
-    ax.set_ylabel('Range / m')
-    ax.legend()
+    ax.set_ylabel(r'Average Range $R_{\left\langle -\frac{\rm{d} E}{\rm{d} X} \right\rangle}$ / m')
+    # ax.legend()
     ax.grid()
 
     fig.savefig(output, bbox_inches='tight', pad_inches=0.02)
@@ -193,11 +193,11 @@ def plot_dEdx(energy_min=1e3, energy_max=1e12, n_energies=200, ecut=np.inf,
     else:
         for dedx, _label in zip(dedx_all[:-2], labels[:-2]):
             ax.plot(energies, dedx, linestyle='-', label=_label)
-        ax.set_ylabel(r'$\frac{\mathrm{d}E}{\mathrm{d}X} \,\left/\, \left( \rm{MeV} / \rm{cm} \right) \right. $')
+        ax.set_ylabel(r'$\left\langle -\frac{\mathrm{d}E}{\mathrm{d}X}\right\rangle \,\left/\, \left( \mathrm{MeV} \mathrm{g}^{-1} \mathrm{cm}^2 \right) \right. $')
 
 
     ax.set_xlabel(r'Muon Energy $E \,/\, \mathrm{MeV} $')
-    ax.set_ylabel(r'$\left\langle\frac{\mathrm{d}E}{\mathrm{d}X}\right\rangle \,\left/\, \left( \rm{MeV} / \rm{cm} \right) \right. $')
+    ax.set_ylabel(r'Average Energy Loss $\left\langle -\frac{\mathrm{d}E}{\mathrm{d}X}\right\rangle \,\left/\, \left( \rm{MeV} \rm{g}^{-1} \rm{cm}^2 \right) \right. $')
     ax.legend(loc='best')
     ax.set_xscale('log')
     ax.set_yscale('log')
@@ -237,7 +237,7 @@ def plot_dNdx(energy_min=1e3, energy_max=1e12, n_energies=200, ecut=1, #MeV
         ax.plot(energies, dndx, linestyle='-', label=_label)
 
     ax.set_xlabel(r'Muon Energy $E \,/\, \mathrm{MeV} $')
-    ax.set_ylabel(r'$\left\langle\frac{\mathrm{d}N}{\mathrm{d}X}\right\rangle \,\left/\, \left( 1 / \rm{cm} \right) \right. $')
+    ax.set_ylabel(r'Number of Interactions $\frac{\mathrm{d}N}{\mathrm{d}X} \,\left/\, \left( \rm{g}^{-1} \rm{cm}^2 \right) \right. $')
     ax.legend(loc='lower right')
     ax.set_xscale('log')
     ax.set_yscale('log')
@@ -248,9 +248,9 @@ def plot_dNdx(energy_min=1e3, energy_max=1e12, n_energies=200, ecut=1, #MeV
     plt.close()
 
 if __name__ == "__main__":
-    # plot_dEdx(output='dedx_all.pdf', ecut=np.inf, do_fit=True)
+    plot_dEdx(output='dedx_all.pdf', ecut=np.inf, do_fit=True)
     plot_dEdx(output='dedx_ecut_{ecut:.4g}.pdf', ecut=1)
-    # plot_dEdx(output='dedx_ecut_{ecut:.4g}.pdf', ecut=500)
-    # plot_dNdx(output='dndx_ecut_{ecut:.4g}.pdf', ecut=1)
-    # plot_dNdx(output='dndx_ecut_{ecut:.4g}.pdf', ecut=500)
-    # plot_ranges(output='dedx_range.pdf')
+    plot_dEdx(output='dedx_ecut_{ecut:.4g}.pdf', ecut=500)
+    plot_dNdx(output='dndx_ecut_{ecut:.4g}.pdf', ecut=1)
+    plot_dNdx(output='dndx_ecut_{ecut:.4g}.pdf', ecut=500)
+    plot_ranges(output='dedx_range.pdf')

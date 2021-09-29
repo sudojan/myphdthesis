@@ -123,7 +123,7 @@ def plot_range_distribution(
     ax2.plot(energy_bin_mids, dedx_ranges/median_ranges, label=r'$\langle\mathrm{d}E/\mathrm{d}X\rangle$ Fit / Simulation')
     # ax2.plot(energy_bin_mids, average_ranges/median_ranges, label='average/median')
     ax2.set_ylabel('Ratio')
-    ax2.set_xlabel(r'Muon Energy $E_\mu$ / MeV')
+    ax2.set_xlabel(r'Muon Energy $E$ / MeV')
     ax2.set_xscale('log')
     ax2.legend()
     plt.subplots_adjust(hspace=.0)

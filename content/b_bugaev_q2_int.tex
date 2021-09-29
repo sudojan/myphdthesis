@@ -1,0 +1,68 @@
+\chapter{Appendix}
+
+\section{Pair production $e$-diagram}
+
+written differential in $\rho$ with $4 e_+ e_- = \omega^2 (1 - \rho^2)$
+\begin{align}
+    \delta = \frac{2 m_e^2}{\omega(1 - \rho^2)}
+    \qquad
+    \Gamma = 1 + \frac{k^2 (1 - \rho^2)}{4 m_e^2}
+    \qquad
+    \zeta = \frac{q^2}{4 m_e^2 \Gamma}
+    \qquad
+    y = \frac{\sqrt{q^2}}{\delta \Gamma}
+\end{align}
+
+pre-definitions
+\begin{align}
+    \logn x &= \frac{1}{4 \sqrt{\zeta(\zeta + 1)}} \cdot \logn \frac{1 + 4 \zeta + 4 \sqrt{\zeta(\zeta + 1)} - \frac{\zeta}{\sqrt{\zeta(\zeta + 1)}}}{\frac1y \sqrt{(y - 4\zeta)^2 + 16 \zeta} + \frac4y \sqrt{\zeta(\zeta + 1)} - \frac{\zeta}{\sqrt{\zeta(\zeta + 1)}}} \\
+    J_3' &= \sqrt{(y - 4 \zeta)^2 + 16 \zeta} - 1 - 4\zeta + 4\zeta \logn y \\
+    t_1 &= \frac{2 \pi}{m_e^2 \delta \Gamma}  \left( 1 - \frac1y - \frac{\delta^2 \Gamma}{m_e^2} \logn y - \logn x \right)
+\end{align}
+
+electron line
+\begin{align}
+    \frac{1}{8}M_{44}^{44} &= - \frac{\omega}{\delta} \cdot t_1 \\
+    \frac{1}{8}M_{\alpha\alpha}^{44} &= \left(2 - \frac{k^2}{m_e^2}\right) t_1 + \frac{\omega \pi}{m_e^6} (1 + \rho^2) \left( -\delta^2 \Gamma J_3' + \frac{q^2}{\Gamma} \logn x \right) \\
+\end{align}
+with $k^\ast = \sqrt{k^2 + \omega^2}$
+\begin{align}
+    t_1 = \frac{k^2}{{k^\ast}^2} \left(-E_i (E_i - \omega) + \frac{k^2}{4} \right) \\
+    L_1 = \frac{2}{k^\ast} \left( \frac{k^2}{2} - m_\mu^2 - t_1 \right)
+    \qquad
+    L_2 = \frac{2 k^2}{{k^\ast}^3} \left( \frac{k^2}{2} - m_\mu^2 - 3t_1 \right)
+\end{align}
+integral
+\begin{align}
+   \int \dif k^2 \dif q^2 \frac{m_e^4}{k^4 q^4} (- L_1 M_{\alpha\alpha}^{44} W_2 + L_2 M_{44}^{44} W_2)
+\end{align}
+
+\section{Bremsstrahlung}
+
+\begin{align}
+    \delta = \frac{m_\mu^2 \omega_B}{2 E_1 E_2}
+    \qquad
+    \zeta = \frac{q^2}{4 m_\mu^2}
+    \qquad
+    y = \frac{\sqrt{k^2 + \omega^2} - \omega}{\delta}
+\end{align}
+
+muon line with bremsstrahlung
+\begin{align}
+    \frac18 M_{\alpha\alpha}^{44} &= \frac{4\pi}{m_\mu^2 \delta} (1 - \frac{1}{y} - \frac{\delta^2}{m_\mu^2} \logn y - \logn x)
+        + \frac{2\pi}{m_\mu^6 \omega}(E_1^2 + E_2^2)( \delta^2 J_3' - q^2 \logn x - 2 \delta \nu \logn y )
+    \\
+    \frac18 M_{\alpha\alpha}^{\mu\mu} &= \frac{\pi}{\delta} (2 - \frac{q^2}{m_\mu^2}) (1 - \frac1y) (E_1^{-2} + E_2^{-2})
+        - \frac{2\pi}{m_\mu^2\omega} (4 - (\frac{q^2}{m_\mu^2})^2) \logn x 
+        \\
+        &\quad + \frac{\omega\pi}{m_\mu^2} (E_1^{-2} + E_2^{-2}) J_3' - \frac{4\pi\delta}{m_\mu^4}(2 - \frac{q^2}{m_\mu^2}) \logn y
+\end{align}
+
+
+        % J3p = omega/mc2*(np.sqrt((y - 4*zeta)**2 + 16*zeta) - 1 - 4*zeta) + omega*q2/mc4*lny
+        % J2 = -pi/(mc2*omega)*lnx
+
+        % Maamm = pi*(2 - q2/mc2)/delta * (1. - 1/y)*(E1**(-2) + E2**(-2)) \
+        %     + 2*(4 - (q2/mc2)**2)*J2 + pi*(E1**(-2) + E2**(-2))*J3p - 4*pi*delta/mc6*(2*mc2 - q2)*lny
+
+

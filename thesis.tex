@@ -10,6 +10,16 @@
 % oder einfach mit:
 % make
 
+% % Metadata for pdf/a compliance
+% \begin{filecontents*}[overwrite]{\jobname.xmpdata}
+% \Title{Systematic Uncertainties of High Energy Muon Propagation using the Leptonpropagator PROPOSAL}
+% \Author{Jan Benjamin Soedingrekso}
+% \Language{en-US}
+% \Keywords{PHD thesis\sep Dissertation\sep Neutrino Astronomy\sep IceCube}
+% \Publisher{TU Dortmund}
+% \Date{2021}
+% \end{filecontents*}
+
 \documentclass[
   tucolor,       % remove for less green,
   BCOR=12mm,     % 12mm binding corrections, adjust to fit your binding
@@ -24,6 +34,10 @@
 
 % just list chapters and sections in the toc, not subsections or smaller
 \setcounter{tocdepth}{2}
+
+% \usepackage[a-3u]{pdfx}
+% % for pdf/a compliance, see https://tex.stackexchange.com/a/474336/59716
+% \pdfvariable omitcidset=1
 
 %------------------------------------------------------------------------------
 %------------------------------ Fonts, Unicode, Language ----------------------
@@ -84,7 +98,7 @@
 \usepackage{booktabs}       % \toprule, \midrule, \bottomrule, etc
 
 %------------------------------------------------------------------------------
-%-------------------------------- graphics -------------------------------------
+%-------------------------------- graphics ------------------------------------
 %------------------------------------------------------------------------------
 
 \usepackage{graphicx}
@@ -208,6 +222,7 @@
 \input{content/a_appendix.tex}
 \input{content/a_study.tex}
 \input{content/a_software.tex}
+% \input{content/b_bugaev_q2_int}
 
 % \listoffigures
 % \listoftables

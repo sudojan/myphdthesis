@@ -147,7 +147,7 @@ def plot_dsigma(energy, medium, output='ioniz_dsigma.pdf'):
 
     ax.set_xlim(right = 1)
     ax.set_xlabel(r'Relative Energy Loss $v$')
-    ax.set_ylabel(r'$\mathrm{d}\sigma/\mathrm{d}v$')
+    ax.set_ylabel(r'Differential Cross Section $\frac{\mathrm{d}\sigma}{\mathrm{d}v}  \,/\, \mathrm{cm}^2$')
 
     ax.legend()
     ax.grid()
@@ -183,7 +183,7 @@ def plot_dedx(medium, output='ioniz_dedx.pdf'):
     ax.set_ylim(bottom=1e-2)
 
     ax.set_xlabel(r'Muon Energy $E$ / MeV')
-    ax.set_ylabel(r'$\mathrm{d}E/\mathrm{d}X$')
+    ax.set_ylabel(r'Average Energy Loss $\left\langle -\frac{\mathrm{d}E}{\mathrm{d}X}\right\rangle \,\left/\, \left( \rm{MeV} \rm{g}^{-1} \rm{cm}^2 \right) \right. $')
 
     ax.legend()
     ax.grid()

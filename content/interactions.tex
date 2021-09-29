@@ -7,7 +7,7 @@ In principle, they are also valid for the other charged leptons, electrons, and 
 
 All cross-sections $\sigma$ are differential in the energy loss $v$ relative to the energy of the primary particle $E$, given as $\dif \sigma / \dif v$ or as the average energy loss over distance $X$
 \begin{align} \label{eq:dedx_int}
-    \left\langle - \frac{\dif E}{\dif X} \right\rangle = \frac{N_A}{A} \int v \frac{\dif \sigma}{\dif v} \dif v.
+    \left\langle - \frac{\dif E}{\dif X} \right\rangle = \frac{N_A}{A} E \int v \frac{\dif \sigma}{\dif v} \dif v.
 \end{align}
 The cross-sections are also given in a generalized form for particles with mass $M$ and charge $z$.
 Mainly the natural unit system is used with the symbolic definitions listed in \tabref{tab:symbols}.
@@ -82,7 +82,7 @@ Thereby, the functions $a$ and $b$ only depend logarithmically on the energy, wh
 
 Assuming $a$ and $b$ as constant values, the average range of the muons can be approximated by
 \begin{align} \label{eq:dedx_range}
-    R_{\left\langle \frac{\dif E}{\dif X} \right\rangle} = \frac{1}{b} \logn \left( 1 + \frac{b}{a} E \right).
+    R_{\left\langle -\frac{\dif E}{\dif X} \right\rangle} = \frac{1}{b} \logn \left( 1 + \frac{b}{a} E \right).
 \end{align}
 This simple linear model, shown in \figref{fig:dedx_range}, already provides a rough description of the muon energy loss and range and is used in many applications as a first estimation of the muon contribution.
 A comparison with more precise calculations of the range using Monte-Carlo techniques is shown in \figref{fig:prop_range}.
@@ -98,7 +98,7 @@ A comparison with more precise calculations of the range using Monte-Carlo techn
     \begin{subfigure}{0.9\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./plots/dedx_range.pdf}
-        \caption{The average range of muons using the $\dif E / \dif X$ fit.}
+        \caption{The average range of muons using the $\left\langle -\frac{\dif E}{\dif X} \right\rangle$ fit.}
         \label{fig:dedx_range}
     \end{subfigure}
     \caption{The average energy loss and range of muons in Standard Rock ($Z=11, A=22$) using the linear approximation in \ref{eq:dedx_approx}. The fitted values are then used to calculate the average range given by \ref{eq:dedx_range}. The contribution of the decay and the weak interaction to the \enquote{continuous energy loss} is described in the text.}
@@ -640,7 +640,7 @@ Up to this point only the muon, or atomic electron, emit the bremsstrahlung phot
 In \cite{Kelner99BremsDiffract} the diffraction of the bremsstrahlung on a nucleus was calculated also being a correction on the percent level.
 This correction is in particular of interest, since it differs between a $\mu^-$ and a $\mu^+$, while all other processes contributing to the cross-section that have been considered so far do not depend on the charge of the primary particle.
 In fact, it is not the diffractive process, which depends on the charge, but the interference term.
-Since the cross-section for the $\mu^-$ decreases while for the $\mu^+$ it increases, the deviation between both processes can as large as \SI{10}{\%} at \SI{10}{TeV}.
+Since the cross-section for the $\mu^-$ decreases while for the $\mu^+$ it increases, the deviation between both processes can be as large as \SI{10}{\%} at \SI{10}{TeV}.
 Unfortunately, the interference term, which is the interesting part of this correction has not yet been parameterized and can therefore not be included in simulations.
 \begin{figure}
     \centering

@@ -95,7 +95,7 @@ def plot_photo_dsigma(energy, npts, output='photo_dsigma.pdf'):
     ax1.set_yscale('log')
 
     # ax1.set_xlabel(r'Relative Energy Loss $v$')
-    ax1.set_ylabel(r'$v \mathrm{d}\sigma/\mathrm{d}v$')
+    ax1.set_ylabel(r'Differential Cross Section $v \frac{\mathrm{d}\sigma}{\mathrm{d}v}  \,/\, \mathrm{cm}^2$')
 
     ax1.set_xlim(right=1)
     ax1.set_ylim(bottom=1e-8)
@@ -195,7 +195,7 @@ def plot_photo_dedx(energy_arr, output='photo_dedx.pdf'):
     ax1.set_yscale('log')
 
     # ax1.set_xlabel(r'Muon Energy / MeV')
-    ax1.set_ylabel(r'$E^{-1} \mathrm{d}E / \mathrm{d}X$')
+    ax1.set_ylabel(r'Average Energy Loss $\frac{1}{E} \frac{\mathrm{d}E}{\mathrm{d}X} \,/\, (\mathrm{g}^{-1} \mathrm{cm}^2)$')
 
     ax1.set_xlim(right=energy_arr[-1])
 
@@ -206,7 +206,7 @@ def plot_photo_dedx(energy_arr, output='photo_dedx.pdf'):
     ax2.plot(energy_arr, dedx_soft/dedx_vmd[0], c='C4', label='BezrukovBugaev: soft/(soft+hard)')
 
     ax2.set_xscale('log')
-    ax2.set_xlabel(r'Muon Energy $E_\mu$ / MeV')
+    ax2.set_xlabel(r'Muon Energy $E$ / MeV')
     ax2.set_ylabel(r'Ratio')
 
     ax2.legend()

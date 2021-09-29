@@ -1,0 +1,40 @@
+%
+\begin{tikzpicture}
+\begin{feynman}
+    % define vertices
+    % muon
+    \vertex (mu_in) at (-\feynlen, \feynlen);
+    \vertex (mu_vertex) at (0, 0.75*\feynlen);
+    \vertex[right=2*\feynlen of mu_in] (mu_out);
+    % nucleus
+    \vertex[below=1.25*\feynlen of mu_in] (n_in);
+    \vertex[right=2*\feynlen of n_in] (n_out);
+    \vertex[above=.3*\feynlen of n_out] (n_out_u);
+    \vertex[below=.3*\feynlen of n_out] (n_out_d);
+    % blob
+    \vertex[right=\feynlen of n_in] (blob);
+    \vertex (blob_up) at ($(blob) + (90:\feynsmallen)$);
+    \vertex (blob_left) at ($(blob) + (180:\feynsmallen)$);
+    \vertex (blob_u) at ($(blob) + (30:\feynsmallen)$);
+    \vertex (blob_m) at ($(blob) + (-0:\feynsmallen)$);
+    \vertex (blob_d) at ($(blob) + (-30:\feynsmallen)$);
+    % draw diagram
+    \diagram* {
+        (mu_in) -- [fermion] (mu_vertex) -- [fermion] (mu_out),
+        (mu_vertex) -- [boson, edge label=$\gamma$] (blob_up)
+    };
+    % draw extra features with tikz (not available in tikz-feynman)
+    \draw[pattern = north east lines] (blob) circle[radius=\feynsmallen];
+    \draw[thick, double] (n_in) -- (blob_left);
+    \draw[thick] (blob_u) -- (n_out_u);
+    \draw[thick] (blob_m) -- (n_out);
+    \draw[thick] (blob_d) -- (n_out_d);
+    \draw[fill] (mu_vertex) circle[radius=\feynvertexsize];
+    % add labels
+    \node[left] at (mu_in) {$\mu$};
+    \node[right] at (mu_out) {$\mu'$};
+    \node[left] at (n_in) {$N$};
+    \node[right] at (n_out) {$X$};
+\end{feynman}
+\end{tikzpicture}
+%
