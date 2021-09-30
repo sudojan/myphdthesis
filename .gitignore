@@ -3,3 +3,6 @@ __pycache__/
 .DS_Store
 plots/*.pdf
 plots/tables_proposal_interpol
+*.gz
+*.npy
+*.npz
