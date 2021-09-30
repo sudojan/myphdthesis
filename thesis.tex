@@ -11,14 +11,15 @@
 % make
 
 % % Metadata for pdf/a compliance
-% \begin{filecontents*}[overwrite]{\jobname.xmpdata}
-% \Title{Systematic Uncertainties of High Energy Muon Propagation using the Leptonpropagator PROPOSAL}
-% \Author{Jan Benjamin Soedingrekso}
-% \Language{en-US}
-% \Keywords{PHD thesis\sep Dissertation\sep Neutrino Astronomy\sep IceCube}
-% \Publisher{TU Dortmund}
-% \Date{2021}
-% \end{filecontents*}
+\RequirePackage{filecontents}
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+\Title{Systematic Uncertainties of High Energy Muon Propagation using the Leptonpropagator PROPOSAL}
+\Author{Jan Benjamin Soedingrekso}
+\Language{en-US}
+\Keywords{PHD thesis\sep Dissertation\sep Neutrino Astronomy\sep IceCube}
+\Publisher{TU Dortmund}
+\Date{2021}
+\end{filecontents*}
 
 \documentclass[
   tucolor,       % remove for less green,
@@ -36,7 +37,7 @@
 \setcounter{tocdepth}{2}
 
 % \usepackage[a-3u]{pdfx}
-% % for pdf/a compliance, see https://tex.stackexchange.com/a/474336/59716
+% % % for pdf/a compliance, see https://tex.stackexchange.com/a/474336/59716
 % \pdfvariable omitcidset=1
 
 %------------------------------------------------------------------------------
@@ -158,6 +159,9 @@
 
 % Last packages, do not change order or insert new packages after these ones
 \usepackage[pdfusetitle, unicode, linkbordercolor=tugreen, citebordercolor=tugreen]{hyperref}
+% to create a pdf/a file, pdfx must be used, which already includes hyperref
+% see https://tex.stackexchange.com/a/89073
+% \hypersetup{pdfusetitle, unicode, linkbordercolor=tugreen, citebordercolor=tugreen}
 \usepackage{bookmark}
 \usepackage[shortcuts]{extdash}
 
