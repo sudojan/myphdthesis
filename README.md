@@ -45,6 +45,6 @@ pip install numpy, scipy, matplotlib, proposal
 
 ## Creating a PDF/A Dokument
 
-For publication with [eldorado]{https://eldorado.tu-dortmund.de} it is necessary to create a PDF/A file, described [here]{https://www.ub.tu-dortmund.de/Eldorado/abgabe_dissertationen.html.de}.
+For publication with [eldorado](https://eldorado.tu-dortmund.de) it is necessary to create a PDF/A file, described [here](https://www.ub.tu-dortmund.de/Eldorado/abgabe_dissertationen.html.de).
 
 Although it should in principle be possible to create this in tex by adding `filecontents` and `\usepackage[a-3u]{pdfx}`. However, including `pdfx` somehow changes 3 plots (Figure 3.6.a, 6.11.a, 6.11.b) on having a black background. Therefore a free trial version of `Adobe Acrobat Pro DC` is used opening the compiled file, and saving it as PDF/A file. This also reduces the file size from 16MB to 8MB.
